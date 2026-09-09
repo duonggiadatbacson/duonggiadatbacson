@@ -709,3 +709,43 @@ a {
     }
 
 }
+/* ==========================================================
+   CONTACT PREVIEW - LIÊN HỆ
+========================================================== */
+
+.contact-preview {
+    background: #f8f6f1;
+}
+
+.contact-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-content h2 {
+    margin-bottom: 20px;
+}
+
+.contact-content > p {
+    line-height: 1.8;
+    color: #666;
+}
+
+.contact-info {
+    margin: 30px auto;
+    padding: 20px 25px;
+    background: #ffffff;
+    border-radius: 6px;
+    text-align: left;
+    max-width: 600px;
+}
+
+.contact-info p {
+    margin: 8px 0;
+    line-height: 1.7;
+}
+
+.contact-content .button {
+    margin-top: 10px;
+}
