@@ -2,40 +2,157 @@
 <html lang="vi">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Giới thiệu Dương Gia Đạt Homestay tại Làng Quỳnh Sơn, Bắc Sơn, Lạng Sơn">
-
-    <title>Giới Thiệu - Dương Gia Đạt Homestay</title>
+    <title>Giới thiệu | Dương Gia Đạt Homestay</title>
 
     <link rel="stylesheet" href="css/style.css">
 
+    <style>
+        /* =====================================================
+           GIỚI THIỆU
+        ===================================================== */
+
+        .about-page {
+            padding: 70px 20px 90px;
+            background: #ffffff;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-intro span {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #8a6a3d;
+            margin-bottom: 12px;
+        }
+
+        .about-intro h1 {
+            margin: 0;
+            font-size: 38px;
+            line-height: 1.3;
+            color: #333333;
+        }
+
+        .about-intro p {
+            max-width: 780px;
+            margin: 20px auto 0;
+            font-size: 17px;
+            line-height: 1.8;
+            color: #666666;
+        }
+
+        .about-story {
+            margin-bottom: 75px;
+        }
+
+        .about-story:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-story-text {
+            max-width: 900px;
+            margin: 0 auto 35px;
+        }
+
+        .about-story-text p {
+            margin: 0 0 18px;
+            font-size: 17px;
+            line-height: 1.9;
+            color: #444444;
+            text-align: justify;
+        }
+
+        .about-story-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-story-image {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .about-story-image img {
+            display: block;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .about-story-image:hover img {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+
+            .about-page {
+                padding: 45px 15px 60px;
+            }
+
+            .about-intro {
+                margin-bottom: 40px;
+            }
+
+            .about-intro h1 {
+                font-size: 30px;
+            }
+
+            .about-intro p {
+                font-size: 16px;
+            }
+
+            .about-story {
+                margin-bottom: 50px;
+            }
+
+            .about-story-text p {
+                font-size: 16px;
+                line-height: 1.8;
+                text-align: left;
+            }
+
+            .about-story-image img {
+                height: 300px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header class="site-header">
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-        <div class="container">
+    <header class="header">
+
+        <div class="container header-inner">
 
             <a href="index.html" class="logo">
                 <img src="images/logo/logo.png"
                      alt="Dương Gia Đạt Homestay">
             </a>
 
-            <nav class="main-nav">
+            <nav class="nav">
 
                 <a href="index.html">
                     Trang chủ
                 </a>
 
-                <a href="gioi-thieu.html">
+                <a href="gioi-thieu.html" class="active">
                     Giới Thiệu
                 </a>
 
@@ -53,80 +170,301 @@
 
             </nav>
 
-            <a href="contact.html" class="booking-button">
-                ĐẶT PHÒNG
-            </a>
+            <div class="header-actions">
+
+                <a href="contact.html" class="booking-btn">
+                    ĐẶT PHÒNG
+                </a>
+
+            </div>
 
         </div>
 
     </header>
 
 
-    
+    <!-- =====================================================
+         NỘI DUNG GIỚI THIỆU
+    ====================================================== -->
+
+    <main class="about-page">
+
+        <div class="about-container">
 
 
-    <!-- ABOUT -->
-    <section class="section">
+            <!-- GIỚI THIỆU CHUNG -->
 
-        <div class="container contact-content">
+            <div class="about-intro">
 
-            <div class="section-heading">
+                <span>VỀ CHÚNG TÔI</span>
 
-                <p class="section-label">
-                    VỀ CHÚNG TÔI
+                <h1>
+                    Một vùng đất để nhớ
+                </h1>
+
+                <p>
+                    Giữa núi rừng Đông Bắc, có một vùng đất nơi thiên nhiên,
+                    văn hóa và lịch sử cùng hiện diện trong nhịp sống bình dị
+                    của người dân bản địa.
                 </p>
-
-                <h2>
-                    Dương Gia Đạt Homestay
-                </h2>
 
             </div>
 
 
-            <p>
-                Dương Gia Đạt Homestay nằm tại Làng Quỳnh Sơn,
-                huyện Bắc Sơn, tỉnh Lạng Sơn - một vùng đất yên bình
-                được bao quanh bởi núi rừng và những thung lũng xanh.
-            </p>
+            <!-- =================================================
+                 PHẦN 1
+            ================================================== -->
+
+            <section class="about-story">
+
+                <div class="about-story-text">
+
+                    <p>
+                        Bắc Sơn là vùng đất nằm giữa những dãy núi của
+                        tỉnh Lạng Sơn, nổi bật với thung lũng rộng lớn,
+                        những cánh đồng xanh trải dài và những dòng suối
+                        len qua bản làng. Cảnh sắc nơi đây thay đổi theo
+                        từng mùa, khi ruộng đồng khoác lên màu xanh của
+                        lúa non, khi chuyển sang sắc vàng trong mùa gặt,
+                        tạo nên một bức tranh miền núi vừa hùng vĩ vừa
+                        yên bình.
+                    </p>
+
+                    <p>
+                        Không chỉ có thiên nhiên, vùng đất này còn mang
+                        trong mình một dấu ấn lịch sử đặc biệt. Ngày
+                        27 tháng 9 năm 1940, cuộc Khởi nghĩa Bắc Sơn
+                        bùng nổ, trở thành một sự kiện quan trọng trong
+                        phong trào đấu tranh cách mạng của nhân dân ta
+                        dưới sự lãnh đạo của Đảng. Từ đây hình thành
+                        lực lượng du kích Bắc Sơn và căn cứ địa
+                        Bắc Sơn – Võ Nhai, để lại dấu ấn sâu đậm trong
+                        lịch sử cách mạng Việt Nam. 
+                    </p>
+
+                    <p>
+                        Ngày nay, Bắc Sơn đang dần trở thành điểm đến
+                        được nhiều du khách tìm về để khám phá thiên
+                        nhiên, văn hóa bản địa và những câu chuyện lịch
+                        sử. Du lịch cộng đồng phát triển giúp những giá
+                        trị truyền thống tiếp tục được gìn giữ trong
+                        chính đời sống của người dân địa phương.
+                    </p>
+
+                </div>
+
+                <div class="about-story-image">
+
+                    <img
+                        src="images/banner/1.jpg"
+                        alt="Cảnh sắc thung lũng Bắc Sơn"
+                    >
+
+                </div>
+
+            </section>
 
 
-            <p>
-                Chúng tôi mong muốn mang đến cho du khách một không gian
-                nghỉ ngơi gần gũi với thiên nhiên, nơi bạn có thể tận hưởng
-                cuộc sống chậm rãi và khám phá vẻ đẹp của Bắc Sơn.
-            </p>
+            <!-- =================================================
+                 PHẦN 2
+            ================================================== -->
+
+            <section class="about-story">
+
+                <div class="about-story-text">
+
+                    <p>
+                        Trong thung lũng Bắc Sơn là những bản làng của
+                        đồng bào Tày, nơi những ngôi nhà sàn truyền thống
+                        vẫn được gìn giữ qua nhiều thế hệ. Quỳnh Sơn là
+                        một trong những nơi tiêu biểu cho vẻ đẹp ấy.
+                        Những nếp nhà sàn nằm giữa núi rừng, những con
+                        đường nhỏ chạy qua bản và cuộc sống cộng đồng
+                        bình dị tạo nên một không gian rất riêng của
+                        vùng Đông Bắc.
+                    </p>
+
+                    <p>
+                        Đến đây, du khách có thể cảm nhận văn hóa Tày
+                        qua những làn điệu Then, Sli, thưởng thức các
+                        món ăn địa phương và trải nghiệm cuộc sống
+                        trong những ngôi nhà sàn truyền thống. Điều
+                        đặc biệt của du lịch cộng đồng nơi đây là du
+                        khách không chỉ đến để ngắm cảnh, mà còn được
+                        sống chậm lại và hòa mình vào đời sống của
+                        người dân bản địa.
+                    </p>
+
+                    <p>
+                        Ngày 17 tháng 10 năm 2025, Làng du lịch cộng đồng
+                        Quỳnh Sơn được Tổ chức Du lịch Liên Hợp Quốc
+                        (UN Tourism) vinh danh trong danh sách
+                        <strong>“Best Tourism Villages 2025”</strong>,
+                        một trong những làng du lịch tiêu biểu trên thế
+                        giới. Sự ghi nhận này là niềm tự hào của người
+                        dân địa phương, đồng thời khẳng định những giá
+                        trị về cảnh quan, văn hóa, cộng đồng và định
+                        hướng phát triển du lịch bền vững của Quỳnh Sơn.
+                        
+                    </p>
+
+                    <p>
+                        Chính những điều bình dị ấy làm nên sức hấp dẫn
+                        của Quỳnh Sơn – một nơi không cần quá nhiều
+                        những công trình hiện đại, bởi bản sắc văn hóa,
+                        cảnh quan và cuộc sống cộng đồng đã trở thành
+                        nét đẹp riêng của vùng đất này.
+                    </p>
+
+                </div>
+
+                <div class="about-story-image">
+
+                    <img
+                        src="images/rooms/2.jpg"
+                        alt="Không gian làng quê vùng Bắc Sơn"
+                        loading="lazy"
+                    >
+
+                </div>
+
+            </section>
 
 
-            <p>
-                Từ homestay, du khách có thể trải nghiệm văn hóa địa phương,
-                thưởng thức những món ăn truyền thống và khám phá cảnh sắc
-                đặc biệt của Làng Quỳnh Sơn.
-            </p>
+            <!-- =================================================
+                 PHẦN 3
+            ================================================== -->
 
+            <section class="about-story">
 
-            <p>
-                Dương Gia Đạt Homestay mong được trở thành điểm dừng chân
-                thân thiện dành cho những ai muốn tìm kiếm sự bình yên,
-                gần gũi và những trải nghiệm đáng nhớ tại Bắc Sơn.
-            </p>
+                <div class="about-story-text">
+
+                    <p>
+                        Trong hành trình khám phá vùng đất này, một nơi
+                        nghỉ nhỏ giữa bản làng có thể trở thành điểm
+                        dừng chân để du khách cảm nhận rõ hơn nhịp sống
+                        địa phương.
+                    </p>
+
+                    <p>
+                        Dương Gia Đạt Homestay nằm tại Làng Quỳnh Sơn,
+                        mang đến một không gian nghỉ ngơi gần gũi,
+                        yên bình và thân thiện. Tại đây, du khách có
+                        thể tạm rời xa nhịp sống vội vã thường ngày,
+                        nghỉ ngơi giữa không gian núi rừng và cảm nhận
+                        cuộc sống giản dị của bản làng.
+                    </p>
+
+                    <p>
+                        Từ nơi lưu trú, du khách có thể bắt đầu hành
+                        trình khám phá Quỳnh Sơn, tìm hiểu văn hóa Tày,
+                        thưởng thức ẩm thực địa phương và tiếp tục
+                        khám phá cảnh sắc, lịch sử của vùng Bắc Sơn.
+                    </p>
+
+                    <p>
+                        Với chúng tôi, một chuyến đi đáng nhớ không chỉ
+                        nằm ở nơi bạn đã đến, mà còn ở những khoảnh khắc
+                        bình dị bạn đã trải qua trên hành trình ấy.
+                    </p>
+
+                </div>
+
+                <div class="about-story-image">
+
+                    <img
+                        src="images/rooms/1.jpg"
+                        alt="Không gian nghỉ tại Dương Gia Đạt Homestay"
+                        loading="lazy"
+                    >
+
+                </div>
+
+            </section>
+
 
         </div>
 
-    </section>
+    </main>
 
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
 
         <div class="container">
 
-            <p>
-                © 2026 Dương Gia Đạt Homestay
-            </p>
+            <div class="footer-content">
 
-            <p>
-                Làng Quỳnh Sơn - Bắc Sơn - Lạng Sơn
-            </p>
+                <div class="footer-column">
+
+                    <h3>
+                        Dương Gia Đạt Homestay
+                    </h3>
+
+                    <p>
+                        Làng Quỳnh Sơn, huyện Bắc Sơn,
+                        tỉnh Lạng Sơn
+                    </p>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h3>
+                        Liên kết
+                    </h3>
+
+                    <a href="index.html">
+                        Trang chủ
+                    </a>
+
+                    <a href="gioi-thieu.html">
+                        Giới Thiệu
+                    </a>
+
+                    <a href="rooms.html">
+                        Phòng
+                    </a>
+
+                    <a href="blog.html">
+                        Blog
+                    </a>
+
+                    <a href="contact.html">
+                        Liên Hệ
+                    </a>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h3>
+                        Liên hệ
+                    </h3>
+
+                    <p>
+                        Làng Quỳnh Sơn, Bắc Sơn, Lạng Sơn
+                    </p>
+
+                    <p>
+                        Điện thoại: Liên hệ trực tiếp
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 Dương Gia Đạt Homestay.
+                    All Rights Reserved.
+                </p>
+
+            </div>
 
         </div>
 
@@ -136,4 +474,5 @@
     <script src="js/script.js"></script>
 
 </body>
+
 </html>
