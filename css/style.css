@@ -294,3 +294,51 @@ a {
     }
 
 }
+
+/* LANGUAGE SWITCHER */
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: px;
+    margin-left: px;
+}
+
+.language-switcher button {
+    border: px solid #daa;
+    background: transparent;
+    color: #dc;
+    padding: px px;
+    border-radius: px;
+    font-size: px;
+    font-weight: ;
+    cursor: pointer;
+}
+
+.language-switcher button:hover,
+.language-switcher button.active {
+    background: #c;
+    color: white;
+}
+
+
+/* HEADER LANGUAGE + NAV */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: px;
+}
+
+@media (max-width: px) {
+
+    .header-actions {
+        width: %;
+        justify-content: center;
+    }
+
+    .language-switcher {
+        margin-left: ;
+    }
+
+}
