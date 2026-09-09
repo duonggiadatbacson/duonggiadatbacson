@@ -1,166 +1,195 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-    <meta charset="UTF-">
-    <meta name="viewport" content="width=device-width, initial-scale=.">
-    <meta name="description" content="Blog Duong Gia ?t Homestay - Kh�m ph� B?c Son v� L�ng Qu?nh Son">
-    <title>Blog - Duong Gia ?t Homestay</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Blog Dương Gia Đạt Homestay - Khám phá Bắc Sơn và Làng Quỳnh Sơn">
+
+    <title>Blog - Dương Gia Đạt Homestay</title>
+
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-<header class="site-header">
+    <!-- HEADER -->
+    <header class="site-header">
 
-    <div class="container">
+        <div class="container">
 
-        <a href="index.html" class="logo">
-            <img src="images/logo/logo.png"
-                 alt="Duong Gia ?t Homestay">
-        </a>
-
-        <nav class="main-nav">
-
-            <a href="index.html" data-in="nav.home">
-                Trang ch?
+            <a href="index.html" class="logo">
+                <img src="images/logo/logo.png"
+                     alt="Dương Gia Đạt Homestay">
             </a>
 
-            <a href="gioi-thieu.html" data-in="nav.about">
-                Gi?i thi?u
+            <nav class="main-nav">
+
+                <a href="index.html">
+                    Trang chủ
+                </a>
+
+                <a href="gioi-thieu.html">
+                    Giới Thiệu
+                </a>
+
+                <a href="rooms.html">
+                    Homestay
+                </a>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="contact.html">
+                    Liên Hệ
+                </a>
+
+            </nav>
+
+            <a href="contact.html" class="booking-button">
+                ĐẶT PHÒNG
             </a>
 
-            <a href="rooms.html" data-in="nav.rooms">
-                Ph�ng ngh?
-            </a>
+        </div>
 
-            <a href="blog.html" data-in="nav.blog">
+    </header>
+
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+
+        <div class="container">
+
+            <p>
+                DƯƠNG GIA ĐẠT HOMESTAY
+            </p>
+
+            <h1>
                 Blog
-            </a>
+            </h1>
 
-            <a href="contact.html" data-in="nav.contact">
-                Li�n h?
-            </a>
+        </div>
 
-        </nav>
+    </section>
 
-        <div class="header-actions">
 
-            <div class="language-switcher">
+    <!-- BLOG -->
+    <section class="section">
 
-                <button type="button"
-                        data-lang="vi"
-                        onclick="setLanguage('vi')">
-                    VI
-                </button>
+        <div class="container">
 
-                <button type="button"
-                        data-lang="en"
-                        onclick="setLanguage('en')">
-                    EN
-                </button>
+            <div class="section-heading">
+
+                <p class="section-label">
+                    KHÁM PHÁ BẮC SƠN
+                </p>
+
+                <h2>
+                    Câu chuyện từ Quỳnh Sơn
+                </h2>
 
             </div>
 
-            <a href="contact.html"
-               class="booking-button"
-               data-in="nav.booking">
-                ?T PH�NG
-            </a>
+
+            <div class="room-grid">
+
+                <!-- BLOG 1 -->
+                <article class="room-card">
+
+                    <div class="room-image">
+
+                        <img src="images/places/bs-.jpg"
+                             alt="Bắc Sơn"
+                             onerror="this.style.display='none'">
+
+                    </div>
+
+                    <div class="room-content">
+
+                        <h3>
+                            Khám phá Bắc Sơn
+                        </h3>
+
+                        <p>
+                            Bắc Sơn nổi tiếng với cảnh sắc núi rừng,
+                            những thung lũng xanh và vẻ đẹp bình yên.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- BLOG 2 -->
+                <article class="room-card">
+
+                    <div class="room-content">
+
+                        <h3>
+                            Làng Quỳnh Sơn
+                        </h3>
+
+                        <p>
+                            Tìm hiểu cuộc sống, văn hóa và không gian
+                            nhà sàn truyền thống tại Làng Quỳnh Sơn.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- BLOG 3 -->
+                <article class="room-card">
+
+                    <div class="room-content">
+
+                        <h3>
+                            Trải nghiệm Homestay
+                        </h3>
+
+                        <p>
+                            Một kỳ nghỉ gần gũi thiên nhiên và những
+                            trải nghiệm đáng nhớ tại Bắc Sơn.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
 
         </div>
 
-    </div>
-
-</header>
+    </section>
 
 
-<section class="page-banner">
-    <div class="container">
-        <p>DUONG GIA DAT HOMESTAY</p>
-        <h data-in="blog.pageTitle">Blog</h>
-    </div>
-</section>
+    <!-- FOOTER -->
+    <footer class="site-footer">
 
+        <div class="container">
 
-<section class="section">
-    <div class="container">
-
-        <div class="section-heading">
-            <p class="section-label" data-in="blog.label">
-                KH�M PH� B?C SN
+            <p>
+                © 2026 Dương Gia Đạt Homestay
             </p>
 
-            <h data-in="blog.title">
-                C�u chuy?n t? Qu?nh Son
-            </h>
-        </div>
-
-        <div class="room-grid">
-
-            <article class="room-card">
-                <img src="images/places/bs-.jpg"
-                     alt="B?c Son"
-                     onerror="this.style.display='none'">
-
-                <div class="room-content">
-                    <h data-in="blog.post.title">
-                        Kh�m ph� B?c Son
-                    </h>
-
-                    <p data-in="blog.post.text">
-                        B?c Son n?i ti?ng v?i c?nh s?c n�i r?ng,
-                        nh?ng thung lung xanh v� v? d?p b�nh y�n.
-                    </p>
-                </div>
-            </article>
-
-
-            <article class="room-card">
-
-                <div class="room-content">
-                    <h data-in="blog.post.title">
-                        L�ng Qu?nh Son
-                    </h>
-
-                    <p data-in="blog.post.text">
-                        T�m hi?u cu?c s?ng, van h�a v� kh�ng gian
-                        nh� s�n truy?n th?ng t?i L�ng Qu?nh Son.
-                    </p>
-                </div>
-
-            </article>
-
-
-            <article class="room-card">
-
-                <div class="room-content">
-                    <h data-in="blog.post.title">
-                        Tr?i nghi?m Homestay
-                    </h>
-
-                    <p data-in="blog.post.text">
-                        M?t k? ngh? g?n gui thi�n nhi�n v� nh?ng
-                        tr?i nghi?m d�ng nh? t?i B?c Son.
-                    </p>
-                </div>
-
-            </article>
+            <p>
+                Làng Quỳnh Sơn - Bắc Sơn - Lạng Sơn
+            </p>
 
         </div>
 
-    </div>
-</section>
+    </footer>
 
 
-<footer class="site-footer">
-    <div class="container">
-        <p>�  Duong Gia ?t Homestay</p>
-        <p>L�ng Qu?nh Son - B?c Son - L?ng Son</p>
-    </div>
-</footer>
-
-<script src="js/script.js"></script>
-<script src="js/language.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
 </html>
