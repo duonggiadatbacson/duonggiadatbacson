@@ -749,3 +749,11 @@ a {
 .contact-content .button {
     margin-top: 10px;
 }
+/* ==========================================================
+   GIẢM KHOẢNG CÁCH GIỮA CÁC SECTION
+========================================================== */
+
+.section {
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
