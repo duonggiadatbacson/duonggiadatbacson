@@ -341,3 +341,67 @@ a {
     }
 
 }
+/* ==========================================================
+   HIGHLIGHTS - ĐIỂM NỔI BẬT
+========================================================== */
+
+.highlights {
+    background: #f8f6f1;
+}
+
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 45px;
+}
+
+.highlight-card {
+    background: #ffffff;
+    padding: 35px 25px;
+    text-align: center;
+    border-radius: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.highlight-icon {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.highlight-card h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.highlight-card p {
+    margin: 0;
+    line-height: 1.7;
+    color: #666;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .highlight-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .highlight-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+}
