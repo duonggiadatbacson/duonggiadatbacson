@@ -651,3 +651,61 @@ a {
 .family-content .button {
     margin-top: 25px;
 }
+/* ==========================================================
+   REVIEWS - ĐÁNH GIÁ
+========================================================== */
+
+.reviews {
+    background: #ffffff;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 45px;
+}
+
+.review-card {
+    background: #f8f6f1;
+    padding: 35px 30px;
+    text-align: center;
+    border-radius: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.review-stars {
+    font-size: 20px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.review-text {
+    margin: 0;
+    line-height: 1.8;
+    color: #666;
+    font-style: italic;
+}
+
+.review-name {
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .review-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+}
