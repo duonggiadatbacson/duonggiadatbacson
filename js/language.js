@@ -15,9 +15,6 @@ const translations = {
         "home.introTitle": "DUONG GIA DAT HOMESTAY",
 
         "rooms.pageTitle": "Rooms",
-        "rooms.room": "Room ",
-        "rooms.room": "Room ",
-        "rooms.room": "Room ",
         "rooms.updating": "Room information will be updated.",
 
         "about.pageTitle": "About",
@@ -35,9 +32,9 @@ function applyEnglish() {
 
     const dictionary = translations.en;
 
-    document.querySelectorAll("[data-in]").forEach(function(element) {
+    document.querySelectorAll("[data-lang-key]").forEach(function(element) {
 
-        const key = element.getAttribute("data-in");
+        const key = element.getAttribute("data-lang-key");
 
         if (dictionary[key] !== undefined) {
             element.textContent = dictionary[key];
@@ -88,7 +85,9 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.getItem("language") || "vi";
 
     if (savedLanguage === "en") {
+
         applyEnglish();
+
     } else {
 
         document.querySelectorAll(".language-switcher button").forEach(function(button) {
@@ -104,3 +103,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 });
+
+
+
