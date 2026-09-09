@@ -617,3 +617,37 @@ a {
     }
 
 }
+/* ==========================================================
+   FAMILY - GIA ĐÌNH
+========================================================== */
+
+.family {
+    background: #f8f6f1;
+}
+
+.family-content {
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.family-content .section-label {
+    margin-bottom: 15px;
+}
+
+.family-content h2 {
+    margin-bottom: 25px;
+}
+
+.family-content p {
+    line-height: 1.8;
+    color: #666;
+}
+
+.family-content p + p {
+    margin-top: 15px;
+}
+
+.family-content .button {
+    margin-top: 25px;
+}
