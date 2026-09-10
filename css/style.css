@@ -863,7 +863,7 @@ a {
 
 .blog-hero {
 
-    min-height: 450px;
+    min-height: 650px;
 
     background-image: url("../images/banner/1.jpg");
     background-size: cover;
@@ -875,7 +875,7 @@ a {
 
 .blog-hero-overlay {
 
-    min-height: 450px;
+    min-height: 650px;
 
     display: flex;
     align-items: center;
