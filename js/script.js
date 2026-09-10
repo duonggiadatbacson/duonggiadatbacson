@@ -90,3 +90,42 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 5000);
 
     }
+// ======================================================
+// BLOG HERO SLIDESHOW
+// ======================================================
+
+const blogHero = document.querySelector(".blog-hero");
+
+if (blogHero) {
+
+    const blogImages = [
+        "images/blog/1.jpg",
+        "images/blog/2.jpg",
+        "images/blog/3.jpg",
+        "images/blog/4.jpg"
+    ];
+
+    let blogIndex = 0;
+
+    blogHero.style.backgroundImage =
+        `url("${blogImages[blogIndex]}")`;
+
+    setInterval(function () {
+
+        blogHero.style.opacity = "0";
+
+        setTimeout(function () {
+
+            blogIndex =
+                (blogIndex + 1) % blogImages.length;
+
+            blogHero.style.backgroundImage =
+                `url("${blogImages[blogIndex]}")`;
+
+            blogHero.style.opacity = "1";
+
+        }, 1200);
+
+    }, 5000);
+
+}
