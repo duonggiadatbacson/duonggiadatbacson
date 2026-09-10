@@ -99,10 +99,10 @@ const blogHero = document.querySelector(".blog-hero");
 if (blogHero) {
 
     const blogImages = [
-        "images/blog/1.jpg",
-        "images/blog/2.jpg",
-        "images/blog/3.jpg",
-        "images/blog/4.jpg"
+        "images/banner/1.jpg",
+        "images/banner/2.jpg",
+        "images/banner/3.jpg"
+        
     ];
 
     let blogIndex = 0;
