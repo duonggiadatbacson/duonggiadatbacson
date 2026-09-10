@@ -789,7 +789,7 @@ a {
 ========================================================== */
 
 .rooms-hero {
-    min-height: 650px;
+    min-height: 450px;
 
     background-image: url("../images/rooms/6.jpg");
     background-size: cover;
@@ -800,7 +800,7 @@ a {
 }
 
 .rooms-hero-overlay {
-    min-height: 650px;
+    min-height: 450px;
 
     display: flex;
     align-items: center;
