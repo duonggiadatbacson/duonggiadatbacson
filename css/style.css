@@ -1,6 +1,7 @@
 ﻿/* ==========================================================
    DUONG GIA DAT HOMESTAY
    MAIN STYLE
+   TONE: ĐỎ ĐẤT - NÂU ẤM - VÀNG ĐỒNG
 ========================================================== */
 
 * {
@@ -14,7 +15,7 @@ html {
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    color: #234d3c;
+    color: #6B3E26;
     background: #fffdf8;
 }
 
@@ -34,11 +35,13 @@ a {
 }
 
 .section {
-    padding: 80px 0;
+    padding: 55px 0;
 }
 
 
-/* HEADER */
+/* ==========================================================
+   HEADER
+========================================================== */
 
 .site-header {
     background: #fffdf8;
@@ -65,10 +68,12 @@ a {
 
 .main-nav a {
     font-weight: 600;
+    color: #6B3E26;
+    transition: color 0.3s ease;
 }
 
 .main-nav a:hover {
-    color: #b28a20;
+    color: #B8862F;
 }
 
 .booking-button,
@@ -78,15 +83,23 @@ a {
     border-radius: 4px;
     font-weight: 700;
     letter-spacing: .5px;
+    transition: all 0.3s ease;
 }
 
 .booking-button {
-    background: #075c45;
+    background: #8B3A2E;
     color: white;
 }
 
+.booking-button:hover {
+    background: #6F2E25;
+}
 
-/* HERO */
+
+/* ==========================================================
+   HERO
+========================================================== */
+
 .hero {
     min-height: 450px;
     background-image: url("../images/banner/1.jpg");
@@ -140,17 +153,27 @@ a {
 }
 
 .button.primary {
-    background: #075c45;
+    background: #8B3A2E;
     color: white;
+}
+
+.button.primary:hover {
+    background: #6F2E25;
 }
 
 .button.secondary {
-    background: #d2aa42;
+    background: #B8862F;
     color: white;
 }
 
+.button.secondary:hover {
+    background: #946F24;
+}
 
-/* HEADINGS */
+
+/* ==========================================================
+   HEADINGS
+========================================================== */
 
 .section-heading {
     max-width: 750px;
@@ -159,7 +182,7 @@ a {
 }
 
 .section-label {
-    color: #b28a20;
+    color: #B8862F;
     font-weight: 700;
     letter-spacing: 2px;
 }
@@ -167,252 +190,13 @@ a {
 .section-heading h2 {
     font-size: 40px;
     margin: 10px 0 20px;
+    color: #6B3E26;
 }
 
 
-/* ROOMS */
-
-.room-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.room-card {
-    background: white;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, .08);
-    overflow: hidden;
-}
-
-.room-card img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-}
-
-.room-content {
-    padding: 25px;
-}
-
-.room-content h2,
-.room-content h3 {
-    margin-top: 0;
-}
-
-
-/* GALLERY */
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
-.gallery-grid img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-}
-
-
-/* PAGE BANNER */
-
-.page-banner {
-    padding: 100px 0;
-    text-align: center;
-    background: #075c45;
-    color: white;
-}
-
-.page-banner h1 {
-    font-size: 48px;
-    margin: 10px 0 0;
-}
-
-
-/* BOOKING */
-
-.booking-section {
-    padding: 90px 20px;
-    text-align: center;
-    background: #eee5c8;
-}
-
-.booking-section h2 {
-    font-size: 40px;
-}
-
-
-/* CONTACT */
-
-.contact-content {
-    max-width: 800px;
-    text-align: center;
-}
-
-
-/* FOOTER */
-
-.site-footer {
-    padding: 35px 0;
-    background: #064b39;
-    color: white;
-    text-align: center;
-}
-
-
-/* MOBILE */
-
-@media (max-width: 800px) {
-
-    .site-header .container {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 15px 0;
-    }
-
-    .main-nav {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .room-grid,
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero,
-    .hero-overlay {
-        min-height: 560px;
-    }
-
-    .hero-content h1 {
-        font-size: 48px;
-    }
-
-}
-
-/* LANGUAGE SWITCHER */
-
-.language-switcher {
-    display: flex;
-    align-items: center;
-    gap: px;
-    margin-left: px;
-}
-
-.language-switcher button {
-    border: px solid #daa;
-    background: transparent;
-    color: #dc;
-    padding: px px;
-    border-radius: px;
-    font-size: px;
-    font-weight: ;
-    cursor: pointer;
-}
-
-.language-switcher button:hover,
-.language-switcher button.active {
-    background: #c;
-    color: white;
-}
-
-
-/* HEADER LANGUAGE + NAV */
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: px;
-}
-
-@media (max-width: px) {
-
-    .header-actions {
-        width: %;
-        justify-content: center;
-    }
-
-    .language-switcher {
-        margin-left: ;
-    }
-
-}
 /* ==========================================================
-   HIGHLIGHTS - ĐIỂM NỔI BẬT
+   ROOMS
 ========================================================== */
-
-.highlights {
-    background: #f8f6f1;
-}
-
-.highlight-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    margin-top: 45px;
-}
-
-.highlight-card {
-    background: #ffffff;
-    padding: 35px 25px;
-    text-align: center;
-    border-radius: 6px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.highlight-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-.highlight-icon {
-    font-size: 38px;
-    margin-bottom: 20px;
-}
-
-.highlight-card h3 {
-    margin-bottom: 12px;
-    font-size: 20px;
-}
-
-.highlight-card p {
-    margin: 0;
-    line-height: 1.7;
-    color: #666;
-}
-
-
-/* MOBILE */
-
-@media (max-width: 900px) {
-
-    .highlight-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-
-@media (max-width: 600px) {
-
-    .highlight-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-}
-/* ==========================================================
-   ROOMS PREVIEW - PHÒNG NGHỈ
-========================================================== */
-
-.rooms-preview {
-    background: #ffffff;
-}
 
 .room-grid {
     display: grid;
@@ -423,7 +207,7 @@ a {
 
 .room-card {
     background: #ffffff;
-    border: 1px solid #eeeeee;
+    border: 1px solid #eadfd2;
     border-radius: 6px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -431,7 +215,13 @@ a {
 
 .room-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 30px rgba(90, 46, 36, 0.12);
+}
+
+.room-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
 }
 
 .room-image {
@@ -455,6 +245,12 @@ a {
     padding: 25px;
 }
 
+.room-content h2,
+.room-content h3 {
+    margin-top: 0;
+    color: #6B3E26;
+}
+
 .room-content h3 {
     margin-bottom: 12px;
     font-size: 21px;
@@ -472,6 +268,12 @@ a {
     font-weight: 600;
     text-decoration: none;
     letter-spacing: 0.5px;
+    color: #8B3A2E;
+    transition: color 0.3s ease;
+}
+
+.room-link:hover {
+    color: #B8862F;
 }
 
 .rooms-more {
@@ -480,35 +282,210 @@ a {
 }
 
 
-/* MOBILE */
+/* ==========================================================
+   GALLERY
+========================================================== */
 
-@media (max-width: 900px) {
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
 
-    .room-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
+.gallery-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
 }
 
 
-@media (max-width: 600px) {
+/* ==========================================================
+   PAGE BANNER
+========================================================== */
 
-    .room-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .room-image {
-        height: 230px;
-    }
-
+.page-banner {
+    padding: 100px 0;
+    text-align: center;
+    background: #8B3A2E;
+    color: white;
 }
+
+.page-banner h1 {
+    font-size: 48px;
+    margin: 10px 0 0;
+}
+
+
+/* ==========================================================
+   BOOKING
+========================================================== */
+
+.booking-section {
+    padding: 90px 20px;
+    text-align: center;
+    background: #F3E6D5;
+}
+
+.booking-section h2 {
+    font-size: 40px;
+    color: #6B3E26;
+}
+
+
+/* ==========================================================
+   CONTACT
+========================================================== */
+
+.contact-content {
+    max-width: 800px;
+    text-align: center;
+}
+
+.contact-content h2 {
+    color: #6B3E26;
+}
+
+.contact-content > p {
+    line-height: 1.8;
+    color: #666;
+}
+
+.contact-info {
+    margin: 30px auto;
+    padding: 20px 25px;
+    background: #ffffff;
+    border-radius: 6px;
+    text-align: left;
+    max-width: 600px;
+    border: 1px solid #eadfd2;
+}
+
+.contact-info p {
+    margin: 8px 0;
+    line-height: 1.7;
+}
+
+.contact-content .button {
+    margin-top: 10px;
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.site-footer {
+    padding: 35px 0;
+    background: #5A2E24;
+    color: white;
+    text-align: center;
+}
+
+
+/* ==========================================================
+   LANGUAGE SWITCHER
+========================================================== */
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+}
+
+.language-switcher button {
+    border: 1px solid #B8862F;
+    background: transparent;
+    color: #6B3E26;
+    padding: 7px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-switcher button:hover,
+.language-switcher button.active {
+    background: #8B3A2E;
+    color: white;
+    border-color: #8B3A2E;
+}
+
+
+/* ==========================================================
+   HEADER LANGUAGE + NAV
+========================================================== */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* ==========================================================
+   HIGHLIGHTS - ĐIỂM NỔI BẬT
+========================================================== */
+
+.highlights {
+    background: #F8F1E7;
+}
+
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 45px;
+}
+
+.highlight-card {
+    background: #ffffff;
+    padding: 35px 25px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #eadfd2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(90, 46, 36, 0.10);
+}
+
+.highlight-icon {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.highlight-card h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    color: #6B3E26;
+}
+
+.highlight-card p {
+    margin: 0;
+    line-height: 1.7;
+    color: #666;
+}
+
+
+/* ==========================================================
+   ROOMS PREVIEW - PHÒNG NGHỈ
+========================================================== */
+
+.rooms-preview {
+    background: #ffffff;
+}
+
+
 /* ==========================================================
    EXPERIENCES - TRẢI NGHIỆM
 ========================================================== */
 
 .experiences {
-    background: #f8f6f1;
+    background: #F8F1E7;
 }
 
 .experience-grid {
@@ -522,18 +499,19 @@ a {
     background: #ffffff;
     padding: 30px 25px;
     border-radius: 6px;
-    border: 1px solid #eeeeee;
+    border: 1px solid #eadfd2;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .experience-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 30px rgba(90, 46, 36, 0.10);
 }
 
 .experience-card h3 {
     margin-bottom: 15px;
     font-size: 20px;
+    color: #6B3E26;
 }
 
 .experience-card p {
@@ -543,25 +521,6 @@ a {
 }
 
 
-/* MOBILE */
-
-@media (max-width: 900px) {
-
-    .experience-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-
-@media (max-width: 600px) {
-
-    .experience-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-}
 /* ==========================================================
    FOOD - ẨM THỰC
 ========================================================== */
@@ -580,7 +539,7 @@ a {
 .food-card {
     text-align: center;
     padding: 35px 25px;
-    border: 1px solid #eeeeee;
+    border: 1px solid #eadfd2;
     border-radius: 6px;
     background: #ffffff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -588,7 +547,7 @@ a {
 
 .food-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 30px rgba(90, 46, 36, 0.10);
 }
 
 .food-icon {
@@ -599,6 +558,7 @@ a {
 .food-card h3 {
     margin-bottom: 12px;
     font-size: 20px;
+    color: #6B3E26;
 }
 
 .food-card p {
@@ -608,22 +568,12 @@ a {
 }
 
 
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-    .food-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-}
 /* ==========================================================
    FAMILY - GIA ĐÌNH
 ========================================================== */
 
 .family {
-    background: #f8f6f1;
+    background: #F8F1E7;
 }
 
 .family-content {
@@ -638,6 +588,7 @@ a {
 
 .family-content h2 {
     margin-bottom: 25px;
+    color: #6B3E26;
 }
 
 .family-content p {
@@ -652,6 +603,8 @@ a {
 .family-content .button {
     margin-top: 25px;
 }
+
+
 /* ==========================================================
    REVIEWS - ĐÁNH GIÁ
 ========================================================== */
@@ -668,22 +621,24 @@ a {
 }
 
 .review-card {
-    background: #f8f6f1;
+    background: #F8F1E7;
     padding: 35px 30px;
     text-align: center;
     border-radius: 6px;
+    border: 1px solid #eadfd2;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .review-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 30px rgba(90, 46, 36, 0.10);
 }
 
 .review-stars {
     font-size: 20px;
     letter-spacing: 3px;
     margin-bottom: 20px;
+    color: #B8862F;
 }
 
 .review-text {
@@ -697,70 +652,26 @@ a {
     margin-top: 20px;
     margin-bottom: 0;
     font-weight: 600;
+    color: #6B3E26;
 }
 
 
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-    .review-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-}
 /* ==========================================================
    CONTACT PREVIEW - LIÊN HỆ
 ========================================================== */
 
 .contact-preview {
-    background: #f8f6f1;
-}
-
-.contact-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.contact-content h2 {
-    margin-bottom: 20px;
-}
-
-.contact-content > p {
-    line-height: 1.8;
-    color: #666;
+    background: #F8F1E7;
 }
 
 .contact-info {
-    margin: 30px auto;
-    padding: 20px 25px;
-    background: #ffffff;
-    border-radius: 6px;
-    text-align: left;
-    max-width: 600px;
+    box-shadow: 0 5px 20px rgba(90, 46, 36, 0.06);
 }
 
-.contact-info p {
-    margin: 8px 0;
-    line-height: 1.7;
-}
 
-.contact-content .button {
-    margin-top: 10px;
-}
 /* ==========================================================
-   GIẢM KHOẢNG CÁCH GIỮA CÁC SECTION
-========================================================== */
-
-.section {
-    padding-top: 55px;
-    padding-bottom: 55px;
-}
-/* =====================================================
    VIDEO GIỚI THIỆU
-===================================================== */
+========================================================== */
 
 .about-video {
     width: 100%;
@@ -775,4 +686,101 @@ a {
     height: auto;
     max-height: 750px;
     object-fit: contain;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .highlight-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .room-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experience-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .site-header .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .main-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .language-switcher {
+        margin-left: 0;
+    }
+
+    .room-grid,
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero,
+    .hero-overlay {
+        min-height: 560px;
+    }
+
+    .hero-content h1 {
+        font-size: 48px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .highlight-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .food-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .review-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .room-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .room-image {
+        height: 230px;
+    }
+
 }
