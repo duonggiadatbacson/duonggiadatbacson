@@ -784,3 +784,76 @@ a {
     }
 
 }
+/* ==========================================================
+   ROOMS HERO - SLIDESHOW 3 PHÒNG
+========================================================== */
+
+.rooms-hero {
+    min-height: 650px;
+
+    background-image: url("../images/rooms/6.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transition: opacity 1.2s ease-in-out;
+}
+
+.rooms-hero-overlay {
+    min-height: 650px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: rgba(0, 0, 0, 0.30);
+}
+
+.rooms-hero-content {
+    color: white;
+    padding: 30px;
+}
+
+.rooms-hero-content p {
+    margin: 0 0 15px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+.rooms-hero-content h1 {
+    margin: 0 0 18px;
+
+    font-size: clamp(42px, 7vw, 76px);
+
+    letter-spacing: 4px;
+}
+
+.rooms-hero-content span {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .rooms-hero,
+    .rooms-hero-overlay {
+        min-height: 560px;
+    }
+
+    .rooms-hero-content h1 {
+        font-size: 48px;
+    }
+
+    .rooms-hero-content span {
+        font-size: 17px;
+    }
+
+}

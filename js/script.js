@@ -52,3 +52,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+// ======================================================
+    // ROOMS HERO SLIDESHOW
+    // ======================================================
+
+    const roomsHero = document.querySelector(".rooms-hero");
+
+    if (roomsHero) {
+
+        const roomsImages = [
+            "images/rooms/6.jpg",
+            "images/rooms/7.jpg",
+            "images/rooms/8.jpg"
+        ];
+
+        let roomsIndex = 0;
+
+        roomsHero.style.backgroundImage =
+            `url("${roomsImages[roomsIndex]}")`;
+
+        setInterval(function () {
+
+            roomsHero.style.opacity = "0";
+
+            setTimeout(function () {
+
+                roomsIndex =
+                    (roomsIndex + 1) % roomsImages.length;
+
+                roomsHero.style.backgroundImage =
+                    `url("${roomsImages[roomsIndex]}")`;
+
+                roomsHero.style.opacity = "1";
+
+            }, 1200);
+
+        }, 5000);
+
+    }
