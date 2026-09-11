@@ -939,3 +939,58 @@ a {
     }
 
 }
+/* ==========================================================
+   HEADER IMAGE
+========================================================== */
+
+.site-header {
+    background: #fffdf8;
+    border-bottom: 1px solid #d2aa42;
+}
+
+.header-image {
+    width: 100%;
+    overflow: hidden;
+}
+
+.header-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* ==========================================================
+   HEADER NAVIGATION
+========================================================== */
+
+.header-navigation {
+    background: #fffdf8;
+    border-top: 1px solid #e6d7a5;
+}
+
+.header-navigation .container {
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 30px;
+}
+
+.header-navigation .main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+.header-navigation .main-nav a {
+    font-weight: 600;
+    color: #7a3e20;
+}
+
+.header-navigation .main-nav a:hover {
+    color: #b8860b;
+}
