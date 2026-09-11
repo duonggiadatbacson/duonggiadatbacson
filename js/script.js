@@ -19,7 +19,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const heroImages = [
             "images/banner/1.jpg",
             "images/banner/2.jpg",
-            "images/banner/3.jpg"
+            "images/banner/3.jpg",
+            "images/banner/4.jpg",
+            "images/banner/5.jpg",
+            "images/banner/6.jpg",
+            "images/banner/7.jpg",
+            "images/banner/8.jpg",
+            "images/banner/9.jpg",
+            "images/banner/10.jpg"
         ];
 
         let heroIndex = 0;
