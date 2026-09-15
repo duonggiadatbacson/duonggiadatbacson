@@ -994,3 +994,39 @@ a {
 .header-navigation .main-nav a:hover {
     color: #b8860b;
 }
+.map-hero {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+.map-hero iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.map-hero-info {
+    position: absolute;
+    left: 50px;
+    bottom: 35px;
+    background: rgba(255, 253, 248, 0.95);
+    padding: 20px 25px;
+    max-width: 380px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
+}
+
+.map-hero-info h1 {
+    margin: 0 0 8px;
+}
+
+.map-hero-info p {
+    margin: 0 0 15px;
+}
+
+.map-hero-info a {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+}
