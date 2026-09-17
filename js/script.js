@@ -136,3 +136,80 @@ if (blogHero) {
     }, 5000);
 
 }
+// ======================================================
+// GALLERY LIGHTBOX
+// ======================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const lightbox = document.getElementById("image-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const closeButton = document.querySelector(".lightbox-close");
+
+    if (!lightbox || !lightboxImage) {
+        return;
+    }
+
+    const galleryImages = document.querySelectorAll(".gallery-item img");
+
+    galleryImages.forEach(function (image) {
+
+        image.addEventListener("click", function () {
+
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.alt;
+
+            lightbox.classList.add("active");
+
+            document.body.style.overflow = "hidden";
+
+        });
+
+    });
+
+
+    // Đóng bằng nút X
+
+    if (closeButton) {
+
+        closeButton.addEventListener("click", function () {
+
+            lightbox.classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        });
+
+    }
+
+
+    // Bấm vào nền tối để đóng
+
+    lightbox.addEventListener("click", function (event) {
+
+        if (event.target === lightbox) {
+
+            lightbox.classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        }
+
+    });
+
+
+    // Nhấn ESC để đóng
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+
+            lightbox.classList.remove("active");
+
+            document.body.style.overflow = "";
+
+        }
+
+    });
+
+});
