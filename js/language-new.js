@@ -254,6 +254,13 @@ const translations = {
 "gallery.momentsTitle": "Khoảnh khắc tại homestay",
 "gallery.momentsText": "Những khoảnh khắc bình dị bên gia đình, bạn bè và những ngày nghỉ tại Quỳnh Sơn.",
 "gallery.momentsPlaceholder": "Hình ảnh sẽ được cập nhật.",
+"contact.name": "Dương Gia Đạt Homestay",
+"contact.address": "Làng Quỳnh Sơn, xã Bắc Sơn, tỉnh Lạng Sơn",
+"contact.phone": "Điện thoại:",
+"contact.zalo": "Zalo:",
+"contact.facebook": "Facebook:",
+"contact.facebookName": "Facebook Dương Gia Đạt Homestay",
+"contact.booking": "GỌI ĐẶT PHÒNG",
 
     },
 
@@ -513,7 +520,13 @@ const translations = {
 "gallery.momentsTitle": "Moments at the Homestay",
 "gallery.momentsText": "Simple moments with family and friends during your stay in Quynh Son.",
 "gallery.momentsPlaceholder": "Photos will be updated soon.",
-
+"contact.name": "Duong Gia Dat Homestay",
+"contact.address": "Quynh Son Village, Bac Son Commune, Lang Son Province",
+"contact.phone": "Phone:",
+"contact.zalo": "Zalo:",
+"contact.facebook": "Facebook:",
+"contact.facebookName": "Duong Gia Dat Homestay on Facebook",
+"contact.booking": "CALL TO BOOK",
     }
 };
 
