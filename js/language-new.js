@@ -101,7 +101,9 @@ const translations = {
         "alt.bacson": "Khám phá Bắc Sơn - Dương Gia Đạt Homestay",
         "alt.room1": "Phòng nghỉ Dương Gia Đạt Homestay",
         "alt.room2": "Không gian nghỉ tại Dương Gia Đạt Homestay",
-        "alt.room3": "Không gian nhà sàn Dương Gia Đạt Homestay"
+        "alt.room3": "Không gian nhà sàn Dương Gia Đạt Homestay",
+        "about.label": "GIỚI THIỆU",
+"about.title": "Dương Gia Đạt Homestay"
     },
 
     en: {
@@ -206,7 +208,9 @@ const translations = {
         "alt.bacson": "Explore Bac Son - Duong Gia Dat Homestay",
         "alt.room1": "Guest room at Duong Gia Dat Homestay",
         "alt.room2": "Accommodation at Duong Gia Dat Homestay",
-        "alt.room3": "Traditional stilt house at Duong Gia Dat Homestay"
+        "alt.room3": "Traditional stilt house at Duong Gia Dat Homestay",
+        "about.label": "ABOUT US",
+"about.title": "Duong Gia Dat Homestay"
     }
 };
 
