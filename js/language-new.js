@@ -103,7 +103,14 @@ const translations = {
         "alt.room2": "Không gian nghỉ tại Dương Gia Đạt Homestay",
         "alt.room3": "Không gian nhà sàn Dương Gia Đạt Homestay",
         "about.label": "GIỚI THIỆU",
-"about.title": "Dương Gia Đạt Homestay"
+"about.title": "Dương Gia Đạt Homestay",
+"rooms.brand": "DUONG GIA DAT HOMESTAY",
+"rooms.title": "PHÒNG NGHỈ",
+"rooms.subtitle": "Không gian nghỉ ngơi giữa núi rừng Bắc Sơn",
+"rooms.room1Title": "Phòng nghỉ 1",
+"rooms.room2Title": "Phòng nghỉ 2",
+"rooms.room3Title": "Phòng nghỉ 3"
+
     },
 
     en: {
@@ -210,7 +217,14 @@ const translations = {
         "alt.room2": "Accommodation at Duong Gia Dat Homestay",
         "alt.room3": "Traditional stilt house at Duong Gia Dat Homestay",
         "about.label": "ABOUT US",
-"about.title": "Duong Gia Dat Homestay"
+"about.title": "Duong Gia Dat Homestay",
+"rooms.brand": "DUONG GIA DAT HOMESTAY",
+"rooms.title": "ROOMS",
+"rooms.subtitle": "A peaceful place to stay among the mountains of Bac Son",
+"rooms.room1Title": "Room 1",
+"rooms.room2Title": "Room 2",
+"rooms.room3Title": "Room 3"
+
     }
 };
 
