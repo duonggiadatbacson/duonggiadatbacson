@@ -160,8 +160,29 @@ const translations = {
 "blog.readMore": "Xem bài viết →",
 "blog.foodCardText": "Khám phá những món ăn và hương vị đặc trưng của vùng núi Bắc Sơn.",
 "blog.bacsonCardText": "Khám phá cảnh quan núi rừng, bản làng và những điểm đến quanh Bắc Sơn.",
+"blog.foodMainTitle": "Ẩm thực Bắc Sơn, Quỳnh Sơn",
+"blog.foodLabel": "ẨM THỰC BẮC SƠN",
+"blog.foodMainHeading": "Hương vị ẩm thực Quỳnh Sơn",
+"blog.foodIntroText": "Ẩm thực Bắc Sơn mang nét mộc mạc, gần gũi với cuộc sống của người dân vùng núi. Những nguyên liệu quen thuộc từ địa phương được chế biến thành những món ăn giản dị nhưng đậm đà hương vị.",
+"blog.foodLocalTitle": "Ẩm thực gắn với đời sống địa phương",
+"blog.foodLocalText1": "Trong đời sống của người dân Quỳnh Sơn, những bữa cơm gia đình thường gắn với các nguyên liệu quen thuộc của vùng núi và những sản vật theo mùa.",
+"blog.foodLocalText2": "Cách chế biến không quá cầu kỳ nhưng chú trọng giữ được hương vị tự nhiên của nguyên liệu. Chính sự giản dị này tạo nên nét riêng của ẩm thực vùng Bắc Sơn.",
 
+"blog.foodIngredientsTitle": "Những nguyên liệu quen thuộc của vùng núi",
+"blog.foodIngredientsText1": "Rau rừng, các loại rau theo mùa, thịt, cá và những sản vật địa phương là những nguyên liệu thường xuất hiện trong các bữa ăn của người dân vùng Bắc Sơn.",
+"blog.foodIngredientsText2": "Tùy từng thời điểm trong năm, các món ăn và nguyên liệu có thể thay đổi theo mùa. Đây cũng là một phần thú vị khi du khách trải nghiệm ẩm thực địa phương.",
 
+"blog.foodHomestayTitle": "Bữa cơm gần gũi tại homestay",
+"blog.foodHomestayText1": "Một bữa cơm tại homestay không chỉ đơn giản là thưởng thức món ăn mà còn là khoảng thời gian để du khách cảm nhận nhịp sống chậm rãi và không gian gần gũi của bản làng Quỳnh Sơn.",
+"blog.foodHomestayText2": "Tại Dương Gia Đạt Homestay, du khách có thể tìm hiểu thêm về những món ăn địa phương và trải nghiệm không gian sinh hoạt gần gũi với đời sống người dân Bắc Sơn.",
+
+"blog.foodExperienceTitle": "Trải nghiệm ẩm thực Bắc Sơn",
+"blog.foodExperienceText1": "Khám phá ẩm thực cũng là một cách để tìm hiểu văn hóa địa phương. Qua món ăn, nguyên liệu và cách thưởng thức, du khách có thể cảm nhận thêm về cuộc sống và phong tục của người dân Quỳnh Sơn.",
+"blog.foodExperienceText2": "Kết hợp nghỉ ngơi trong không gian nhà sàn, khám phá bản làng và thưởng thức những món ăn địa phương sẽ mang đến một trải nghiệm gần gũi hơn về Bắc Sơn.",
+
+"blog.foodGalleryButton": "XEM HÌNH ẢNH ẨM THỰC",
+"blog.tayCardText": "Tìm hiểu những nét văn hóa, phong tục và đời sống truyền thống của người Tày tại Quỳnh Sơn.",
+"blog.bacsonCardText": "Khám phá cảnh quan núi rừng, bản làng và những điểm đến quanh Bắc Sơn.",
 
     },
 
@@ -326,7 +347,29 @@ const translations = {
 "blog.readMore": "Read article →",
 "blog.foodCardText": "Discover the dishes and flavors that are characteristic of the mountainous region of Bac Son.",
 "blog.bacsonCardText": "Explore the mountain landscapes, traditional villages and destinations around Bac Son.",
+"blog.foodMainTitle": "Bac Son and Quynh Son Cuisine",
+"blog.foodLabel": "BAC SON CUISINE",
+"blog.foodMainHeading": "The Flavors of Quynh Son Cuisine",
+"blog.foodIntroText": "Bac Son cuisine has a simple and authentic character, closely connected with the daily life of people in the mountains. Familiar local ingredients are prepared into simple dishes with rich and distinctive flavors.",
+"blog.foodLocalTitle": "Cuisine and Local Life",
+"blog.foodLocalText1": "In the daily life of people in Quynh Son, family meals are often connected with familiar mountain ingredients and seasonal local produce.",
+"blog.foodLocalText2": "The cooking methods are not overly elaborate, but they focus on preserving the natural flavors of the ingredients. This simplicity creates the distinctive character of Bac Son cuisine.",
 
+"blog.foodIngredientsTitle": "Familiar Mountain Ingredients",
+"blog.foodIngredientsText1": "Wild vegetables, seasonal greens, meat, fish and local produce are among the ingredients commonly found in the meals of people in Bac Son.",
+"blog.foodIngredientsText2": "Depending on the time of year, dishes and ingredients may change with the seasons. This is also part of the enjoyment of experiencing local cuisine.",
+
+"blog.foodHomestayTitle": "A Warm and Authentic Homestay Meal",
+"blog.foodHomestayText1": "A meal at a homestay is not simply about enjoying food. It is also a chance for visitors to experience the slower rhythm of life and the welcoming atmosphere of Quynh Son village.",
+"blog.foodHomestayText2": "At Duong Gia Dat Homestay, visitors can learn more about local dishes and experience a living space that is closely connected with the daily life of people in Bac Son.",
+
+"blog.foodExperienceTitle": "Experiencing Bac Son Cuisine",
+"blog.foodExperienceText1": "Exploring local cuisine is also a way to understand local culture. Through dishes, ingredients and dining traditions, visitors can gain a deeper appreciation of the life and customs of the people of Quynh Son.",
+"blog.foodExperienceText2": "Combining a stay in a traditional stilt house with exploring the village and enjoying local dishes offers a more authentic and intimate experience of Bac Son.",
+
+"blog.foodGalleryButton": "VIEW CUISINE PHOTOS",
+"blog.tayCardText": "Discover the culture, traditions and traditional way of life of the Tay people in Quynh Son.",
+"blog.bacsonCardText": "Explore the mountain landscapes, traditional villages and destinations around Bac Son.",
 
     }
 };
