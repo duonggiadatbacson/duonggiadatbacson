@@ -183,6 +183,32 @@ const translations = {
 "blog.foodGalleryButton": "XEM HÌNH ẢNH ẨM THỰC",
 "blog.tayCardText": "Tìm hiểu những nét văn hóa, phong tục và đời sống truyền thống của người Tày tại Quỳnh Sơn.",
 "blog.bacsonCardText": "Khám phá cảnh quan núi rừng, bản làng và những điểm đến quanh Bắc Sơn.",
+"blog.bacsonMainTitle": "Khám phá Bắc Sơn, Lạng Sơn",
+"blog.bacsonLabel": "KHÁM PHÁ BẮC SƠN",
+"blog.bacsonMainHeading": "Vẻ đẹp vùng núi Bắc Sơn",
+"blog.bacsonIntroText": "Bắc Sơn là vùng đất nằm giữa núi rừng Lạng Sơn, nổi bật với cảnh quan tự nhiên, những thung lũng, bản làng và đời sống văn hóa đặc trưng của đồng bào địa phương.",
+"blog.bacsonQuynhSonTitle": "Khám phá Quỳnh Sơn",
+"blog.bacsonQuynhSonText1": "Quỳnh Sơn là một điểm đến mang nét bình dị của vùng núi Bắc Sơn. Những ngôi nhà sàn, bản làng và cảnh quan xung quanh tạo nên một không gian yên bình, phù hợp cho những chuyến đi nghỉ ngơi và khám phá.",
+"blog.bacsonQuynhSonText2": "Du khách có thể dành thời gian đi bộ quanh bản, ngắm cảnh, tìm hiểu đời sống địa phương và cảm nhận nhịp sống chậm rãi của vùng quê Bắc Sơn.",
+
+"blog.bacsonLandscapeTitle": "Cảnh quan núi rừng và thung lũng",
+"blog.bacsonLandscapeText1": "Một trong những nét đặc trưng của Bắc Sơn là sự kết hợp giữa núi đá, thung lũng và những cánh đồng nằm xen giữa các bản làng. Cảnh quan thay đổi theo mùa tạo nên những góc nhìn khác nhau trong mỗi chuyến đi.",
+"blog.bacsonLandscapeText2": "Đây cũng là không gian thích hợp để du khách thư giãn, chụp ảnh và tận hưởng không khí trong lành của vùng núi.",
+
+"blog.bacsonCultureTitle": "Văn hóa và đời sống bản làng",
+"blog.bacsonCultureText1": "Khám phá Bắc Sơn không chỉ là ngắm cảnh mà còn là tìm hiểu đời sống và văn hóa địa phương. Những nếp nhà sàn, sinh hoạt cộng đồng và các phong tục truyền thống góp phần tạo nên bản sắc riêng của vùng đất này.",
+"blog.bacsonCultureText2": "Đặc biệt, văn hóa Tày là một phần quan trọng trong đời sống tại Quỳnh Sơn và nhiều khu vực của Bắc Sơn. Du khách có thể tìm hiểu thêm qua không gian bản làng, ẩm thực và những trải nghiệm thực tế.",
+
+"blog.bacsonExperienceTitle": "Những trải nghiệm tại Bắc Sơn",
+"blog.bacsonExperienceText1": "Một chuyến đi đến Bắc Sơn có thể kết hợp nhiều trải nghiệm: nghỉ ngơi trong không gian nhà sàn, khám phá bản làng, tìm hiểu văn hóa Tày, thưởng thức ẩm thực địa phương và dành thời gian hòa mình vào thiên nhiên.",
+"blog.bacsonExperienceText2": "Từ Dương Gia Đạt Homestay tại Quỳnh Sơn, du khách có thể bắt đầu hành trình khám phá vẻ đẹp bình dị của Bắc Sơn và tìm hiểu thêm về cuộc sống địa phương.",
+
+"blog.bacsonSlowTripTitle": "Một chuyến đi chậm giữa núi rừng",
+"blog.bacsonSlowTripText1": "Bắc Sơn phù hợp với những ai muốn tạm rời xa nhịp sống bận rộn, tìm một không gian yên bình và dành thời gian cho thiên nhiên, gia đình và những trải nghiệm giản dị.",
+"blog.bacsonSlowTripText2": "Dương Gia Đạt Homestay mong muốn trở thành một điểm dừng chân gần gũi để du khách có thể nghỉ ngơi và khám phá Quỳnh Sơn, Bắc Sơn theo cách riêng của mình.",
+
+"blog.bacsonGalleryButton": "XEM HÌNH ẢNH BẮC SƠN",
+
 
     },
 
@@ -370,6 +396,32 @@ const translations = {
 "blog.foodGalleryButton": "VIEW CUISINE PHOTOS",
 "blog.tayCardText": "Discover the culture, traditions and traditional way of life of the Tay people in Quynh Son.",
 "blog.bacsonCardText": "Explore the mountain landscapes, traditional villages and destinations around Bac Son.",
+"blog.bacsonMainTitle": "Explore Bac Son, Lang Son",
+"blog.bacsonLabel": "EXPLORE BAC SON",
+"blog.bacsonMainHeading": "The Beauty of the Bac Son Mountains",
+"blog.bacsonIntroText": "Bac Son is a mountainous region in Lang Son, known for its natural landscapes, valleys, traditional villages and the distinctive cultural life of local communities.",
+"blog.bacsonQuynhSonTitle": "Explore Quynh Son",
+"blog.bacsonQuynhSonText1": "Quynh Son is a peaceful destination with the simple character of the Bac Son mountains. Traditional stilt houses, village communities and the surrounding landscape create a tranquil setting that is well suited for relaxing and exploring.",
+"blog.bacsonQuynhSonText2": "Visitors can spend time walking around the village, enjoying the scenery, learning about local life and experiencing the slower rhythm of the countryside in Bac Son.",
+
+"blog.bacsonLandscapeTitle": "Mountain Landscapes and Valleys",
+"blog.bacsonLandscapeText1": "One of the distinctive features of Bac Son is the combination of limestone mountains, valleys and rice fields scattered among traditional villages. The landscape changes with the seasons, offering different views on every journey.",
+"blog.bacsonLandscapeText2": "It is also an ideal setting for visitors to relax, take photos and enjoy the fresh mountain air.",
+
+"blog.bacsonCultureTitle": "Village Culture and Local Life",
+"blog.bacsonCultureText1": "Exploring Bac Son is not only about enjoying the scenery but also about discovering local life and culture. Traditional stilt houses, community activities and customs contribute to the distinctive character of this region.",
+"blog.bacsonCultureText2": "Tay culture is an important part of life in Quynh Son and many areas of Bac Son. Visitors can learn more through the village environment, local cuisine and authentic experiences.",
+
+"blog.bacsonExperienceTitle": "Experiences in Bac Son",
+"blog.bacsonExperienceText1": "A trip to Bac Son can combine many experiences: staying in a traditional stilt house, exploring the village, learning about Tay culture, enjoying local cuisine and spending time in nature.",
+"blog.bacsonExperienceText2": "From Duong Gia Dat Homestay in Quynh Son, visitors can begin their journey to discover the peaceful beauty of Bac Son and learn more about local life.",
+
+"blog.bacsonSlowTripTitle": "A Slow Journey Through the Mountains",
+"blog.bacsonSlowTripText1": "Bac Son is suitable for those who want to step away from a busy pace of life, find a peaceful place and spend time with nature, family and simple experiences.",
+"blog.bacsonSlowTripText2": "Duong Gia Dat Homestay hopes to be a warm and welcoming place where visitors can relax and explore Quynh Son and Bac Son in their own way.",
+
+"blog.bacsonGalleryButton": "VIEW BAC SON PHOTOS",
+
 
     }
 };
