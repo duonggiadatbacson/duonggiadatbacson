@@ -134,6 +134,33 @@ const translations = {
 "blog.bacsonText": "Cùng khám phá cảnh quan núi rừng, bản làng và những trải nghiệm quanh Quỳnh Sơn và Bắc Sơn.",
 "blog.cakeTitle": "Gói bánh truyền thống ở Quỳnh Sơn",
 "blog.cakeText": "Cùng tìm hiểu quá trình chuẩn bị nguyên liệu, gói bánh và luộc bánh bên bếp lửa tại Quỳnh Sơn.",
+"blog.tayTitle": "Văn hóa Tày ở Quỳnh Sơn, Bắc Sơn",
+"blog.tayLabel": "VĂN HÓA TÀY",
+"blog.tayMainTitle": "Văn hóa Tày ở Quỳnh Sơn",
+"blog.tayIntroText": "Quỳnh Sơn là một bản làng mang đậm nét văn hóa truyền thống của người Tày tại Bắc Sơn, Lạng Sơn. Không gian bản làng, những nếp nhà sàn và đời sống gần gũi với thiên nhiên tạo nên nét riêng của vùng đất này.",
+"blog.tayVillageTitle": "Bản làng và đời sống người Tày",
+"blog.tayVillageText1": "Không gian sống của người Tày tại Quỳnh Sơn gắn liền với bản làng, ruộng đồng, núi rừng và những ngôi nhà sàn truyền thống. Đời sống cộng đồng tạo nên một không gian văn hóa gần gũi và bình dị.",
+"blog.tayVillageText2": "Những sinh hoạt thường ngày, cách tổ chức không gian nhà ở và sự gắn kết giữa các gia đình góp phần tạo nên nét đặc trưng trong đời sống văn hóa của người Tày.",
+
+"blog.tayStiltTitle": "Nhà sàn trong văn hóa Tày",
+"blog.tayStiltText1": "Nhà sàn là một hình ảnh quen thuộc trong các bản làng người Tày. Không gian nhà sàn gắn với đời sống gia đình, sinh hoạt hàng ngày và những mối quan hệ cộng đồng.",
+"blog.tayStiltText2": "Tại Dương Gia Đạt Homestay, du khách có thể trải nghiệm không gian nhà sàn và cảm nhận sự gần gũi giữa kiến trúc truyền thống, con người và cảnh quan bản làng Quỳnh Sơn.",
+
+"blog.tayTraditionTitle": "Những nét văn hóa truyền thống",
+"blog.tayTraditionText1": "Văn hóa Tày được thể hiện qua nhiều khía cạnh của đời sống như tiếng nói, trang phục, ẩm thực, phong tục, sinh hoạt cộng đồng và những giá trị được gìn giữ qua nhiều thế hệ.",
+"blog.tayTraditionText2": "Khi đến Quỳnh Sơn, du khách có thể dành thời gian tìm hiểu cuộc sống địa phương và cảm nhận không gian văn hóa một cách tự nhiên thông qua những trải nghiệm tại bản làng.",
+
+"blog.tayExperienceTitle": "Trải nghiệm văn hóa Tày tại Quỳnh Sơn",
+"blog.tayExperienceText1": "Một chuyến đi đến Quỳnh Sơn không chỉ là nghỉ ngơi mà còn là cơ hội tìm hiểu văn hóa địa phương, thưởng thức ẩm thực và khám phá cuộc sống bình dị của người dân Bắc Sơn.",
+"blog.tayExperienceText2": "Dương Gia Đạt Homestay mong muốn mang đến cho du khách một không gian nghỉ ngơi gần gũi, từ đó có thêm cơ hội tìm hiểu văn hóa Tày và vẻ đẹp của Quỳnh Sơn, Bắc Sơn.",
+
+"blog.tayGalleryButton": "XEM HÌNH ẢNH VĂN HÓA TÀY",
+"blog.backToBlog": "← Quay lại Blog",
+"blog.stiltCardText": "Khám phá không gian nhà sàn truyền thống tại Quỳnh Sơn.",
+"blog.readMore": "Xem bài viết →",
+"blog.foodCardText": "Khám phá những món ăn và hương vị đặc trưng của vùng núi Bắc Sơn.",
+"blog.bacsonCardText": "Khám phá cảnh quan núi rừng, bản làng và những điểm đến quanh Bắc Sơn.",
+
 
 
     },
@@ -273,6 +300,32 @@ const translations = {
 "blog.bacsonText": "Discover the mountain landscapes, traditional villages and experiences around Quynh Son and Bac Son.",
 "blog.cakeTitle": "Traditional Cake Making in Quynh Son",
 "blog.cakeText": "Discover how local ingredients are prepared, traditional cakes are wrapped and cooked over the fire in Quynh Son.",
+"blog.tayTitle": "Tay Culture in Quynh Son, Bac Son",
+"blog.tayLabel": "TAY CULTURE",
+"blog.tayMainTitle": "Tay Culture in Quynh Son",
+"blog.tayIntroText": "Quynh Son is a village rich in the traditional culture of the Tay people in Bac Son, Lang Son. The village landscape, traditional stilt houses and close connection with nature create the unique character of this region.",
+"blog.tayVillageTitle": "Tay Villages and Community Life",
+"blog.tayVillageText1": "The traditional way of life of the Tay people in Quynh Son is closely connected with village communities, rice fields, mountains, forests and traditional stilt houses. Community life creates a warm and simple cultural atmosphere.",
+"blog.tayVillageText2": "Daily activities, the way homes are organized and the close bonds between families all contribute to the distinctive cultural life of the Tay people.",
+
+"blog.tayStiltTitle": "Stilt Houses in Tay Culture",
+"blog.tayStiltText1": "Traditional stilt houses are a familiar feature of Tay villages. They are closely connected with family life, daily activities and community relationships.",
+"blog.tayStiltText2": "At Duong Gia Dat Homestay, visitors can experience the traditional stilt house and feel the connection between traditional architecture, local people and the village landscape of Quynh Son.",
+
+"blog.tayTraditionTitle": "Traditional Cultural Values",
+"blog.tayTraditionText1": "Tay culture is expressed through many aspects of daily life, including language, traditional clothing, cuisine, customs, community activities and values preserved through generations.",
+"blog.tayTraditionText2": "When visiting Quynh Son, visitors can take time to learn about local life and naturally experience the cultural atmosphere through their experiences in the village.",
+
+"blog.tayExperienceTitle": "Experiencing Tay Culture in Quynh Son",
+"blog.tayExperienceText1": "A trip to Quynh Son is not only about relaxation but also an opportunity to learn about local culture, enjoy local cuisine and discover the simple way of life of the people of Bac Son.",
+"blog.tayExperienceText2": "Duong Gia Dat Homestay hopes to offer visitors a warm and welcoming place to stay, giving them more opportunities to learn about Tay culture and appreciate the beauty of Quynh Son and Bac Son.",
+
+"blog.tayGalleryButton": "VIEW TAY CULTURE PHOTOS",
+"blog.backToBlog": "← Back to Blog",
+"blog.stiltCardText": "Discover the traditional stilt house in Quynh Son.",
+"blog.readMore": "Read article →",
+"blog.foodCardText": "Discover the dishes and flavors that are characteristic of the mountainous region of Bac Son.",
+"blog.bacsonCardText": "Explore the mountain landscapes, traditional villages and destinations around Bac Son.",
 
 
     }
