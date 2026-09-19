@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://duonggiadatbacson.github.io/duonggiadatbacson/sitemap.xml
+Sitemap: https://duonggiadatbacson.com/sitemap.xml
