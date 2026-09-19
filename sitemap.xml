@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <url>
-    <loc>https://duonggiadatbacson.github.io/duonggiadatbacson/</loc>
-  </url>
-
-  <url>
-    <loc>https://duonggiadatbacson.github.io/duonggiadatbacson/gioi-thieu.html</loc>
-  </url>
-
-  <url>
-    <loc>https://duonggiadatbacson.github.io/duonggiadatbacson/rooms.html</loc>
-  </url>
-
-  <url>
-    <loc>https://duonggiadatbacson.github.io/duonggiadatbacson/gallery.html</loc>
-  </url>
-
-  <url>
-    <loc>https://duonggiadatbacson.github.io/duonggiadatbacson/blog.html</loc>
-  </url>
-
-  <url>
-    <loc>https://duonggiadatbacson.github.io/duonggiadatbacson/contact.html</loc>
-  </url>
-
+<url>
+<loc>https://duonggiadatbacson.com/</loc>
+</url>
+<url>
+<loc>https://duonggiadatbacson.com/gioi-thieu.html</loc>
+</url>
+<url>
+<loc>https://duonggiadatbacson.com/rooms.html</loc>
+</url>
+<url>
+<loc>https://duonggiadatbacson.com/gallery.html</loc>
+</url>
+<url>
+<loc>https://duonggiadatbacson.com/blog.html</loc>
+</url>
+<url>
+<loc>https://duonggiadatbacson.com/contact.html</loc>
+</url>
 </urlset>
