@@ -261,6 +261,10 @@ const translations = {
 "contact.facebook": "Facebook:",
 "contact.facebookName": "Facebook Dương Gia Đạt Homestay",
 "contact.booking": "GỌI ĐẶT PHÒNG",
+"review.title": "Khách nói gì về chúng tôi",
+"review.subtitle": "Những chia sẻ chân thực từ du khách đã trải nghiệm tại Dương Gia Đạt Homestay",
+"review.button": "Xem đánh giá trên Google",
+"review.write": "Viết đánh giá",
 
     },
 
@@ -527,6 +531,10 @@ const translations = {
 "contact.facebook": "Facebook:",
 "contact.facebookName": "Duong Gia Dat Homestay on Facebook",
 "contact.booking": "CALL TO BOOK",
+"review.title": "What Our Guests Say",
+"review.subtitle": "Real experiences shared by guests who stayed at Dương Gia Đạt Homestay",
+"review.button": "View Reviews on Google",
+"review.write": "Write a Review",
     }
 };
 
