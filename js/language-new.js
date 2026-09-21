@@ -265,6 +265,9 @@ const translations = {
 "review.subtitle": "Những chia sẻ chân thực từ du khách đã trải nghiệm tại Dương Gia Đạt Homestay",
 "review.button": "Xem đánh giá trên Google",
 "review.write": "Viết đánh giá",
+"review.placeholderText": "Nội dung đánh giá sẽ được cập nhật tại đây.",
+"review.placeholderName": "Khách lưu trú",
+"home.reviewAll": "XEM TẤT CẢ ĐÁNH GIÁ",
 
     },
 
@@ -535,6 +538,9 @@ const translations = {
 "review.subtitle": "Real experiences shared by guests who stayed at Dương Gia Đạt Homestay",
 "review.button": "View Reviews on Google",
 "review.write": "Write a Review",
+"review.placeholderText": "Guest reviews will be updated here.",
+"review.placeholderName": "Guest",
+"home.reviewAll": "VIEW ALL REVIEWS",
     }
 };
 
