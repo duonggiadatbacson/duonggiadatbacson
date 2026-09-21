@@ -277,6 +277,46 @@ const translations = {
 "reviews.ctaTitle": "Hãy chia sẻ trải nghiệm của bạn",
 "reviews.ctaText": "Nếu bạn đã từng lưu trú tại Dương Gia Đạt Homestay, chúng tôi rất vui khi nhận được cảm nhận của bạn.",
 "reviews.writeButton": "VIẾT ĐÁNH GIÁ TRÊN GOOGLE",
+"travel.quynhsonLabel": "DU LỊCH QUỲNH SƠN",
+"travel.quynhsonTitle": "Khám phá Quỳnh Sơn",
+"travel.quynhsonSubtitle": "Một hành trình khám phá bản làng, văn hóa và thiên nhiên Bắc Sơn",
+
+"travel.quynhsonIntroTitle": "Du lịch Quỳnh Sơn",
+"travel.quynhsonIntroText1": "Quỳnh Sơn là một bản làng nằm giữa không gian núi rừng Bắc Sơn, mang vẻ đẹp bình dị với những ngôi nhà sàn truyền thống và đời sống văn hóa đặc trưng của người Tày.",
+"travel.quynhsonIntroText2": "Đến Quỳnh Sơn, du khách có thể nghỉ ngơi, khám phá bản làng, tìm hiểu văn hóa Tày, thưởng thức ẩm thực địa phương và tận hưởng những khoảnh khắc yên bình giữa thiên nhiên.",
+
+"travel.quynhsonVillageTitle": "Khám phá bản làng Quỳnh Sơn",
+"travel.quynhsonVillageText1": "Những ngôi nhà sàn, con đường trong bản và khung cảnh núi rừng tạo nên một không gian gần gũi, yên bình và đặc trưng của Quỳnh Sơn.",
+"travel.quynhsonVillageText2": "Du khách có thể dành thời gian đi bộ quanh bản, ngắm cảnh, tìm hiểu đời sống địa phương và cảm nhận nhịp sống chậm rãi của người dân nơi đây.",
+
+"travel.quynhsonCultureTitle": "Văn hóa Tày tại Quỳnh Sơn",
+"travel.quynhsonCultureText1": "Quỳnh Sơn mang đậm những nét văn hóa truyền thống của người Tày được thể hiện qua nhà ở, phong tục, ẩm thực và đời sống cộng đồng.",
+"travel.quynhsonCultureText2": "Những trải nghiệm gần gũi trong bản làng giúp du khách có thêm cơ hội tìm hiểu về văn hóa và cuộc sống của người Tày tại Bắc Sơn.",
+
+"travel.quynhsonStiltTitle": "Trải nghiệm nhà sàn",
+"travel.quynhsonStiltText1": "Nhà sàn là một phần quen thuộc trong không gian sống của người Tày tại Quỳnh Sơn.",
+"travel.quynhsonStiltText2": "Lưu trú tại nhà sàn giúp du khách cảm nhận rõ hơn sự gần gũi giữa kiến trúc truyền thống, thiên nhiên và đời sống bản làng.",
+
+"travel.quynhsonFoodTitle": "Ẩm thực Quỳnh Sơn",
+"travel.quynhsonFoodText1": "Ẩm thực địa phương là một phần không thể thiếu trong hành trình khám phá Quỳnh Sơn.",
+"travel.quynhsonFoodText2": "Những nguyên liệu quen thuộc của vùng núi được chế biến thành những món ăn giản dị, gần gũi và mang hương vị riêng của Bắc Sơn.",
+
+"travel.quynhsonNatureTitle": "Thiên nhiên và cảnh quan",
+"travel.quynhsonNatureText1": "Không gian núi rừng, thung lũng và những bản làng tạo nên vẻ đẹp tự nhiên đặc trưng của Quỳnh Sơn và Bắc Sơn.",
+"travel.quynhsonNatureText2": "Đây là không gian thích hợp để nghỉ ngơi, đi bộ, ngắm cảnh và tận hưởng bầu không khí trong lành của vùng núi.",
+
+"travel.quynhsonExperienceTitle": "Những trải nghiệm tại Quỳnh Sơn",
+"travel.quynhsonExperienceText1": "Một chuyến đi đến Quỳnh Sơn có thể kết hợp nghỉ ngơi trong nhà sàn, khám phá bản làng, tìm hiểu văn hóa Tày và thưởng thức ẩm thực địa phương.",
+"travel.quynhsonExperienceText2": "Mỗi trải nghiệm đều mang đến những góc nhìn gần gũi hơn về thiên nhiên, con người và cuộc sống tại vùng đất Bắc Sơn.",
+
+"travel.quynhsonStayTitle": "Nghỉ tại Dương Gia Đạt Homestay",
+"travel.quynhsonStayText1": "Dương Gia Đạt Homestay là nơi dừng chân để du khách nghỉ ngơi và bắt đầu hành trình khám phá Quỳnh Sơn.",
+"travel.quynhsonStayText2": "Từ không gian nhà sàn, du khách có thể dành thời gian thư giãn và cảm nhận nhịp sống bình dị của bản làng.",
+
+"travel.quynhsonGalleryButton": "XEM HÌNH ẢNH QUỲNH SƠN",
+"travel.quynhsonContactButton": "LIÊN HỆ ĐẶT PHÒNG",
+"travel.quynhsonBackButton": "← QUAY LẠI",
+"nav.quynhson": "Du lịch Quỳnh Sơn",
 
 
     },
@@ -560,6 +600,46 @@ const translations = {
 "reviews.ctaTitle": "Share Your Experience",
 "reviews.ctaText": "If you have stayed at Duong Gia Dat Homestay, we would be very happy to hear about your experience.",
 "reviews.writeButton": "WRITE A REVIEW ON GOOGLE",
+"travel.quynhsonLabel": "QUYNH SON TRAVEL",
+"travel.quynhsonTitle": "Explore Quynh Son",
+"travel.quynhsonSubtitle": "A journey through village life, culture and nature in Bac Son",
+
+"travel.quynhsonIntroTitle": "Travel in Quynh Son",
+"travel.quynhsonIntroText1": "Quynh Son is a traditional village surrounded by the mountains of Bac Son, known for its peaceful landscape, traditional stilt houses and distinctive Tay culture.",
+"travel.quynhsonIntroText2": "Visitors to Quynh Son can relax, explore the village, discover Tay culture, enjoy local cuisine and experience peaceful moments surrounded by nature.",
+
+"travel.quynhsonVillageTitle": "Discover Quynh Son Village",
+"travel.quynhsonVillageText1": "Traditional stilt houses, village paths and mountain landscapes create the peaceful and welcoming character of Quynh Son.",
+"travel.quynhsonVillageText2": "Visitors can walk around the village, enjoy the scenery, learn about local life and experience the slower rhythm of everyday life.",
+
+"travel.quynhsonCultureTitle": "Tay Culture in Quynh Son",
+"travel.quynhsonCultureText1": "Quynh Son preserves many traditional aspects of Tay culture, reflected in architecture, customs, cuisine and community life.",
+"travel.quynhsonCultureText2": "Experiencing village life gives visitors an opportunity to learn more about the culture and traditions of the Tay people in Bac Son.",
+
+"travel.quynhsonStiltTitle": "Experience a Traditional Stilt House",
+"travel.quynhsonStiltText1": "Traditional stilt houses are an important part of the living environment of the Tay people in Quynh Son.",
+"travel.quynhsonStiltText2": "Staying in a traditional stilt house allows visitors to experience the close connection between traditional architecture, nature and village life.",
+
+"travel.quynhsonFoodTitle": "Quynh Son Cuisine",
+"travel.quynhsonFoodText1": "Local cuisine is an important part of discovering Quynh Son.",
+"travel.quynhsonFoodText2": "Familiar mountain ingredients are prepared into simple and authentic dishes with the distinctive flavors of Bac Son.",
+
+"travel.quynhsonNatureTitle": "Nature and Landscapes",
+"travel.quynhsonNatureText1": "Mountains, valleys and traditional villages create the distinctive natural beauty of Quynh Son and Bac Son.",
+"travel.quynhsonNatureText2": "It is a peaceful setting for relaxing, walking, enjoying the scenery and experiencing the fresh mountain air.",
+
+"travel.quynhsonExperienceTitle": "Experiences in Quynh Son",
+"travel.quynhsonExperienceText1": "A trip to Quynh Son can combine staying in a traditional stilt house, exploring the village, learning about Tay culture and enjoying local cuisine.",
+"travel.quynhsonExperienceText2": "Each experience offers a closer connection to the nature, people and everyday life of Bac Son.",
+
+"travel.quynhsonStayTitle": "Stay at Duong Gia Dat Homestay",
+"travel.quynhsonStayText1": "Duong Gia Dat Homestay is a welcoming place to stay while discovering Quynh Son.",
+"travel.quynhsonStayText2": "From the traditional stilt house, visitors can relax and experience the peaceful rhythm of village life.",
+
+"travel.quynhsonGalleryButton": "VIEW QUYNH SON PHOTOS",
+"travel.quynhsonContactButton": "CONTACT TO BOOK",
+"travel.quynhsonBackButton": "← BACK",
+"nav.quynhson": "Quynh Son Travel",
 
     }
 };
