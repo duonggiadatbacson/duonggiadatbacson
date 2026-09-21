@@ -268,6 +268,16 @@ const translations = {
 "review.placeholderText": "Nội dung đánh giá sẽ được cập nhật tại đây.",
 "review.placeholderName": "Khách lưu trú",
 "home.reviewAll": "XEM TẤT CẢ ĐÁNH GIÁ",
+"nav.reviews": "Đánh giá",
+"reviews.label": "CẢM NHẬN",
+"reviews.title": "Khách nói gì về Dương Gia Đạt",
+"reviews.heading": "Những cảm nhận từ khách lưu trú",
+"reviews.description": "Những chia sẻ của khách sau khi nghỉ ngơi, trải nghiệm văn hóa và khám phá Bắc Sơn tại Dương Gia Đạt Homestay.",
+"reviews.googleButton": "XEM ĐÁNH GIÁ TRÊN GOOGLE",
+"reviews.ctaTitle": "Hãy chia sẻ trải nghiệm của bạn",
+"reviews.ctaText": "Nếu bạn đã từng lưu trú tại Dương Gia Đạt Homestay, chúng tôi rất vui khi nhận được cảm nhận của bạn.",
+"reviews.writeButton": "VIẾT ĐÁNH GIÁ TRÊN GOOGLE",
+
 
     },
 
@@ -541,6 +551,16 @@ const translations = {
 "review.placeholderText": "Guest reviews will be updated here.",
 "review.placeholderName": "Guest",
 "home.reviewAll": "VIEW ALL REVIEWS",
+"nav.reviews": "Reviews",
+"reviews.label": "GUEST REVIEWS",
+"reviews.title": "What Guests Say About Duong Gia Dat",
+"reviews.heading": "Guest Experiences",
+"reviews.description": "Guest experiences after staying, discovering local culture and exploring Bac Son at Duong Gia Dat Homestay.",
+"reviews.googleButton": "VIEW REVIEWS ON GOOGLE",
+"reviews.ctaTitle": "Share Your Experience",
+"reviews.ctaText": "If you have stayed at Duong Gia Dat Homestay, we would be very happy to hear about your experience.",
+"reviews.writeButton": "WRITE A REVIEW ON GOOGLE",
+
     }
 };
 
