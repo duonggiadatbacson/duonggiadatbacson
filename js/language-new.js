@@ -131,7 +131,10 @@ const translations = {
         "blog.stiltGalleryTitle": "Khám phá thêm hình ảnh nhà sàn",
         "blog.stiltGalleryText": "Bạn có thể xem thêm những hình ảnh thực tế về không gian nhà sàn tại Dương Gia Đạt Homestay trong Thư viện ảnh.",
         "blog.stiltGalleryButton": "XEM HÌNH ẢNH NHÀ SÀN",
-
+"blog.stiltTravelLinkBefore": "Nếu muốn tìm hiểu rộng hơn về vùng đất này, bạn có thể khám phá",
+"blog.stiltTravelLink": "Du lịch Quỳnh Sơn, Bắc Sơn, Lạng Sơn",
+"blog.stiltTravelLinkAfter": "với những câu chuyện về lịch sử, thiên nhiên, văn hóa Tày, nhà sàn và đời sống cộng đồng.",
+         
         "blog.exploreLabel": "KHÁM PHÁ THÊM",
         "blog.exploreTitle": "Những câu chuyện từ Quỳnh Sơn",
 
@@ -465,6 +468,9 @@ const translations = {
         "blog.stiltGalleryTitle": "Explore More Photos of the Stilt House",
         "blog.stiltGalleryText": "You can see more real photos of the traditional stilt house at Duong Gia Dat Homestay in our photo gallery.",
         "blog.stiltGalleryButton": "VIEW STILT HOUSE PHOTOS",
+"blog.stiltTravelLinkBefore": "Nếu muốn tìm hiểu rộng hơn về vùng đất này, bạn có thể khám phá",
+"blog.stiltTravelLink": "Du lịch Quỳnh Sơn, Bắc Sơn, Lạng Sơn",
+"blog.stiltTravelLinkAfter": "với những câu chuyện về lịch sử, thiên nhiên, văn hóa Tày, nhà sàn và đời sống cộng đồng.",
 
         "blog.exploreLabel": "EXPLORE MORE",
         "blog.exploreTitle": "Stories from Quynh Son",
