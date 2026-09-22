@@ -14,7 +14,7 @@ const translations = {
         "home.subtitle": "Làng Tày giữa thung lũng Bắc Sơn",
         "home.intro1": "Quỳnh Sơn là một làng du lịch cộng đồng nằm giữa thung lũng Bắc Sơn, tỉnh Lạng Sơn, nơi lưu giữ không gian làng bản Tày với những ngôi nhà sàn truyền thống.",
         "home.intro2": "Đến Quỳnh Sơn, du khách có thể khám phá cảnh quan Bắc Sơn, tìm hiểu văn hóa Tày, thưởng thức ẩm thực địa phương và cảm nhận nhịp sống bình dị của bản làng.",
-        "home.explore": "XEM CẨM NANG DU LỊCH QUỲNH SƠN",
+        "home.explore": "KHÁM PHÁ QUỲNH SƠN",
 
         "home.highlightsTitle": "Khám phá Quỳnh Sơn",
         "home.highlightsDescription": "Tìm hiểu những giá trị văn hóa, không gian làng bản, ẩm thực và cảnh quan làm nên nét đặc sắc của Quỳnh Sơn.",
@@ -349,8 +349,7 @@ const translations = {
         "home.subtitle": "A Tay village in the Bac Son Valley",
         "home.intro1": "Quynh Son is a community-based tourism village in the Bac Son Valley of Lang Son Province, preserving a traditional Tay village setting with traditional stilt houses.",
         "home.intro2": "Visitors to Quynh Son can explore the landscapes of Bac Son, discover Tay culture, enjoy local cuisine and experience the peaceful rhythm of village life.",
-        "home.explore": "VIEW THE QUYNH SON TRAVEL GUIDE",
-
+        "home.explore": "EXPLORE QUYNH SON",
         "home.highlightsTitle": "Explore Quynh Son",
         "home.highlightsDescription": "Discover the culture, village life, local cuisine and landscapes that make Quynh Son a distinctive destination.",
 
