@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gửi yêu cầu đặt phòng trực tiếp tại Dương Gia Đạt Homestay, Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn.">
+  <link rel="canonical" href="https://duonggiadatbacson.com/dat-phong.html">
+  <meta property="og:title" content="Đặt phòng trực tiếp | Dương Gia Đạt Homestay">
+  <meta property="og:description" content="Gửi thông tin ngày lưu trú và số khách để Dương Gia Đạt Homestay kiểm tra phòng và phản hồi.">
+  <meta property="og:image" content="https://duonggiadatbacson.com/images/logo/3.jpg">
+  <meta property="og:url" content="https://duonggiadatbacson.com/dat-phong.html">
+  <title>Đặt phòng trực tiếp | Dương Gia Đạt Homestay</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .booking-page{padding:42px 16px 60px}
+    .booking-wrap{max-width:850px;margin:0 auto}
+    .booking-intro{text-align:center;margin-bottom:28px}
+    .booking-intro h1{margin-bottom:10px}
+    .booking-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:clamp(20px,4vw,36px);box-shadow:0 8px 28px rgba(0,0,0,.06);color:#222}
+    .booking-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .booking-field{display:flex;flex-direction:column;gap:7px}
+    .booking-field.full{grid-column:1/-1}
+    .booking-field label{font-weight:600}
+    .booking-field input,.booking-field select,.booking-field textarea{width:100%;box-sizing:border-box;padding:12px 13px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;background:#fff;color:#222}
+    .booking-field textarea{min-height:110px;resize:vertical}
+    .booking-help{font-size:.92rem;color:#5b6470;line-height:1.6}
+    .booking-submit{display:inline-flex;align-items:center;justify-content:center;width:100%;margin-top:22px;padding:14px 20px;border:0;border-radius:9px;background:#176b45;color:#fff;font-size:1rem;font-weight:700;cursor:pointer}
+    .booking-submit:hover{background:#105638}
+    .booking-notice{margin-top:16px;padding:14px;border-radius:9px;background:#f0f7f2;line-height:1.6}
+    .booking-contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+    .booking-contact-actions a{display:inline-flex;align-items:center;justify-content:center;flex:1 1 190px;padding:13px 16px;border-radius:9px;text-decoration:none;font-weight:700}
+    .booking-fb{background:#1877f2;color:#fff}
+    .booking-zalo{background:#0068ff;color:#fff}
+    .booking-mail{background:#176b45;color:#fff}
+    .booking-hidden{display:none}
+    @media(max-width:620px){.booking-grid{grid-template-columns:1fr}.booking-field.full{grid-column:auto}.booking-page{padding-top:28px}}
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-image">
+    <img src="images/logo/1.jpg" alt="Dương Gia Đạt Homestay">
+  </div>
+  <div class="header-navigation">
+    <div class="container">
+      <nav class="main-nav">
+        <a href="index.html" data-i18n="nav.home" aria-label="Trang chủ">🏠</a>
+        <a href="gioi-thieu.html" data-i18n="nav.about">Giới Thiệu</a>
+        <a href="rooms.html" data-i18n="nav.rooms">Phòng</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="gallery.html" data-i18n="nav.gallery">Thư viện ảnh</a>
+        <a href="contact.html" data-i18n="nav.contact">Liên Hệ</a>
+      </nav>
+      <div class="language-switcher">
+        <button type="button" data-lang="vi">VI</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a href="dat-phong.html" class="booking-button" data-i18n="nav.booking">ĐẶT PHÒNG</a>
+    </div>
+  </div>
+</header>
+
+<main class="booking-page">
+  <div class="booking-wrap">
+    <div class="booking-intro">
+      <h1>Đặt phòng trực tiếp</h1>
+      <p>Dương Gia Đạt Homestay · Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+      <p class="booking-help">Gửi thông tin lưu trú để homestay kiểm tra tình trạng phòng và liên hệ xác nhận với anh/chị.</p>
+    </div>
+
+    <section class="booking-card" aria-labelledby="booking-form-title">
+      <h2 id="booking-form-title">Thông tin đặt phòng</h2>
+      <form id="bookingForm">
+        <div class="booking-grid">
+          <div class="booking-field">
+            <label for="checkin">Ngày nhận phòng *</label>
+            <input id="checkin" name="checkin" type="date" required>
+          </div>
+          <div class="booking-field">
+            <label for="checkout">Ngày trả phòng *</label>
+            <input id="checkout" name="checkout" type="date" required>
+          </div>
+          <div class="booking-field">
+            <label for="guests">Số khách *</label>
+            <select id="guests" name="guests" required>
+              <option value="">Chọn số khách</option>
+              <option>1 khách</option><option>2 khách</option><option>3 khách</option>
+              <option>4 khách</option><option>5 khách</option><option>6 khách</option>
+              <option>Trên 6 khách</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label for="rooms">Số phòng dự kiến *</label>
+            <select id="rooms" name="rooms" required>
+              <option value="">Chọn số phòng</option>
+              <option>1 phòng</option><option>2 phòng</option><option>3 phòng</option>
+              <option>4 phòng trở lên</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label for="fullname">Họ và tên *</label>
+            <input id="fullname" name="fullname" type="text" autocomplete="name" maxlength="100" placeholder="Tên người đặt phòng" required>
+          </div>
+          <div class="booking-field">
+            <label for="phone">Số điện thoại *</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Số điện thoại liên hệ" required>
+          </div>
+          <div class="booking-field full">
+            <label for="email">Email (không bắt buộc)</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="Địa chỉ email nếu có">
+          </div>
+          <div class="booking-field full">
+            <label for="note">Yêu cầu thêm (không bắt buộc)</label>
+            <textarea id="note" name="note" maxlength="1000" placeholder="Ví dụ: giờ đến dự kiến, nhu cầu ăn uống hoặc yêu cầu khác..."></textarea>
+          </div>
+        </div>
+        <p class="booking-help">Sau khi bấm gửi, thiết bị sẽ mở ứng dụng email với nội dung yêu cầu đã điền sẵn. Anh/chị cần bấm <strong>Gửi</strong> trong ứng dụng email để chuyển yêu cầu đến homestay. Việc gửi yêu cầu chưa phải xác nhận phòng đã được giữ.</p>
+        <button class="booking-submit" type="submit">Gửi yêu cầu đặt phòng qua email</button>
+      </form>
+
+      <div id="afterSubmit" class="booking-notice booking-hidden" role="status" aria-live="polite">
+        <strong>Đã chuẩn bị nội dung yêu cầu đặt phòng.</strong><br>
+        Vui lòng hoàn tất thao tác gửi trong ứng dụng email vừa mở. Nếu không mở được email, anh/chị có thể liên hệ trực tiếp qua các kênh bên dưới.
+        <div class="booking-contact-actions">
+          <a class="booking-fb" href="https://www.facebook.com/profile.php?id=61593858644090" target="_blank" rel="noopener">Nhắn tin qua Fanpage</a>
+          <a class="booking-zalo" href="https://zalo.me/0815959399" target="_blank" rel="noopener">Liên hệ qua Zalo</a>
+          <a class="booking-mail" href="mailto:duonggiadathomestay@gmail.com">Mở email</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-main">
+    <div class="footer-column">
+      <h3>Liên kết nhanh</h3>
+      <a href="index.html">Trang chủ</a>
+      <a href="gioi-thieu.html">Giới thiệu</a>
+      <a href="rooms.html">Phòng nghỉ</a>
+      <a href="blog.html">Blog</a>
+      <a href="gallery.html">Thư viện ảnh</a>
+      <a href="contact.html">Liên hệ</a>
+      <a href="dat-phong.html">Đặt phòng trực tiếp</a>
+    </div>
+    <div class="footer-column">
+      <h3>Thông tin liên hệ</h3>
+      <p>Dương Gia Đạt Homestay</p>
+      <p>Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+      <p>Điện thoại: <a href="tel:0815959399">0815 959 399</a></p>
+      <a href="dat-phong.html" class="footer-booking">Gửi yêu cầu đặt phòng</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Dương Gia Đạt Homestay</p>
+      <div class="social-links">
+        <a href="https://www.facebook.com/profile.php?id=61593858644090" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://zalo.me/0815959399" target="_blank" rel="noopener">Zalo</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const form = document.getElementById('bookingForm');
+    const checkin = document.getElementById('checkin');
+    const checkout = document.getElementById('checkout');
+    const afterSubmit = document.getElementById('afterSubmit');
+
+    const today = new Date();
+    const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+      .toISOString().slice(0, 10);
+    checkin.min = localToday;
+    checkout.min = localToday;
+
+    checkin.addEventListener('change', function () {
+      checkout.min = checkin.value || localToday;
+      if (checkout.value && checkout.value <= checkin.value) checkout.value = '';
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      if (checkout.value <= checkin.value) {
+        checkout.setCustomValidity('Ngày trả phòng phải sau ngày nhận phòng.');
+        checkout.reportValidity();
+        checkout.setCustomValidity('');
+        return;
+      }
+
+      const data = new FormData(form);
+      const subject = 'Yêu cầu đặt phòng trực tiếp - Dương Gia Đạt Homestay';
+      const body = [
+        'Xin chào Dương Gia Đạt Homestay,',
+        '',
+        'Tôi muốn gửi yêu cầu đặt phòng với thông tin:',
+        'Ngày nhận phòng: ' + data.get('checkin'),
+        'Ngày trả phòng: ' + data.get('checkout'),
+        'Số khách: ' + data.get('guests'),
+        'Số phòng dự kiến: ' + data.get('rooms'),
+        'Họ và tên: ' + data.get('fullname'),
+        'Số điện thoại: ' + data.get('phone'),
+        'Email: ' + (data.get('email') || 'Không cung cấp'),
+        'Yêu cầu thêm: ' + (data.get('note') || 'Không có'),
+        '',
+        'Vui lòng kiểm tra tình trạng phòng và phản hồi giúp tôi.',
+        'Xin cảm ơn!'
+      ].join('\n');
+
+      const mailto = 'mailto:duonggiadathomestay@gmail.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+
+      afterSubmit.classList.remove('booking-hidden');
+      afterSubmit.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      window.location.href = mailto;
+    });
+  })();
+</script>
+<script src="js/language-new.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
