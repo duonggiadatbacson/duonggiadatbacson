@@ -323,17 +323,409 @@ main .actions {
 <h2>Chọn phòng</h2><div class="rooms" id="rooms"></div>
 <section class="panel booking" id="booking"><h2>Gửi yêu cầu đặt phòng</h2><p id="summary"></p><div class="fields"><div><label>Họ tên</label><input id="name" required></div><div><label>Số điện thoại</label><input id="phone" type="tel" required></div><div><label>Số khách</label><select id="n"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div><p><label>Ghi chú</label><textarea id="note" rows="3"></textarea></p><div class="actions"><button id="msg">Messenger</button><button class="alt" id="zalo">Zalo</button><button class="alt" id="email">Email</button></div></section></main>
 <script>
-const rooms=[{id:"r1",name:"Phòng 01",beds:2,cap:4},{id:"r2",name:"Phòng 02",beds:2,cap:4},{id:"r3",name:"Phòng 03",beds:3,cap:6}],KEY="dgd_reservations_v1";let checked=false,chosen=null;
-const $=x=>document.getElementById(x);let now=new Date(),today=new Date(now-now.getTimezoneOffset()*60000).toISOString().slice(0,10);$("ci").min=today;$("co").min=today;$("ci").value=today;
-function data(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
-function free(r){if(!checked)return false;return !data().some(x=>x.roomId===r.id&&["confirmed","checkedin"].includes(x.status)&&$("ci").value<x.checkout&&x.checkin<$("co").value)}
-function render(){$("rooms").innerHTML=rooms.map(r=>{let ok=free(r),s=checked?(ok?"Còn phòng":"Hết phòng trong ngày đã chọn"):"Chọn ngày để kiểm tra";return `<article class="room"><div class="photo">Ảnh ${r.name} sẽ bổ sung</div><h3>${r.name}</h3><div>${r.beds} giường · Tối đa ${r.cap} khách</div><span class="status ${ok?'yes':'no'}">${s}</span><br><button class="alt" onclick="document.getElementById('d-${r.id}').classList.toggle('open')">Xem chi tiết</button> <button ${ok?'':'disabled'} onclick="pick('${r.id}')">Chọn phòng</button><div class="details" id="d-${r.id}"><b>Thông tin phòng</b><p>${r.beds} giường, tối đa ${r.cap} khách.</p><p>Ảnh thực tế, tiện nghi và giá phòng sẽ được bổ sung sau.</p></div></article>`}).join("")}
-window.pick=id=>{chosen=rooms.find(r=>r.id===id);$("booking").classList.add("show");$("summary").textContent=`${chosen.name} · ${$("ci").value} đến ${$("co").value}`;$("n").value=$("guests").value;$("booking").scrollIntoView({behavior:"smooth"})};
-$("ci").onchange=()=>{checked=false;$("co").min=$("ci").value;render()};$("co").onchange=()=>{checked=false;render()};
-$("check").onclick=()=>{if(!$("ci").value||!$("co").value||$("co").value<=$("ci").value){alert("Ngày trả phòng phải sau ngày nhận phòng.");return}checked=true;chosen=null;$("booking").classList.remove("show");render()};
-function body(){if(!chosen){alert("Hãy chọn phòng còn trống.");return null}if(!$("name").value.trim()||!$("phone").value.trim()){alert("Nhập họ tên và số điện thoại.");return null}return `Yêu cầu đặt phòng Dương Gia Đạt Homestay\nTên: ${$("name").value}\nĐiện thoại: ${$("phone").value}\nPhòng: ${chosen.name}\nNhận: ${$("ci").value}\nTrả: ${$("co").value}\nSố khách: ${$("n").value}\nGhi chú: ${$("note").value||"Không có"}\nXin homestay kiểm tra và xác nhận.`}
-function copyOpen(url){let t=body();if(t){if(navigator.clipboard)navigator.clipboard.writeText(t).catch(()=>{});window.open(url,"_blank");alert("Đã mở kênh liên hệ. Hãy dán nội dung yêu cầu vào cuộc trò chuyện rồi gửi.")}}
-$("msg").onclick=()=>copyOpen("https://m.me/61593858644090");$("zalo").onclick=()=>copyOpen("https://zalo.me/0815959399");$("email").onclick=()=>{let t=body();if(t)location.href="mailto:duonggiadathomestay@gmail.com?subject="+encodeURIComponent("Yêu cầu đặt phòng")+"&body="+encodeURIComponent(t)};render();
+/* =====================================
+   1. CẤU HÌNH PHÒNG VÀ BIẾN BAN ĐẦU
+===================================== */
+
+const rooms = [
+  { id: "r1", name: "Phòng 01", beds: 2, cap: 4 },
+  { id: "r2", name: "Phòng 02", beds: 2, cap: 4 },
+  { id: "r3", name: "Phòng 03", beds: 3, cap: 6 }
+];
+
+const $ = id => document.getElementById(id);
+const supabase = window.supabaseClient;
+
+let checked = false;
+let chosen = null;
+let availability = {};
+let savedRequestKey = null;
+
+
+/* =====================================
+   2. THIẾT LẬP NGÀY NHẬN PHÒNG
+===================================== */
+
+const now = new Date();
+
+const today = new Date(
+  now.getTime() - now.getTimezoneOffset() * 60000
+).toISOString().slice(0, 10);
+
+$("ci").min = today;
+$("co").min = today;
+$("ci").value = today;
+
+
+/* =====================================
+   3. HIỂN THỊ DANH SÁCH PHÒNG
+===================================== */
+
+function render() {
+  $("rooms").innerHTML = rooms.map(room => {
+    const available = availability[room.id] === true;
+
+    let status = "Chọn ngày để kiểm tra";
+
+    if (checked) {
+      status = available
+        ? "Còn phòng"
+        : "Hết phòng trong ngày đã chọn";
+    }
+
+    return `
+      <article class="room">
+
+        <div class="photo">
+          Ảnh ${room.name} sẽ bổ sung
+        </div>
+
+        <h3>${room.name}</h3>
+
+        <div>
+          ${room.beds} giường · Tối đa ${room.cap} khách
+        </div>
+
+        <span class="status ${available ? "yes" : "no"}">
+          ${status}
+        </span>
+
+        <br>
+
+        <button
+          class="alt"
+          onclick="document.getElementById('d-${room.id}').classList.toggle('open')">
+          Xem chi tiết
+        </button>
+
+        <button
+          ${available ? "" : "disabled"}
+          onclick="pick('${room.id}')">
+          Chọn phòng
+        </button>
+
+        <div class="details" id="d-${room.id}">
+          <b>Thông tin phòng</b>
+
+          <p>
+            ${room.beds} giường, tối đa ${room.cap} khách.
+          </p>
+
+          <p>
+            Ảnh thực tế, tiện nghi và giá phòng sẽ được bổ sung sau.
+          </p>
+        </div>
+
+      </article>
+    `;
+  }).join("");
+}
+
+
+/* =====================================
+   4. CHỌN PHÒNG
+===================================== */
+
+window.pick = function(id) {
+  if (!checked || availability[id] !== true) {
+    alert("Vui lòng kiểm tra tình trạng phòng trước.");
+    return;
+  }
+
+  chosen = rooms.find(room => room.id === id);
+
+  $("booking").classList.add("show");
+
+  $("summary").textContent =
+    `${chosen.name} · ${$("ci").value} đến ${$("co").value}`;
+
+  $("n").value = $("guests").value;
+
+  $("booking").scrollIntoView({
+    behavior: "smooth"
+  });
+};
+
+
+/* =====================================
+   5. THAY ĐỔI NGÀY ĐẶT PHÒNG
+===================================== */
+
+$("ci").onchange = function() {
+  checked = false;
+  chosen = null;
+  availability = {};
+
+  $("co").min = $("ci").value;
+  $("booking").classList.remove("show");
+
+  render();
+};
+
+$("co").onchange = function() {
+  checked = false;
+  chosen = null;
+  availability = {};
+
+  $("booking").classList.remove("show");
+
+  render();
+};
+
+
+/* =====================================
+   6. KIỂM TRA PHÒNG TRỐNG TRÊN SUPABASE
+===================================== */
+
+$("check").onclick = async function() {
+  const checkin = $("ci").value;
+  const checkout = $("co").value;
+
+  if (!checkin || !checkout || checkout <= checkin) {
+    alert("Ngày trả phòng phải sau ngày nhận phòng.");
+    return;
+  }
+
+  if (!supabase) {
+    alert("Chưa kết nối được Supabase. Vui lòng tải lại trang.");
+    return;
+  }
+
+  $("check").disabled = true;
+  $("check").textContent = "Đang kiểm tra...";
+
+  checked = false;
+  chosen = null;
+  availability = {};
+
+  render();
+
+  try {
+    const results = await Promise.all(
+      rooms.map(room =>
+        supabase.rpc("is_room_available", {
+          p_room_id: room.id,
+          p_checkin: checkin,
+          p_checkout: checkout
+        })
+      )
+    );
+
+    const failed = results.find(result => result.error);
+
+    if (failed) {
+      console.error("Lỗi kiểm tra phòng:", failed.error);
+
+      alert("Chưa kiểm tra được phòng trống. Vui lòng thử lại.");
+      return;
+    }
+
+    rooms.forEach((room, index) => {
+      availability[room.id] = results[index].data === true;
+    });
+
+    checked = true;
+
+    render();
+
+  } catch (error) {
+    console.error(error);
+
+    alert("Có lỗi khi kiểm tra phòng. Vui lòng thử lại.");
+
+  } finally {
+    $("check").disabled = false;
+    $("check").textContent = "Kiểm tra tình trạng phòng";
+  }
+};
+
+
+/* =====================================
+   7. KIỂM TRA THÔNG TIN KHÁCH
+===================================== */
+
+function getRequest() {
+  if (!chosen || !checked || availability[chosen.id] !== true) {
+    alert("Hãy kiểm tra và chọn một phòng còn trống trước.");
+    return null;
+  }
+
+  const name = $("name").value.trim();
+  const phone = $("phone").value.trim();
+  const guests = Number.parseInt($("n").value, 10);
+
+  const checkin = $("ci").value;
+  const checkout = $("co").value;
+  const note = $("note").value.trim();
+
+  if (!name || !phone) {
+    alert("Vui lòng nhập họ tên và số điện thoại.");
+    return null;
+  }
+
+  if (name.length < 2 || name.length > 100) {
+    alert("Họ tên cần có từ 2 đến 100 ký tự.");
+    return null;
+  }
+
+  if (phone.length < 6 || phone.length > 30) {
+    alert("Vui lòng kiểm tra lại số điện thoại.");
+    return null;
+  }
+
+  if (
+    !Number.isInteger(guests) ||
+    guests < 1 ||
+    guests > chosen.cap
+  ) {
+    alert(`Phòng này nhận tối đa ${chosen.cap} khách.`);
+    return null;
+  }
+
+  return {
+    room_id: chosen.id,
+    guest_name: name,
+    guest_phone: phone,
+    guests: guests,
+    checkin: checkin,
+    checkout: checkout,
+    note: note,
+    status: "pending"
+  };
+}
+
+
+/* =====================================
+   8. TẠO NỘI DUNG GỬI KHÁCH SẠN
+===================================== */
+
+function makeMessage(request) {
+  return `
+Yêu cầu đặt phòng Dương Gia Đạt Homestay
+
+Tên: ${request.guest_name}
+Điện thoại: ${request.guest_phone}
+Phòng: ${chosen.name}
+Nhận phòng: ${request.checkin}
+Trả phòng: ${request.checkout}
+Số khách: ${request.guests}
+Ghi chú: ${request.note || "Không có"}
+
+Xin homestay kiểm tra và xác nhận.
+`.trim();
+}
+
+
+/* =====================================
+   9. LƯU YÊU CẦU VÀO SUPABASE
+===================================== */
+
+async function saveRequest(request) {
+  const requestKey = JSON.stringify(request);
+
+  if (savedRequestKey === requestKey) {
+    return true;
+  }
+
+  const { error } = await supabase
+    .from("reservations")
+    .insert(request);
+
+  if (error) {
+    console.error("Lỗi lưu yêu cầu:", error);
+
+    alert(
+      "Chưa lưu được yêu cầu đặt phòng. " +
+      "Vui lòng thử lại hoặc liên hệ trực tiếp homestay."
+    );
+
+    return false;
+  }
+
+  savedRequestKey = requestKey;
+
+  return true;
+}
+
+
+/* =====================================
+   10. XỬ LÝ NÚT MESSENGER, ZALO, EMAIL
+===================================== */
+
+async function submitTo(channel) {
+  const request = getRequest();
+
+  if (!request) {
+    return;
+  }
+
+  const message = makeMessage(request);
+
+  const saved = await saveRequest(request);
+
+  if (!saved) {
+    return;
+  }
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(message).catch(error => {
+      console.warn("Không thể tự động sao chép nội dung:", error);
+    });
+  }
+
+  if (channel === "messenger") {
+    window.open(
+      "https://m.me/61593858644090",
+      "_blank"
+    );
+
+    alert(
+      "Yêu cầu đã được lưu. Hãy dán nội dung yêu cầu vào Messenger để gửi."
+    );
+
+  } else if (channel === "zalo") {
+    window.open(
+      "https://zalo.me/0815959399",
+      "_blank"
+    );
+
+    alert(
+      "Yêu cầu đã được lưu. Hãy dán nội dung yêu cầu vào Zalo để gửi."
+    );
+
+  } else if (channel === "email") {
+    location.href =
+      "mailto:duonggiadathomestay@gmail.com" +
+      "?subject=" +
+      encodeURIComponent("Yêu cầu đặt phòng") +
+      "&body=" +
+      encodeURIComponent(message);
+  }
+}
+
+
+/* =====================================
+   11. GẮN SỰ KIỆN CHO CÁC NÚT
+===================================== */
+
+$("msg").onclick = function() {
+  submitTo("messenger");
+};
+
+$("zalo").onclick = function() {
+  submitTo("zalo");
+};
+
+$("email").onclick = function() {
+  submitTo("email");
+};
+
+
+/* =====================================
+   12. KHỞI ĐỘNG TRANG
+===================================== */
+
+render();
 </script>
 <footer class="site-footer">
 
