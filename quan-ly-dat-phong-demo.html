@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quản lý đặt phòng | Dương Gia Đạt Homestay</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+:root{--wine:#87382d;--wine-dark:#6e2b23;--cream:#fbf7f0;--line:#eadfd2;--ink:#382f2a;--muted:#786b62;--green:#267344;--amber:#93600d;--red:#a33b32}
+*{box-sizing:border-box}body{margin:0;background:#f7f5f1;color:var(--ink);font-family:Arial,sans-serif}
+.admin{max-width:1200px;width:calc(100% - 32px);margin:34px auto 60px}
+.admin-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.admin-head h1{color:var(--wine);font-size:clamp(25px,4vw,34px);margin:0 0 5px}.admin-head p{margin:0;color:var(--muted)}
+.demo-tag{background:#fff2d9;color:#80550e;border:1px solid #f0d9a8;padding:8px 12px;border-radius:30px;font-size:13px;font-weight:bold}
+.notice{padding:13px 16px;background:#fff8e8;border:1px solid #f0dfb8;border-radius:10px;color:#73551e;margin-bottom:20px;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat,.panel{background:white;border:1px solid var(--line);border-radius:13px;box-shadow:0 5px 18px #4b33200c}
+.stat{padding:18px}.stat span{display:block;color:var(--muted);font-size:13px}.stat strong{display:block;font-size:27px;color:var(--wine);margin-top:6px}
+.panel{padding:20px;margin-bottom:20px}.panel h2{font-size:20px;color:var(--wine);margin:0 0 16px}
+.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#51463f}
+input,select,textarea{width:100%;padding:10px 11px;border:1px solid #d9cec3;border-radius:8px;background:#fff;color:var(--ink);font:inherit;min-height:40px}
+button{border:0;border-radius:8px;padding:10px 14px;background:var(--wine);color:white;font-weight:700;cursor:pointer}
+button:hover{background:var(--wine-dark)}button.light{background:#f5eee7;color:var(--wine);border:1px solid var(--line)}button.danger{background:#fff0ee;color:var(--red);border:1px solid #f0cbc6}button.small{padding:7px 10px;font-size:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin-bottom:14px}.toolbar>div{min-width:155px;flex:1}
+.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:800px;font-size:14px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #eee7df;vertical-align:top}th{color:#69594e;background:#fbf8f4;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+.pill{display:inline-block;border-radius:30px;padding:5px 9px;font-size:12px;font-weight:bold;background:#f1eee9;color:#62574e}.pill.pending{background:#fff2d9;color:#80550e}.pill.confirmed{background:#e7f4e9;color:#246a37}.pill.checked{background:#e9efff;color:#3556a2}.pill.done{background:#eee9f7;color:#654b91}.pill.cancelled{background:#fbe9e6;color:#9a3428}
+.empty{text-align:center;padding:28px;color:var(--muted)}
+.modal{display:none;position:fixed;inset:0;background:#1e1714a6;z-index:1000;padding:20px;overflow:auto}.modal.open{display:grid;place-items:center}.modal-card{width:min(650px,100%);background:white;border-radius:14px;padding:22px;box-shadow:0 20px 60px #0003}.modal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.modal-top h2{margin:0;color:var(--wine)}.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+.login-screen{position:fixed;inset:0;background:#f7f5f1;z-index:2000;display:grid;place-items:center;padding:20px}.login-box{width:min(390px,100%);background:white;border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:0 12px 40px #39291b18}.login-box h1{font-size:23px;color:var(--wine);margin:0 0 8px}.login-box p{color:var(--muted);font-size:14px;line-height:1.5}.login-box label{margin-top:13px}.login-box button{width:100%;margin-top:17px}.login-note{font-size:12px!important;background:#fff8e8;padding:10px;border-radius:8px}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.admin{width:calc(100% - 22px);margin-top:20px}.stats{gap:9px}.stat{padding:13px}.stat strong{font-size:23px}.form-grid,.modal-grid{grid-template-columns:1fr}.panel{padding:15px}}
+</style>
+</head>
+<body>
+<!-- Giao diện demo: đăng nhập giả lập, dữ liệu lưu localStorage trên trình duyệt hiện tại. -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h1>Quản lý đặt phòng</h1><p>Dương Gia Đạt Homestay</p>
+    <label for="demoPassword">Mật khẩu thử nghiệm</label>
+    <input id="demoPassword" type="password" placeholder="Nhập mật khẩu demo">
+    <button id="loginBtn">Vào trang quản lý</button>
+    <p class="login-note">Bản thử nghiệm: mật khẩu giao diện không phải bảo mật thật. Dữ liệu chỉ lưu trên trình duyệt này, chưa đồng bộ thiết bị.</p>
+  </div>
+</div>
+
+<main class="admin" id="adminApp" hidden>
+  <header class="admin-head">
+    <div><h1>Quản lý đặt phòng</h1><p>Dương Gia Đạt Homestay · Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p></div>
+    <span class="demo-tag">BẢN THỬ NGHIỆM</span>
+  </header>
+  <div class="notice"><b>Lưu ý:</b> Đây là giao diện demo. Đơn tạo tại đây được lưu trong trình duyệt hiện tại. Chưa có đăng nhập bảo mật, cơ sở dữ liệu tập trung hay đồng bộ với website/thiết bị khác.</div>
+
+  <section class="stats">
+    <div class="stat"><span>Tổng đơn</span><strong id="statTotal">0</strong></div>
+    <div class="stat"><span>Chờ xác nhận</span><strong id="statPending">0</strong></div>
+    <div class="stat"><span>Đã xác nhận</span><strong id="statConfirmed">0</strong></div>
+    <div class="stat"><span>Đang lưu trú</span><strong id="statChecked">0</strong></div>
+  </section>
+
+  <section class="panel">
+    <h2>Thêm đơn đặt phòng thử nghiệm</h2>
+    <form id="addForm">
+      <div class="form-grid">
+        <div><label for="guestName">Tên khách *</label><input id="guestName" required></div>
+        <div><label for="guestPhone">Số điện thoại *</label><input id="guestPhone" type="tel" required></div>
+        <div><label for="roomId">Phòng *</label><select id="roomId"><option value="r1">Phòng 01 · 2 giường · 4 khách</option><option value="r2">Phòng 02 · 2 giường · 4 khách</option><option value="r3">Phòng 03 · 3 giường · 6 khách</option></select></div>
+        <div><label for="guestCount">Số khách</label><input id="guestCount" type="number" min="1" max="6" value="2" required></div>
+        <div><label for="checkin">Ngày nhận *</label><input id="checkin" type="date" required></div>
+        <div><label for="checkout">Ngày trả *</label><input id="checkout" type="date" required></div>
+        <div><label for="status">Trạng thái</label><select id="status"><option value="pending">Chờ xác nhận</option><option value="confirmed">Đã xác nhận</option><option value="checkedin">Đã nhận phòng</option><option value="completed">Đã trả phòng</option><option value="cancelled">Đã hủy</option></select></div>
+        <div><label for="amount">Tổng tiền (VNĐ, tùy chọn)</label><input id="amount" type="number" min="0" placeholder="Ví dụ: 800000"></div>
+      </div>
+      <div style="margin-top:13px"><label for="memo">Ghi chú</label><textarea id="memo" rows="2" style="width:100%;padding:10px;border:1px solid #d9cec3;border-radius:8px;font:inherit"></textarea></div>
+      <div class="actions"><button type="submit">Lưu đơn thử nghiệm</button><button type="reset" class="light">Xóa nội dung nhập</button></div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Danh sách đặt phòng</h2>
+    <div class="toolbar">
+      <div><label for="filterStatus">Lọc trạng thái</label><select id="filterStatus"><option value="">Tất cả trạng thái</option><option value="pending">Chờ xác nhận</option><option value="confirmed">Đã xác nhận</option><option value="checkedin">Đã nhận phòng</option><option value="completed">Đã trả phòng</option><option value="cancelled">Đã hủy</option></select></div>
+      <div><label for="filterDate">Lọc ngày nhận từ</label><input type="date" id="filterDate"></div>
+      <div><label for="searchText">Tìm tên / điện thoại</label><input id="searchText" placeholder="Nhập từ khóa"></div>
+      <button type="button" class="light" id="clearFilters">Xóa lọc</button>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Khách đặt</th><th>Phòng / khách</th><th>Ngày lưu trú</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+      <tbody id="bookingRows"></tbody>
+    </table></div>
+    <div class="empty" id="emptyState" hidden>Chưa có đơn phù hợp. Bạn có thể thêm đơn thử nghiệm ở phía trên.</div>
+    <div class="actions"><button type="button" class="light" id="exportBtn">Xuất CSV</button><button type="button" class="danger" id="clearDemo">Xóa toàn bộ dữ liệu demo</button><button type="button" class="light" id="logoutBtn">Thoát quản lý</button></div>
+  </section>
+</main>
+
+<div class="modal" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+ <div class="modal-card">
+  <div class="modal-top"><h2 id="editTitle">Chi tiết / chỉnh sửa đơn</h2><button type="button" class="light small" id="closeModal">Đóng</button></div>
+  <form id="editForm">
+   <input type="hidden" id="editId">
+   <div class="modal-grid">
+    <div><label for="editName">Tên khách</label><input id="editName" required></div>
+    <div><label for="editPhone">Số điện thoại</label><input id="editPhone" type="tel" required></div>
+    <div><label for="editRoom">Phòng</label><select id="editRoom"><option value="r1">Phòng 01</option><option value="r2">Phòng 02</option><option value="r3">Phòng 03</option></select></div>
+    <div><label for="editGuests">Số khách</label><input id="editGuests" type="number" min="1" max="6" required></div>
+    <div><label for="editCheckin">Ngày nhận</label><input id="editCheckin" type="date" required></div>
+    <div><label for="editCheckout">Ngày trả</label><input id="editCheckout" type="date" required></div>
+    <div><label for="editStatus">Trạng thái</label><select id="editStatus"><option value="pending">Chờ xác nhận</option><option value="confirmed">Đã xác nhận</option><option value="checkedin">Đã nhận phòng</option><option value="completed">Đã trả phòng</option><option value="cancelled">Đã hủy</option></select></div>
+    <div><label for="editAmount">Tổng tiền (VNĐ)</label><input id="editAmount" type="number" min="0"></div>
+   </div>
+   <div style="margin-top:12px"><label for="editMemo">Ghi chú</label><textarea id="editMemo" rows="3" style="width:100%;padding:10px;border:1px solid #d9cec3;border-radius:8px;font:inherit"></textarea></div>
+   <div class="modal-actions"><button type="button" class="danger" id="deleteOrder">Xóa đơn</button><button type="submit">Lưu thay đổi</button></div>
+  </form>
+ </div>
+</div>
+
+<script>
+const STORAGE_KEY = "dgd_reservations_v1";
+const DEMO_LOGIN_KEY = "dgd_admin_demo_session";
+const roomNames = {r1:"Phòng 01",r2:"Phòng 02",r3:"Phòng 03"};
+const statusNames = {pending:"Chờ xác nhận",confirmed:"Đã xác nhận",checkedin:"Đã nhận phòng",completed:"Đã trả phòng",cancelled:"Đã hủy"};
+const $ = id => document.getElementById(id);
+let orders = readOrders();
+
+function readOrders(){try{const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");return Array.isArray(value)?value:[]}catch(e){return []}}
+function saveOrders(){localStorage.setItem(STORAGE_KEY,JSON.stringify(orders))}
+function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function dateLabel(value){if(!value)return "—";const p=value.split("-");return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:value}
+function statusClass(s){return ({pending:"pending",confirmed:"confirmed",checkedin:"checked",completed:"done",cancelled:"cancelled"})[s]||""}
+function normalize(o){return {...o,checkin:o.checkin||o.ci||"",checkout:o.checkout||o.co||"",guestName:o.guestName||o.name||"",guestPhone:o.guestPhone||o.phone||"",guests:o.guests||o.n||2,roomId:o.roomId||"r1",status:o.status||"pending",memo:o.memo||o.note||"",amount:o.amount||""}}
+function updateStats(){
+ $("statTotal").textContent=orders.length;
+ $("statPending").textContent=orders.filter(o=>o.status==="pending").length;
+ $("statConfirmed").textContent=orders.filter(o=>o.status==="confirmed").length;
+ $("statChecked").textContent=orders.filter(o=>o.status==="checkedin").length;
+}
+function render(){
+ orders=readOrders().map(normalize);
+ const status=$("filterStatus").value,date=$("filterDate").value,q=$("searchText").value.trim().toLowerCase();
+ const filtered=orders.filter(o=>(!status||o.status===status)&&(!date||o.checkin>=date)&&(!q||`${o.guestName} ${o.guestPhone}`.toLowerCase().includes(q))).sort((a,b)=>(b.createdAt||"").localeCompare(a.createdAt||""));
+ $("bookingRows").innerHTML=filtered.map(o=>`<tr>
+ <td><b>${esc(o.guestName||"Khách")}</b><br><small>${esc(o.guestPhone)}</small><br><small>${o.amount?Number(o.amount).toLocaleString("vi-VN")+" ₫":""}</small></td>
+ <td>${esc(roomNames[o.roomId]||o.roomId)}<br><small>${esc(o.guests)} khách</small></td>
+ <td>${dateLabel(o.checkin)}<br>đến ${dateLabel(o.checkout)}</td>
+ <td><span class="pill ${statusClass(o.status)}">${statusNames[o.status]||esc(o.status)}</span></td>
+ <td><button class="small" type="button" onclick="editOrder('${esc(o.id)}')">Chi tiết / sửa</button></td>
+ </tr>`).join("");
+ $("emptyState").hidden=filtered.length!==0;
+ updateStats();
+}
+function makeId(){return "dgd-"+Date.now()+"-"+Math.random().toString(36).slice(2,7)}
+function overlapConflict(roomId,ci,co,excludeId){
+ return orders.some(o=>o.id!==excludeId&&o.roomId===roomId&&["confirmed","checkedin"].includes(o.status)&&ci<o.checkout&&o.checkin<co);
+}
+$("addForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const ci=$("checkin").value,co=$("checkout").value,roomId=$("roomId").value;
+ if(!ci||!co||co<=ci){alert("Ngày trả phòng phải sau ngày nhận phòng.");return}
+ if(Number($("guestCount").value)<1||Number($("guestCount").value)>({r1:4,r2:4,r3:6}[roomId])){alert("Số khách vượt sức chứa phòng đã chọn.");return}
+ if(["confirmed","checkedin"].includes($("status").value)&&overlapConflict(roomId,ci,co,null)){alert("Có đơn đã xác nhận/đang lưu trú trùng ngày cho phòng này. Vui lòng kiểm tra lịch.");return}
+ const order={id:makeId(),roomId,guestName:$("guestName").value.trim(),guestPhone:$("guestPhone").value.trim(),guests:Number($("guestCount").value),checkin:ci,checkout:co,status:$("status").value,amount:$("amount").value,memo:$("memo").value.trim(),createdAt:new Date().toISOString()};
+ orders.push(order);saveOrders();e.target.reset();$("guestCount").value=2;render();alert("Đã lưu đơn thử nghiệm trên trình duyệt này.");
+});
+window.editOrder=id=>{
+ const o=orders.find(x=>x.id===id);if(!o)return;
+ $("editId").value=o.id;$("editName").value=o.guestName;$("editPhone").value=o.guestPhone;$("editRoom").value=o.roomId;$("editGuests").value=o.guests;$("editCheckin").value=o.checkin;$("editCheckout").value=o.checkout;$("editStatus").value=o.status;$("editAmount").value=o.amount||"";$("editMemo").value=o.memo||"";
+ $("editModal").classList.add("open");
+};
+function closeModal(){$("editModal").classList.remove("open")}
+$("closeModal").onclick=closeModal;
+$("editModal").addEventListener("click",e=>{if(e.target===$("editModal"))closeModal()});
+$("editForm").addEventListener("submit",e=>{
+ e.preventDefault();const id=$("editId").value,old=orders.find(o=>o.id===id);if(!old)return;
+ const ci=$("editCheckin").value,co=$("editCheckout").value,roomId=$("editRoom").value,status=$("editStatus").value;
+ if(!ci||!co||co<=ci){alert("Ngày trả phòng phải sau ngày nhận phòng.");return}
+ const cap={r1:4,r2:4,r3:6}[roomId];if(Number($("editGuests").value)<1||Number($("editGuests").value)>cap){alert("Số khách vượt sức chứa phòng.");return}
+ if(["confirmed","checkedin"].includes(status)&&overlapConflict(roomId,ci,co,id)){alert("Trùng lịch với một đơn đã xác nhận/đang lưu trú.");return}
+ Object.assign(old,{guestName:$("editName").value.trim(),guestPhone:$("editPhone").value.trim(),roomId,guests:Number($("editGuests").value),checkin:ci,checkout:co,status,amount:$("editAmount").value,memo:$("editMemo").value.trim(),updatedAt:new Date().toISOString()});
+ saveOrders();closeModal();render();
+});
+$("deleteOrder").onclick=()=>{const id=$("editId").value;if(confirm("Bạn chắc chắn muốn xóa đơn này khỏi dữ liệu demo?")){orders=orders.filter(o=>o.id!==id);saveOrders();closeModal();render()}};
+["filterStatus","filterDate","searchText"].forEach(id=>$(id).addEventListener("input",render));
+$("clearFilters").onclick=()=>{$("filterStatus").value="";$("filterDate").value="";$("searchText").value="";render()};
+$("exportBtn").onclick=()=>{
+ const cols=["id","guestName","guestPhone","roomId","guests","checkin","checkout","status","amount","memo","createdAt"];
+ const csv=[cols.join(","),...orders.map(o=>cols.map(k=>'"'+String(o[k]??"").replace(/"/g,'""')+'"').join(","))].join("\r\n");
+ const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="duong-gia-dat-don-dat-phong-demo.csv";a.click();URL.revokeObjectURL(url);
+};
+$("clearDemo").onclick=()=>{if(confirm("Xóa toàn bộ đơn đang lưu trong trình duyệt này? Hành động không thể hoàn tác.")){orders=[];saveOrders();render()}};
+$("loginBtn").onclick=()=>{if(!$("demoPassword").value){alert("Nhập mật khẩu thử nghiệm bất kỳ để mở giao diện.");return}sessionStorage.setItem(DEMO_LOGIN_KEY,"1");showAdmin()};
+$("demoPassword").addEventListener("keydown",e=>{if(e.key==="Enter")$("loginBtn").click()});
+$("logoutBtn").onclick=()=>{sessionStorage.removeItem(DEMO_LOGIN_KEY);$("adminApp").hidden=true;$("loginScreen").style.display="grid";$("demoPassword").value=""};
+function showAdmin(){$("loginScreen").style.display="none";$("adminApp").hidden=false;render()}
+if(sessionStorage.getItem(DEMO_LOGIN_KEY)==="1")showAdmin();
+</script>
+</body>
+</html>
