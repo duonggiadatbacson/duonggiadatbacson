@@ -1,7 +1,200 @@
 
 <!DOCTYPE html>
 <html lang="vi">
+<style>
+/* CSS riêng cho phần đặt phòng */
+main {
+    max-width: 1120px;
+    width: calc(100% - 36px);
+    margin: 40px auto 60px;
+    color: #40352f;
+    line-height: 1.6;
+}
 
+main h1 {
+    color: #8b382c;
+    font-size: 36px;
+    margin: 0 0 8px;
+}
+
+main h2 {
+    color: #8b382c;
+    font-size: 26px;
+    margin: 0 0 20px;
+}
+
+main .panel {
+    background: #fff;
+    border: 1px solid #eadfce;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 24px rgba(70, 45, 25, .07);
+}
+
+main .fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+main label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+main input,
+main select,
+main textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d9cbbd;
+    border-radius: 8px;
+    background: #fff;
+    font: inherit;
+}
+
+main button {
+    border: 1px solid #8b382c;
+    border-radius: 8px;
+    padding: 11px 18px;
+    background: #8b382c;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+main button:hover:not(:disabled) {
+    background: #6f2b22;
+}
+
+main button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+main button.alt {
+    background: #fff;
+    color: #8b382c;
+}
+
+main button.alt:hover:not(:disabled) {
+    background: #fff7ed;
+}
+
+main .hint {
+    color: #796c62;
+    font-size: 14px;
+}
+
+main .rooms {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 20px 0 36px;
+}
+
+main .room {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #eadfce;
+    border-radius: 14px;
+    padding: 0 20px 20px;
+    box-shadow: 0 7px 22px rgba(70, 45, 25, .07);
+}
+
+main .photo {
+    min-height: 180px;
+    margin: 0 -20px 18px;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    text-align: center;
+    color: #79634d;
+    font-weight: 600;
+    background: linear-gradient(135deg, #f5ead9, #e8d4b8);
+}
+
+main .room h3 {
+    color: #8b382c;
+    font-size: 21px;
+    margin: 0 0 8px;
+}
+
+main .status {
+    display: inline-block;
+    margin: 12px 0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #f5eee5;
+    color: #79634d;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+main .status.yes {
+    background: #e7f4e9;
+    color: #246a37;
+}
+
+main .status.no {
+    background: #fbe9e6;
+    color: #9a3428;
+}
+
+main .details {
+    display: none;
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #fffaf2;
+    font-size: 14px;
+}
+
+main .details.open {
+    display: block;
+}
+
+main .booking {
+    display: none;
+}
+
+main .booking.show {
+    display: block;
+}
+
+main #summary {
+    padding: 12px 15px;
+    background: #fffaf2;
+    border-left: 4px solid #d6a34b;
+    border-radius: 5px;
+}
+
+main .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media (max-width: 760px) {
+    main {
+        width: calc(100% - 28px);
+        margin-top: 25px;
+    }
+
+    main .fields,
+    main .rooms {
+        grid-template-columns: 1fr;
+    }
+
+    main .panel {
+        padding: 20px;
+    }
+}
+</style>
 <head>
 
     <meta charset="UTF-8">
@@ -91,9 +284,15 @@
 
 <a href="dat-phong.html" class="booking-button" data-i18n="nav.booking">ĐẶT PHÒNG</a>
 
+</div>
+</div>
 </header>
 
-<body><header><h1>Dương Gia Đạt Homestay</h1><div>Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</div></header><main>
+<main>
+<div class="booking-intro">
+    <h1>Dương Gia Đạt Homestay</h1>
+    <p>Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+</div>
 <section class="panel"><h2>Kiểm tra phòng trống</h2><div class="fields"><div><label>Ngày nhận phòng</label><input type="date" id="ci"></div><div><label>Ngày trả phòng</label><input type="date" id="co"></div><div><label>Số khách</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div><p><button id="check">Kiểm tra tình trạng phòng</button></p><div class="hint">Yêu cầu chỉ được xác nhận sau khi homestay phản hồi.</div></section>
 <h2>Chọn phòng</h2><div class="rooms" id="rooms"></div>
 <section class="panel booking" id="booking"><h2>Gửi yêu cầu đặt phòng</h2><p id="summary"></p><div class="fields"><div><label>Họ tên</label><input id="name" required></div><div><label>Số điện thoại</label><input id="phone" type="tel" required></div><div><label>Số khách</label><select id="n"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div><p><label>Ghi chú</label><textarea id="note" rows="3"></textarea></p><div class="actions"><button id="msg">Messenger</button><button class="alt" id="zalo">Zalo</button><button class="alt" id="email">Email</button></div></section></main>
