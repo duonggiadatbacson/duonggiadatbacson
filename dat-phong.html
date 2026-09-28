@@ -1,9 +1,98 @@
 
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Đặt phòng | Dương Gia Đạt Homestay</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f7f9f7;color:#203027;font:16px/1.5 system-ui}header{text-align:center;background:white;padding:24px}h1{color:#276749;margin:0}main{max-width:1000px;margin:24px auto;padding:0 14px}.panel,.room{background:white;border:1px solid #dce6df;border-radius:14px;padding:18px;margin-bottom:14px}.fields,.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}label{display:block;font-weight:600;font-size:14px}input,select,textarea{width:100%;padding:10px;border:1px solid #cbd7ce;border-radius:8px;font:inherit}button{background:#276749;color:white;border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:600}button.alt{background:#eef4ef;color:#276749}button:disabled{opacity:.4;cursor:not-allowed}.photo{height:130px;background:#e9f1eb;display:grid;place-items:center;color:#56715e;border-radius:9px}.status{display:inline-block;padding:4px 9px;border-radius:20px;font-size:13px;margin:10px 0}.yes{background:#e5f5e9;color:#176238}.no{background:#fff0d9;color:#8a4b00}.details{display:none;border-top:1px solid #ddd;margin-top:12px;padding-top:12px}.details.open{display:block}.booking{display:none}.booking.show{display:block}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.hint{font-size:13px;color:#66756b}@media(max-width:700px){.fields,.rooms{grid-template-columns:1fr}}
-</style>
-<link rel="stylesheet" href="css/style.css">
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Du lịch Quỳnh Sơn, Bắc Sơn, Lạng Sơn. Khám phá làng Tày, nhà sàn truyền thống, văn hóa, ẩm thực địa phương, thung lũng Bắc Sơn và những trải nghiệm đặc sắc tại Quỳnh Sơn.">
+
+    <link rel="canonical" href="https://duonggiadatbacson.com">
+
+    <meta property="og:title" content="Du lịch Quỳnh Sơn | Khám phá Bắc Sơn, Lạng Sơn">
+
+    <meta property="og:description" content="Khám phá Quỳnh Sơn, Bắc Sơn, Lạng Sơn với làng Tày, nhà sàn truyền thống, văn hóa, ẩm thực địa phương và cảnh quan núi rừng Đông Bắc.">
+
+    <meta property="og:image" content="https://duonggiadatbacson.com/images/logo/1.jpg">
+
+    <meta property="og:url" content="https://duonggiadatbacson.com">
+
+    <title>Du lịch Quỳnh Sơn | Khám phá Bắc Sơn, Lạng Sơn</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
+
+<body>
+
+    <header class="site-header">
+
+    <div class="header-image">
+        <img src="images/logo/1.jpg"
+             alt="Dương Gia Đạt Homestay">
+    </div>
+
+    <div class="header-navigation">
+
+        <div class="container">
+
+            <nav class="main-nav">
+
+    <a href="index.html"
+       data-i18n="nav.home"
+       aria-label="Trang chủ">
+        🏠
+    </a>
+
+    <a href="du-lich-quynh-son.html"
+       data-i18n="nav.quynhson">
+        Du lịch Quỳnh Sơn
+    </a>
+
+    <a href="rooms.html"
+       data-i18n="nav.rooms">
+        Phòng
+    </a>
+
+    <a href="blog.html"
+       data-i18n="nav.blog">
+        Blog
+    </a>
+
+    <a href="gallery.html"
+       data-i18n="nav.gallery">
+        Thư viện ảnh
+    </a>
+
+    <a href="contact.html"
+       data-i18n="nav.contact">
+        Liên Hệ
+    </a>
+
+</nav>
+
+<div class="language-switcher">
+
+    <button type="button"
+            data-lang="vi">
+        VI
+    </button>
+
+    <button type="button"
+            data-lang="en">
+        EN
+    </button>
+
+</div>
+
+<a href="dat-phong.html" class="booking-button" data-i18n="nav.booking">ĐẶT PHÒNG</a>
+
+</header>
+
 <body><header><h1>Dương Gia Đạt Homestay</h1><div>Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</div></header><main>
 <section class="panel"><h2>Kiểm tra phòng trống</h2><div class="fields"><div><label>Ngày nhận phòng</label><input type="date" id="ci"></div><div><label>Ngày trả phòng</label><input type="date" id="co"></div><div><label>Số khách</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div><p><button id="check">Kiểm tra tình trạng phòng</button></p><div class="hint">Yêu cầu chỉ được xác nhận sau khi homestay phản hồi.</div></section>
 <h2>Chọn phòng</h2><div class="rooms" id="rooms"></div>
