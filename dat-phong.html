@@ -219,6 +219,159 @@ main .actions {
     opacity: 1;
     background: rgba(255,255,255,.15);
 }
+/* Khu vực chi tiết và thư viện ảnh phòng */
+.room-gallery {
+  margin: 28px 0;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid #e8e5dc;
+  border-radius: 16px;
+}
+
+.room-gallery h2 {
+  margin: 0 0 8px;
+  color: #244b3b;
+}
+
+.room-gallery .room-description {
+  margin: 0 0 18px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.room-gallery-main {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f1f1ed;
+}
+
+.room-gallery-main img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.room-gallery-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.room-gallery-thumbnails button {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f1f1ed;
+  cursor: pointer;
+}
+
+.room-gallery-thumbnails button.active {
+  border-color: #32664f;
+}
+
+.room-gallery-thumbnails img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: block;
+  object-fit: cover;
+}
+
+.room-gallery-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 18px;
+  color: #444;
+}
+
+.room-gallery-info span {
+  display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .room-gallery {
+    padding: 14px;
+  }
+
+  .room-gallery-thumbnails {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+  }
+}
+/* Thư viện ảnh chi tiết từng phòng */
+.room-gallery {
+    margin-top: 16px;
+    padding: 14px;
+    background: #fffaf2;
+    border-radius: 10px;
+}
+
+.room-gallery-main {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f5ead9, #e8d4b8);
+    display: grid;
+    place-items: center;
+    color: #79634d;
+    text-align: center;
+}
+
+.room-gallery-main img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.room-gallery-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.room-gallery-thumbnails button {
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 7px;
+    overflow: hidden;
+    background: #f1e6d7;
+    cursor: pointer;
+}
+
+.room-gallery-thumbnails button.active {
+    border-color: #8b382c;
+}
+
+.room-gallery-thumbnails img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    display: block;
+    object-fit: cover;
+}
+
+.room-gallery-note {
+    margin: 10px 0 0;
+    color: #796c62;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .room-gallery {
+        padding: 10px;
+    }
+
+    .room-gallery-thumbnails {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
 }
 </style>
 <head>
@@ -330,9 +483,27 @@ main .actions {
 ===================================== */
 
 const rooms = [
-  { id: "r1", name: "Phòng 01", beds: 2, cap: 4 },
-  { id: "r2", name: "Phòng 02", beds: 2, cap: 4 },
-  { id: "r3", name: "Phòng 03", beds: 3, cap: 6 }
+  {
+    id: "r1",
+    name: "Phòng 01",
+    beds: 2,
+    cap: 4,
+    images: []
+  },
+  {
+    id: "r2",
+    name: "Phòng 02",
+    beds: 2,
+    cap: 4,
+    images: []
+  },
+  {
+    id: "r3",
+    name: "Phòng 03",
+    beds: 3,
+    cap: 6,
+    images: []
+  }
 ];
 
 const $ = id => document.getElementById(id);
@@ -375,10 +546,40 @@ function render() {
         : "Hết phòng trong ngày đã chọn";
     }
 
+    const hasImages = room.images && room.images.length > 0;
+
+    const cover = hasImages
+      ? `
+        <img
+          src="${room.images[0]}"
+          alt="Ảnh ${room.name}"
+          style="width:100%; height:100%; object-fit:cover;"
+        >
+      `
+      : `Ảnh ${room.name} sẽ được cập nhật`;
+
+    const mainImage = hasImages
+      ? `<img id="main-image-${room.id}"
+              src="${room.images[0]}"
+              alt="Hình ảnh ${room.name}">`
+      : `Ảnh phòng sẽ được cập nhật`;
+
+    const thumbnails = hasImages
+      ? room.images.map((image, index) => `
+          <button
+            type="button"
+            class="${index === 0 ? "active" : ""}"
+            onclick="changeRoomImage('${room.id}', ${index})"
+            aria-label="Xem ảnh ${index + 1} của ${room.name}">
+            <img src="${image}" alt="${room.name} - ảnh ${index + 1}">
+          </button>
+        `).join("")
+      : "";
+
     return `
       <article class="room">
         <div class="photo">
-          Ảnh ${room.name} sẽ bổ sung
+          ${cover}
         </div>
 
         <h3>${room.name}</h3>
@@ -406,21 +607,72 @@ function render() {
         </button>
 
         <div class="details" id="d-${room.id}">
-          <b>Thông tin phòng</b>
+          <b>Thông tin ${room.name}</b>
 
           <p>
             ${room.beds} giường, tối đa ${room.cap} khách.
           </p>
 
+          <div class="room-gallery">
+            <div class="room-gallery-main" id="gallery-main-${room.id}">
+              ${mainImage}
+            </div>
+
+            <div
+              class="room-gallery-thumbnails"
+              id="gallery-thumbnails-${room.id}">
+              ${thumbnails}
+            </div>
+
+            ${
+              hasImages
+                ? `<p class="room-gallery-note">
+                     Bấm vào ảnh nhỏ để xem ảnh lớn.
+                   </p>`
+                : `<p class="room-gallery-note">
+                     Ảnh thực tế của phòng sẽ được bổ sung tại đây.
+                   </p>`
+            }
+          </div>
+
           <p>
-            Ảnh thực tế, tiện nghi và giá phòng sẽ được bổ sung sau.
+            Tiện nghi và thông tin chi tiết sẽ được cập nhật.
           </p>
         </div>
       </article>
     `;
   }).join("");
 }
+window.changeRoomImage = function(roomId, imageIndex) {
+  const room = rooms.find(item => item.id === roomId);
 
+  if (!room || !room.images || !room.images[imageIndex]) {
+    return;
+  }
+
+  const mainArea = document.getElementById("gallery-main-" + roomId);
+
+  if (!mainArea) {
+    return;
+  }
+
+  mainArea.innerHTML = `
+    <img
+      src="${room.images[imageIndex]}"
+      alt="Hình ảnh ${room.name}"
+    >
+  `;
+
+  const thumbnails = document.getElementById(
+    "gallery-thumbnails-" + roomId
+  );
+
+  if (thumbnails) {
+    thumbnails.querySelectorAll("button").forEach((button, index) => {
+      button.classList.toggle("active", index === imageIndex);
+    });
+  }
+};
 
 /* =====================================
    4. CHỌN PHÒNG
