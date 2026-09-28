@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Phòng 03 | Dương Gia Đạt Homestay</title>
+  <meta
+    name="description"
+    content="Thông tin chi tiết Phòng 03 tại Dương Gia Đạt Homestay, Quỳnh Sơn, Bắc Sơn, Lạng Sơn. Phòng có 3 giường, sức chứa tối đa 6 khách."
+  >
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .room-detail-page {
+      width: min(1100px, 92%);
+      margin: 35px auto 60px;
+      color: #333;
+    }
+
+    .breadcrumb {
+      margin-bottom: 22px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .breadcrumb a {
+      color: #8b382c;
+      text-decoration: none;
+    }
+
+    .room-detail-heading {
+      margin-bottom: 24px;
+    }
+
+    .room-detail-heading h1 {
+      margin: 0 0 10px;
+      color: #5b3028;
+      font-size: clamp(28px, 4vw, 38px);
+    }
+
+    .room-detail-heading p {
+      margin: 0;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .room-detail-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.8fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .room-gallery {
+      min-width: 0;
+    }
+
+    .room-main-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      border-radius: 14px;
+      background: #f3f0ed;
+    }
+
+    .room-thumbnails {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .room-thumbnail {
+      width: 110px;
+      height: 82px;
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #eee;
+      cursor: pointer;
+    }
+
+    .room-thumbnail.active {
+      border-color: #8b382c;
+    }
+
+    .room-thumbnail img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .room-info-card {
+      padding: 24px;
+      border: 1px solid #eee3dc;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .room-info-card h2 {
+      margin: 0 0 18px;
+      color: #5b3028;
+      font-size: 23px;
+    }
+
+    .room-facts {
+      display: grid;
+      gap: 14px;
+      margin: 0 0 22px;
+    }
+
+    .room-fact {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f0e9e5;
+    }
+
+    .room-fact span:first-child {
+      color: #777;
+    }
+
+    .room-fact strong {
+      color: #333;
+      text-align: right;
+    }
+
+    .room-booking-button {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px 18px;
+      border: 1px solid #8b382c;
+      border-radius: 8px;
+      background: #8b382c;
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .room-booking-button:hover {
+      background: #702b22;
+    }
+
+    .room-back-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #8b382c;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .room-description {
+      margin-top: 32px;
+      padding: 24px;
+      border: 1px solid #eee3dc;
+      border-radius: 14px;
+      background: #fff;
+      line-height: 1.8;
+    }
+
+    .room-description h2 {
+      margin-top: 0;
+      color: #5b3028;
+      font-size: 23px;
+    }
+
+    .room-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 760px) {
+      .room-detail-page {
+        margin-top: 24px;
+      }
+
+      .room-detail-layout {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .room-info-card {
+        padding: 20px;
+      }
+
+      .room-description {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <a href="index.html" aria-label="Dương Gia Đạt Homestay - Trang chủ">
+        <strong>Dương Gia Đạt Homestay</strong>
+      </a>
+
+      <nav aria-label="Điều hướng chính">
+        <a href="index.html">Trang chủ</a>
+        <a href="dat-phong.html">Đặt phòng</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="room-detail-page">
+
+    <div class="breadcrumb">
+      <a href="index.html">Trang chủ</a>
+      &nbsp;›&nbsp;
+      <a href="dat-phong.html">Đặt phòng</a>
+      &nbsp;›&nbsp;
+      Phòng 03
+    </div>
+
+    <div class="room-detail-heading">
+      <h1>Phòng 03</h1>
+      <p>
+        Dương Gia Đạt Homestay · Quỳnh Sơn, Bắc Sơn, Lạng Sơn
+      </p>
+    </div>
+
+    <section class="room-detail-layout" aria-label="Thông tin chi tiết phòng 03">
+
+      <div class="room-gallery">
+        <img
+          id="roomMainImage"
+          class="room-main-image"
+          src="images/rooms/12.jpg"
+          alt="Hình ảnh Phòng 03 tại Dương Gia Đạt Homestay"
+        >
+
+        <div class="room-thumbnails" aria-label="Ảnh phòng">
+          <button
+            class="room-thumbnail active"
+            type="button"
+            onclick="changeRoomImage('images/rooms/12.jpg', this)"
+            aria-label="Xem ảnh phòng 03 số 1"
+          >
+            <img src="images/rooms/12.jpg" alt="Ảnh phòng 03 số 1">
+          </button>
+
+          <button
+            class="room-thumbnail"
+            type="button"
+            onclick="changeRoomImage('images/rooms/8.jpg', this)"
+            aria-label="Xem ảnh phòng 03 số 2"
+          >
+            <img src="images/rooms/8.jpg" alt="Ảnh phòng 03 số 2">
+          </button>
+        </div>
+      </div>
+
+      <aside class="room-info-card">
+        <h2>Thông tin phòng</h2>
+
+        <div class="room-facts">
+          <div class="room-fact">
+            <span>Tên phòng</span>
+            <strong>Phòng 03</strong>
+          </div>
+
+          <div class="room-fact">
+            <span>Số giường</span>
+            <strong>3 giường</strong>
+          </div>
+
+          <div class="room-fact">
+            <span>Sức chứa tối đa</span>
+            <strong>6 khách</strong>
+          </div>
+
+          <div class="room-fact">
+            <span>Địa điểm</span>
+            <strong>Quỳnh Sơn, Bắc Sơn</strong>
+          </div>
+        </div>
+
+        <a class="room-booking-button" href="dat-phong.html?room=r3">
+          Kiểm tra phòng và đặt phòng
+        </a>
+
+        <a class="room-back-link" href="dat-phong.html">
+          ← Quay lại danh sách phòng
+        </a>
+      </aside>
+
+    </section>
+
+    <section class="room-description">
+      <h2>Giới thiệu Phòng 03</h2>
+
+      <p>
+        Phòng 03 tại Dương Gia Đạt Homestay có 3 giường, sức chứa tối đa
+        6 khách. Phòng phù hợp để khách tham khảo khi lên kế hoạch lưu trú
+        tại Quỳnh Sơn, Bắc Sơn, Lạng Sơn.
+      </p>
+
+      <p>
+        Để xem tình trạng phòng và gửi yêu cầu đặt phòng, vui lòng sử dụng
+        nút “Kiểm tra phòng và đặt phòng” ở phía trên.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© Dương Gia Đạt Homestay</p>
+      <p>Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+    </div>
+  </footer>
+
+  <script>
+    function changeRoomImage(imagePath, button) {
+      const mainImage = document.getElementById("roomMainImage");
+
+      if (!mainImage || !button) return;
+
+      mainImage.src = imagePath;
+
+      document.querySelectorAll(".room-thumbnail").forEach(function (item) {
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+    }
+  </script>
+
+</body>
+</html>
