@@ -2,7 +2,11 @@
 <!DOCTYPE html>
 <html lang="vi">
 <style>
-/* CSS riêng cho phần đặt phòng */
+/* ==================================================
+   CSS RIÊNG CHO TRANG ĐẶT PHÒNG
+   ================================================== */
+
+/* Khung nội dung chính */
 main {
     max-width: 1120px;
     width: calc(100% - 36px);
@@ -23,6 +27,7 @@ main h2 {
     margin: 0 0 20px;
 }
 
+/* Khung biểu mẫu */
 main .panel {
     background: #fff;
     border: 1px solid #eadfce;
@@ -54,6 +59,7 @@ main textarea {
     border-radius: 8px;
     background: #fff;
     font: inherit;
+    box-sizing: border-box;
 }
 
 main button {
@@ -90,6 +96,10 @@ main .hint {
     font-size: 14px;
 }
 
+/* ==================================================
+   DANH SÁCH PHÒNG
+   ================================================== */
+
 main .rooms {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -98,6 +108,7 @@ main .rooms {
 }
 
 main .room {
+    min-width: 0;
     overflow: hidden;
     background: #fff;
     border: 1px solid #eadfce;
@@ -106,18 +117,30 @@ main .room {
     box-shadow: 0 7px 22px rgba(70, 45, 25, .07);
 }
 
-main .photo {
-    min-height: 180px;
+/* Ảnh đại diện trên thẻ phòng */
+main .room .photo {
+    width: calc(100% + 40px);
+    height: 220px;
     margin: 0 -20px 18px;
-    display: grid;
-    place-items: center;
-    padding: 20px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     color: #79634d;
     font-weight: 600;
     background: linear-gradient(135deg, #f5ead9, #e8d4b8);
 }
 
+main .room .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tên và thông tin phòng */
 main .room h3 {
     color: #8b382c;
     font-size: 21px;
@@ -145,6 +168,10 @@ main .status.no {
     color: #9a3428;
 }
 
+/* ==================================================
+   PHẦN XEM CHI TIẾT PHÒNG
+   ================================================== */
+
 main .details {
     display: none;
     margin-top: 16px;
@@ -157,6 +184,101 @@ main .details {
 main .details.open {
     display: block;
 }
+
+/* ==================================================
+   THƯ VIỆN ẢNH TRONG CHI TIẾT PHÒNG
+   ================================================== */
+
+main .room-gallery {
+    width: 100%;
+    min-width: 0;
+    margin: 18px 0;
+    padding: 14px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+}
+
+/* Ảnh lớn */
+main .room-gallery-main {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f5ead9, #e8d4b8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #79634d;
+}
+
+main .room-gallery-main img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Hàng ảnh thu nhỏ */
+main .room-gallery-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+main .room-gallery-thumbnails button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f1e6d7;
+    cursor: pointer;
+}
+
+main .room-gallery-thumbnails button:hover {
+    background: #f1e6d7;
+}
+
+main .room-gallery-thumbnails button.active {
+    border-color: #8b382c;
+}
+
+main .room-gallery-thumbnails img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+/* Ghi chú dưới thư viện ảnh */
+main .room-gallery-note {
+    margin: 10px 0 0;
+    color: #796c62;
+    font-size: 13px;
+}
+
+/* Các thông tin bổ sung nếu có */
+main .room-gallery-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 18px;
+    color: #444;
+}
+
+main .room-gallery-info span {
+    display: inline-block;
+}
+
+/* ==================================================
+   PHẦN ĐẶT PHÒNG VÀ NÚT HÀNH ĐỘNG
+   ================================================== */
 
 main .booking {
     display: none;
@@ -179,6 +301,40 @@ main .actions {
     gap: 10px;
 }
 
+/* ==================================================
+   NÚT QUẢN LÝ KÍN ĐÁO CẠNH BẢN QUYỀN
+   ================================================== */
+
+.copyright-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-secret {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: inherit;
+    opacity: .35;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: opacity .2s ease, background .2s ease;
+}
+
+.admin-secret:hover,
+.admin-secret:focus {
+    opacity: 1;
+    background: rgba(255, 255, 255, .15);
+}
+
+/* ==================================================
+   GIAO DIỆN MÁY TÍNH BẢNG VÀ ĐIỆN THOẠI
+   ================================================== */
+
 @media (max-width: 760px) {
     main {
         width: calc(100% - 28px);
@@ -193,185 +349,38 @@ main .actions {
     main .panel {
         padding: 20px;
     }
-/* Nút quản lý kín đáo cạnh bản quyền */
-.copyright-line {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+
+    main .room .photo {
+        height: 230px;
+    }
 }
 
-.admin-secret {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    color: inherit;
-    opacity: 0.35;
-    font-size: 14px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: opacity .2s ease, background .2s ease;
-}
-
-.admin-secret:hover,
-.admin-secret:focus {
-    opacity: 1;
-    background: rgba(255,255,255,.15);
-}
-/* Khu vực chi tiết và thư viện ảnh phòng */
-.room-gallery {
-  margin: 28px 0;
-  padding: 22px;
-  background: #fff;
-  border: 1px solid #e8e5dc;
-  border-radius: 16px;
-}
-
-.room-gallery h2 {
-  margin: 0 0 8px;
-  color: #244b3b;
-}
-
-.room-gallery .room-description {
-  margin: 0 0 18px;
-  color: #666;
-  line-height: 1.6;
-}
-
-.room-gallery-main {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #f1f1ed;
-}
-
-.room-gallery-main img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.room-gallery-thumbnails {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.room-gallery-thumbnails button {
-  padding: 0;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #f1f1ed;
-  cursor: pointer;
-}
-
-.room-gallery-thumbnails button.active {
-  border-color: #32664f;
-}
-
-.room-gallery-thumbnails img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  display: block;
-  object-fit: cover;
-}
-
-.room-gallery-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 22px;
-  margin-top: 18px;
-  color: #444;
-}
-
-.room-gallery-info span {
-  display: inline-block;
-}
-
+/* Màn hình điện thoại nhỏ */
 @media (max-width: 600px) {
-  .room-gallery {
-    padding: 14px;
-  }
+    main h1 {
+        font-size: 29px;
+    }
 
-  .room-gallery-thumbnails {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 7px;
-  }
-}
-/* Thư viện ảnh chi tiết từng phòng */
-.room-gallery {
-    margin-top: 16px;
-    padding: 14px;
-    background: #fffaf2;
-    border-radius: 10px;
-}
+    main h2 {
+        font-size: 23px;
+    }
 
-.room-gallery-main {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #f5ead9, #e8d4b8);
-    display: grid;
-    place-items: center;
-    color: #79634d;
-    text-align: center;
-}
-
-.room-gallery-main img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
-
-.room-gallery-thumbnails {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 8px;
-    margin-top: 10px;
-}
-
-.room-gallery-thumbnails button {
-    padding: 0;
-    border: 2px solid transparent;
-    border-radius: 7px;
-    overflow: hidden;
-    background: #f1e6d7;
-    cursor: pointer;
-}
-
-.room-gallery-thumbnails button.active {
-    border-color: #8b382c;
-}
-
-.room-gallery-thumbnails img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    display: block;
-    object-fit: cover;
-}
-
-.room-gallery-note {
-    margin: 10px 0 0;
-    color: #796c62;
-    font-size: 13px;
-}
-
-@media (max-width: 600px) {
-    .room-gallery {
+    main .room-gallery {
         padding: 10px;
     }
 
-    .room-gallery-thumbnails {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+    main .room-gallery-main {
+        aspect-ratio: 4 / 3;
     }
-}
+
+    main .room-gallery-thumbnails {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    main .room-gallery-thumbnails button {
+        min-height: 0;
+    }
 }
 </style>
 <head>
