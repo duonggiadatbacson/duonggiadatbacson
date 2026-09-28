@@ -193,6 +193,32 @@ main .actions {
     main .panel {
         padding: 20px;
     }
+/* Nút quản lý kín đáo cạnh bản quyền */
+.copyright-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-secret {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: inherit;
+    opacity: 0.35;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: opacity .2s ease, background .2s ease;
+}
+
+.admin-secret:hover,
+.admin-secret:focus {
+    opacity: 1;
+    background: rgba(255,255,255,.15);
+}
 }
 </style>
 <head>
@@ -394,10 +420,15 @@ $("msg").onclick=()=>copyOpen("https://m.me/61593858644090");$("zalo").onclick=(
 
         <div class="container footer-bottom-inner">
 
-            <p>
-                © 2026 Dương Gia Đạt Homestay
-            </p>
-
+            <p class="copyright-line">
+    © 2026 Dương Gia Đạt Homestay
+    <a href="quan-ly-dat-phong.html"
+       class="admin-secret"
+       aria-label="Mở trang quản lý"
+       title="Quản lý">
+        ⚙
+    </a>
+</p>
 
             <div class="social-links">
 
