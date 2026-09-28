@@ -382,6 +382,23 @@ main .actions {
         min-height: 0;
     }
 }
+main .detail-link {
+    display: inline-block;
+    padding: 11px 18px;
+    border: 1px solid #8b382c;
+    border-radius: 8px;
+    background: #fff;
+    color: #8b382c;
+    font: inherit;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+main .detail-link:hover {
+    background: #fff7ed;
+}
 </style>
 <head>
 
@@ -604,11 +621,15 @@ function render() {
 
         <br>
 
-        <button
-          class="alt"
-          onclick="document.getElementById('d-${room.id}').classList.toggle('open')">
-          Xem chi tiết
-        </button>
+     ${
+  room.id === "r1"
+    ? `<a class="detail-link" href="/room1.html">Xem chi tiết</a>`
+    : `<button
+         class="alt"
+         onclick="document.getElementById('d-${room.id}').classList.toggle('open')">
+         Xem chi tiết
+       </button>`
+}
 
         <button
           ${available ? "" : "disabled"}
