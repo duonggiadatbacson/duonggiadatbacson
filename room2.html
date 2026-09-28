@@ -1,738 +1,799 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phòng 02 | Dương Gia Đạt Homestay</title>
+  <meta name="description" content="Thông tin chi tiết Phòng 02 tại Dương Gia Đạt Homestay, Quỳnh Sơn, Bắc Sơn, Lạng Sơn.">
 
-    <title>Phòng 02 | Dương Gia Đạt Homestay</title>
-    <meta name="description" content="Thông tin Phòng 02 tại Dương Gia Đạt Homestay, làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn.">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-    <link rel="canonical" href="https://duonggiadatbacson.com/room2.html">
-    <link rel="stylesheet" href="css/style.css">
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #20342e;
+      background: #faf9f5;
+      line-height: 1.6;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .room-detail-page {
-            max-width: 1500px;
-            width: calc(100% - 60px);
-            margin: 28px auto 55px;
-            color: #203c35;
-        }
+    /* HEADER */
+    .site-header {
+      background: #173b31;
+      color: #fff;
+    }
 
-        .room-breadcrumb {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 22px;
-            color: #68756f;
-            font-size: 14px;
-        }
+    .header-inner {
+      max-width: 1440px;
+      min-height: 100px;
+      margin: auto;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
 
-        .room-breadcrumb a {
-            color: #365d50;
-            text-decoration: none;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 260px;
+    }
 
-        .room-breadcrumb a:hover {
-            text-decoration: underline;
-        }
+    .brand-mark {
+      font-size: 44px;
+      line-height: 1;
+    }
 
-        .room-detail-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(300px, .9fr);
-            gap: 22px;
-            align-items: start;
-        }
+    .brand-name {
+      font-family: Georgia, serif;
+      font-size: 25px;
+      font-weight: bold;
+      font-style: italic;
+      line-height: 1.2;
+    }
 
-        .room-photo-card,
-        .room-description-card,
-        .room-booking-card {
-            min-width: 0;
-            background: #fff;
-            border: 1px solid #e9e7df;
-            border-radius: 14px;
-            box-shadow: 0 7px 24px rgba(40, 50, 40, .06);
-        }
+    .brand-location {
+      margin-top: 4px;
+      font-size: 14px;
+    }
 
-        .room-photo-card {
-            padding: 0;
-            overflow: hidden;
-        }
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 16px;
+    }
 
-        .room-main-photo {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            overflow: hidden;
-            background: #eee8dc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #796c62;
-            text-align: center;
-            padding: 20px;
-        }
+    .main-nav a:hover {
+      opacity: .8;
+    }
 
-        .room-main-photo img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    .nav-book {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 28px;
+      background: #a84632;
+      color: #fff;
+      font-weight: bold;
+    }
 
-        .room-photo-count {
-            position: absolute;
-            right: 14px;
-            bottom: 14px;
-            padding: 6px 12px;
-            border-radius: 7px;
-            color: #fff;
-            background: rgba(0, 0, 0, .62);
-            font-size: 14px;
-        }
+    /* PAGE */
+    .page-wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 28px 54px;
+    }
 
-        .room-photo-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 38px;
-            height: 38px;
-            padding: 0;
-            border: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, .9);
-            color: #203c35;
-            font-size: 24px;
-            line-height: 1;
-            cursor: pointer;
-        }
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 20px;
+      font-size: 14px;
+      color: #53645e;
+    }
 
-        .room-photo-arrow:hover {
-            background: #fff;
-        }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
 
-        .room-photo-arrow.prev {
-            left: 14px;
-        }
+    .room-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr) minmax(300px, .82fr);
+      align-items: stretch;
+      gap: 22px;
+    }
 
-        .room-photo-arrow.next {
-            right: 14px;
-        }
+    .gallery-panel,
+    .info-panel,
+    .booking-panel {
+      min-width: 0;
+      background: #fff;
+      border: 1px solid #eeeae2;
+      border-radius: 14px;
+      box-shadow: 0 5px 22px rgba(42, 54, 45, .045);
+    }
 
-        .room-thumbnails {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 8px;
-            padding: 10px;
-        }
+    /* PHOTO GALLERY */
+    .gallery-panel {
+      padding: 0 0 14px;
+      align-self: start;
+    }
 
-        .room-thumbnails button {
-            min-width: 0;
-            padding: 0;
-            border: 2px solid transparent;
-            border-radius: 7px;
-            overflow: hidden;
-            background: #eee8dc;
-            cursor: pointer;
-        }
+    .gallery-main {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 13px;
+      background: #eee4d5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #796c5c;
+      text-align: center;
+      padding: 24px;
+    }
 
-        .room-thumbnails button.active {
-            border-color: #28745e;
-        }
+    .gallery-main img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .room-thumbnails img {
-            display: block;
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            object-fit: cover;
-        }
+    .gallery-placeholder {
+      max-width: 280px;
+      font-size: 15px;
+    }
 
-        .room-description-card {
-            padding: 24px;
-        }
+    .gallery-count {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      padding: 5px 12px;
+      border-radius: 7px;
+      color: #fff;
+      background: rgba(0, 0, 0, .58);
+      font-size: 13px;
+    }
 
-        .room-description-card h1 {
-            margin: 0 0 18px;
-            color: #203c35;
-            font-size: 36px;
-            line-height: 1.2;
-        }
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .9);
+      color: #20342e;
+      font-size: 23px;
+      cursor: pointer;
+    }
 
-        .room-facts {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px 28px;
-            padding-bottom: 22px;
-            border-bottom: 1px solid #e6e4de;
-            color: #283d37;
-        }
+    .gallery-arrow:hover {
+      background: #fff;
+    }
 
-        .room-fact {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-        }
+    .gallery-arrow.prev {
+      left: 12px;
+    }
 
-        .room-fact-icon {
-            font-size: 22px;
-        }
+    .gallery-arrow.next {
+      right: 12px;
+    }
 
-        .room-description {
-            margin: 22px 0;
-            color: #35443e;
-            line-height: 1.7;
-        }
+    .gallery-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+      padding: 12px 0 0;
+    }
 
-        .room-amenities {
-            padding-top: 20px;
-            border-top: 1px solid #e6e4de;
-        }
+    .gallery-thumb {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      overflow: hidden;
+      border: 2px solid transparent;
+      border-radius: 7px;
+      background: #eee4d5;
+      cursor: pointer;
+    }
 
-        .room-amenities h2 {
-            margin: 0 0 16px;
-            color: #203c35;
-            font-size: 21px;
-        }
+    .gallery-thumb.active {
+      border-color: #27765e;
+    }
 
-        .amenities-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-        }
+    .gallery-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .amenity-item {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-            color: #35443e;
-        }
+    /* ROOM INFORMATION */
+    .info-panel {
+      padding: 22px;
+    }
 
-        .amenity-icon {
-            min-width: 22px;
-            font-size: 19px;
-        }
+    .room-title {
+      margin: 0 0 18px;
+      color: #1c3d33;
+      font-size: 34px;
+      line-height: 1.2;
+    }
 
-        .room-info-note {
-            margin-top: 24px;
-            padding: 14px;
-            border-radius: 9px;
-            background: #f2f6ed;
-            color: #34483d;
-            line-height: 1.6;
-            font-size: 14px;
-        }
+    .room-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e9e7e1;
+      font-size: 15px;
+    }
 
-        .room-booking-card {
-            padding: 22px;
-        }
+    .room-facts span {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
 
-        .room-availability {
-            display: inline-block;
-            padding: 8px 18px;
-            border-radius: 30px;
-            background: #d8f1d8;
-            color: #214d35;
-            font-weight: 600;
-        }
+    .fact-icon {
+      font-size: 21px;
+    }
 
-        .booking-divider {
-            margin: 14px 0;
-            border: 0;
-            border-top: 1px solid #e6e4de;
-        }
+    .room-description {
+      margin: 20px 0 24px;
+      color: #394a44;
+    }
 
-        .booking-section {
-            margin: 20px 0;
-        }
+    .info-divider {
+      border: 0;
+      border-top: 1px solid #e9e7e1;
+      margin: 22px 0;
+    }
 
-        .booking-section h2 {
-            margin: 0 0 8px;
-            color: #203c35;
-            font-size: 17px;
-        }
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 20px;
+      color: #203b32;
+    }
 
-        .booking-section p {
-            margin: 0;
-            color: #59665f;
-            font-size: 14px;
-            line-height: 1.6;
-        }
+    .amenities-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-        .booking-date-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
+    .amenities-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
 
-        .booking-date-grid label {
-            display: block;
-            padding: 10px;
-            border: 1px solid #deded8;
-            border-radius: 9px;
-            color: #5d6963;
-            font-size: 13px;
-        }
+    .amenity-icon {
+      width: 24px;
+      font-size: 18px;
+      text-align: center;
+    }
 
-        .booking-date-grid input {
-            display: block;
-            width: 100%;
-            min-width: 0;
-            margin-top: 8px;
-            padding: 4px 0;
-            border: 0;
-            background: transparent;
-            color: #263b34;
-            font: inherit;
-        }
+    .info-note {
+      margin-top: 26px;
+      padding: 14px;
+      border-radius: 9px;
+      background: #f4f7ef;
+      color: #344b3e;
+      font-size: 13px;
+    }
 
-        .booking-guests {
-            width: 100%;
-            min-height: 48px;
-            padding: 10px 12px;
-            border: 1px solid #deded8;
-            border-radius: 9px;
-            background: #fff;
-            color: #263b34;
-            font: inherit;
-        }
+    /* BOOKING PANEL */
+    .booking-panel {
+      padding: 22px;
+      align-self: start;
+    }
 
-        .room-booking-button {
-            display: block;
-            width: 100%;
-            margin-top: 22px;
-            padding: 14px 18px;
-            border: 0;
-            border-radius: 9px;
-            background: #a94330;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            font: inherit;
-            font-weight: 600;
-            cursor: pointer;
-        }
+    .availability {
+      display: inline-block;
+      padding: 6px 20px;
+      border-radius: 22px;
+      background: #d9f1d8;
+      color: #214d35;
+      font-weight: bold;
+    }
 
-        .room-booking-button:hover {
-            background: #873426;
-            color: #fff;
-        }
+    .booking-divider {
+      border: 0;
+      border-top: 1px solid #e9e7e1;
+      margin: 14px 0;
+    }
 
-        .booking-confirm-note {
-            margin-top: 20px;
-            padding: 14px;
-            border-radius: 9px;
-            background: #f7f5ef;
-            color: #4a5952;
-            font-size: 14px;
-            line-height: 1.6;
-        }
+    .price-label {
+      margin: 0 0 3px;
+      font-weight: bold;
+    }
 
-        @media (max-width: 1050px) {
-            .room-detail-grid {
-                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            }
+    .price-note {
+      margin: 0;
+      color: #59645f;
+      font-size: 14px;
+    }
 
-            .room-photo-card {
-                grid-column: 1 / -1;
-            }
+    .booking-label {
+      display: block;
+      margin: 20px 0 8px;
+      font-weight: bold;
+    }
 
-            .room-main-photo {
-                aspect-ratio: 16 / 9;
-            }
-        }
+    .date-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
 
-        @media (max-width: 700px) {
-            .room-detail-page {
-                width: calc(100% - 28px);
-                margin-top: 20px;
-            }
+    .date-field {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid #e3e2dd;
+      border-radius: 8px;
+    }
 
-            .room-detail-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
+    .date-field label {
+      display: block;
+      margin-bottom: 5px;
+      color: #68736d;
+      font-size: 12px;
+    }
 
-            .room-photo-card {
-                grid-column: auto;
-            }
+    .date-field input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #20342e;
+      font: inherit;
+      font-size: 13px;
+    }
 
-            .room-main-photo {
-                aspect-ratio: 4 / 3;
-            }
+    .guest-select {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 12px;
+      border: 1px solid #e3e2dd;
+      border-radius: 8px;
+      background: #fff;
+      color: #20342e;
+      font: inherit;
+    }
 
-            .room-description-card,
-            .room-booking-card {
-                padding: 18px;
-            }
+    .book-now {
+      display: block;
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px 16px;
+      border: 0;
+      border-radius: 8px;
+      background: #a84632;
+      color: #fff;
+      text-align: center;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-            .room-description-card h1 {
-                font-size: 30px;
-            }
+    .book-now:hover {
+      background: #8e3929;
+    }
 
-            .amenities-grid {
-                gap: 12px;
-            }
-        }
-    </style>
+    .confirmation-note {
+      margin-top: 22px;
+      padding: 14px;
+      border-radius: 9px;
+      background: #f8f7f2;
+      color: #48564f;
+      font-size: 13px;
+    }
+
+    /* FOOTER */
+    .site-footer {
+      background: #173b31;
+      color: #fff;
+      padding: 34px 28px;
+    }
+
+    .footer-inner {
+      max-width: 1440px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    .footer-tagline {
+      font-family: Georgia, serif;
+      font-style: italic;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .room-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+
+      .booking-panel {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .main-nav {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 14px 22px;
+      }
+
+      .page-wrap {
+        padding: 20px 16px 36px;
+      }
+
+      .room-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-panel {
+        grid-column: auto;
+      }
+
+      .room-title {
+        font-size: 29px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand-name {
+        font-size: 21px;
+      }
+
+      .brand-mark {
+        font-size: 36px;
+      }
+
+      .main-nav {
+        font-size: 14px;
+      }
+
+      .info-panel,
+      .booking-panel {
+        padding: 17px;
+      }
+
+      .gallery-thumbnails {
+        gap: 6px;
+      }
+
+      .amenities-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 6px;
+      }
+
+      .date-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-tagline {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="site-header">
-    <div class="header-image">
-        <img src="images/logo/1.jpg" alt="Dương Gia Đạt Homestay">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Dương Gia Đạt Homestay - Trang chủ">
+        <span class="brand-mark">⌂</span>
+        <span>
+          <span class="brand-name">Dương Gia Đạt Homestay</span><br>
+          <span class="brand-location">Quỳnh Sơn - Bắc Sơn - Lạng Sơn</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Điều hướng chính">
+        <a href="index.html">Trang chủ</a>
+        <a href="phong-ngu.html">Phòng nghỉ</a>
+        <a href="index.html#kham-pha">Khám phá</a>
+        <a href="index.html#lien-he">Liên hệ</a>
+        <a class="nav-book" href="dat-phong.html">▣ Đặt phòng</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="header-navigation">
-        <div class="container">
-            <nav class="main-nav">
-                <a href="index.html" aria-label="Trang chủ">🏠</a>
-                <a href="du-lich-quynh-son.html">Du lịch Quỳnh Sơn</a>
-                <a href="rooms.html">Phòng</a>
-                <a href="blog.html">Blog</a>
-                <a href="gallery.html">Thư viện ảnh</a>
-                <a href="contact.html">Liên hệ</a>
-            </nav>
-
-            <div class="language-switcher">
-                <button type="button" data-lang="vi">VI</button>
-                <button type="button" data-lang="en">EN</button>
-            </div>
-
-            <a href="dat-phong.html" class="booking-button">ĐẶT PHÒNG</a>
-        </div>
-    </div>
-</header>
-
-<main class="room-detail-page">
-
-    <nav class="room-breadcrumb" aria-label="Đường dẫn">
-        <a href="index.html">⌂ Trang chủ</a>
-        <span>/</span>
-        <a href="rooms.html">Phòng nghỉ</a>
-        <span>/</span>
-        <span>Phòng 02</span>
+  <main class="page-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">⌂ Trang chủ</a>
+      <span>/</span>
+      <a href="phong-ngu.html">Phòng nghỉ</a>
+      <span>/</span>
+      <span>Phòng 02</span>
     </nav>
 
-    <div class="room-detail-grid">
+    <section class="room-layout">
 
-        <!-- CỘT 1: ẢNH PHÒNG -->
-        <section class="room-photo-card" aria-label="Hình ảnh Phòng 02">
-            <div class="room-main-photo" id="roomMainPhoto">
-                <span>Ảnh thực tế Phòng 02 sẽ được cập nhật tại đây</span>
+      <!-- THƯ VIỆN ẢNH -->
+      <div class="gallery-panel">
+        <div class="gallery-main" id="gallery-main">
+          <div class="gallery-placeholder" id="gallery-placeholder">
+            Ảnh thực tế Phòng 02 sẽ được cập nhật tại đây.
+          </div>
+          <span class="gallery-count" id="gallery-count" hidden></span>
+          <button class="gallery-arrow prev" id="gallery-prev" type="button"
+                  aria-label="Ảnh trước" hidden>‹</button>
+          <button class="gallery-arrow next" id="gallery-next" type="button"
+                  aria-label="Ảnh tiếp theo" hidden>›</button>
+        </div>
+
+        <div class="gallery-thumbnails" id="gallery-thumbnails"></div>
+      </div>
+
+      <!-- THÔNG TIN PHÒNG -->
+      <section class="info-panel">
+        <h1 class="room-title">Phòng 02</h1>
+
+        <div class="room-facts">
+          <span><span class="fact-icon">▤</span> 2 giường</span>
+          <span><span class="fact-icon">♙</span> Tối đa 4 khách</span>
+        </div>
+
+        <p class="room-description">
+          Thông tin mô tả chi tiết của Phòng 02 sẽ được cập nhật.
+          Bạn có thể liên hệ homestay để hỏi thêm về phòng trước khi đặt.
+        </p>
+
+        <hr class="info-divider">
+
+        <h2 class="section-title">Tiện nghi</h2>
+        <ul class="amenities-list">
+          <li><span class="amenity-icon">⌂</span> Thông tin tiện nghi sẽ cập nhật</li>
+          <li><span class="amenity-icon">▣</span> Chi tiết phòng sẽ cập nhật</li>
+          <li><span class="amenity-icon">◈</span> Tiện ích sẽ cập nhật</li>
+          <li><span class="amenity-icon">☼</span> Vui lòng liên hệ để hỏi thêm</li>
+        </ul>
+
+        <div class="info-note">
+          Hình ảnh, giá phòng và thông tin tiện nghi chi tiết sẽ được cập nhật
+          theo thông tin thực tế của homestay.
+        </div>
+      </section>
+
+      <!-- KHUNG ĐẶT PHÒNG -->
+      <aside class="booking-panel">
+        <span class="availability">Liên hệ kiểm tra phòng</span>
+
+        <hr class="booking-divider">
+
+        <p class="price-label">Giá phòng</p>
+        <p class="price-note">Vui lòng liên hệ homestay để biết giá chi tiết.</p>
+
+        <form id="booking-form">
+          <label class="booking-label" for="checkin">Chọn ngày đặt phòng</label>
+
+          <div class="date-fields">
+            <div class="date-field">
+              <label for="checkin">Nhận phòng</label>
+              <input type="date" id="checkin" name="checkin">
             </div>
 
-            <div class="room-thumbnails" id="roomThumbnails"></div>
-        </section>
-
-        <!-- CỘT 2: THÔNG TIN PHÒNG -->
-        <section class="room-description-card">
-            <h1>Phòng 02</h1>
-
-            <div class="room-facts">
-                <div class="room-fact">
-                    <span class="room-fact-icon">▤</span>
-                    <span>2 giường</span>
-                </div>
-
-                <div class="room-fact">
-                    <span class="room-fact-icon">♙</span>
-                    <span>Tối đa 4 khách</span>
-                </div>
+            <div class="date-field">
+              <label for="checkout">Trả phòng</label>
+              <input type="date" id="checkout" name="checkout">
             </div>
+          </div>
 
-            <p class="room-description">
-                Phòng 02 tại Dương Gia Đạt Homestay, thuộc làng du lịch
-                cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn. Vui lòng liên hệ
-                homestay để được tư vấn thêm về phòng và tình trạng đặt phòng.
-            </p>
+          <label class="booking-label" for="guests">Số khách</label>
+          <select class="guest-select" id="guests" name="guests">
+            <option value="1">1 khách</option>
+            <option value="2" selected>2 khách</option>
+            <option value="3">3 khách</option>
+            <option value="4">4 khách</option>
+          </select>
 
-            <div class="room-amenities">
-                <h2>Tiện nghi</h2>
+          <button class="book-now" type="submit">▣ Đặt phòng ngay</button>
+        </form>
 
-                <div class="amenities-grid">
-                    <div class="amenity-item">
-                        <span class="amenity-icon">⌂</span>
-                        <span>Thông tin tiện nghi sẽ được cập nhật</span>
-                    </div>
+        <div class="confirmation-note">
+          Yêu cầu đặt phòng sẽ được tiếp tục tại trang đặt phòng của homestay.
+          Tại đó, bạn có thể kiểm tra ngày còn phòng và gửi thông tin đặt phòng.
+        </div>
+      </aside>
 
-                    <div class="amenity-item">
-                        <span class="amenity-icon">▣</span>
-                        <span>Chi tiết phòng sẽ được cập nhật</span>
-                    </div>
+    </section>
+  </main>
 
-                    <div class="amenity-item">
-                        <span class="amenity-icon">◇</span>
-                        <span>Tiện ích sẽ được cập nhật</span>
-                    </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Dương Gia Đạt Homestay</div>
+        <div>Quỳnh Sơn - Bắc Sơn - Lạng Sơn</div>
+      </div>
 
-                    <div class="amenity-item">
-                        <span class="amenity-icon">☼</span>
-                        <span>Vui lòng liên hệ để hỏi thêm</span>
-                    </div>
-                </div>
-            </div>
+      <div class="footer-tagline">
+        Nghỉ dưỡng giữa thiên nhiên<br>
+        Trải nghiệm trọn vẹn!
+      </div>
 
-            <div class="room-info-note">
-                Hình ảnh phòng sẽ được cập nhật theo ảnh thực tế.
-                Giá phòng và tiện nghi chi tiết vui lòng liên hệ homestay.
-            </div>
-        </section>
-
-        <!-- CỘT 3: KHUNG ĐẶT PHÒNG -->
-        <aside class="room-booking-card">
-            <div class="room-availability">Liên hệ kiểm tra phòng</div>
-
-            <hr class="booking-divider">
-
-            <section class="booking-section">
-                <h2>Giá phòng</h2>
-                <p>Vui lòng liên hệ homestay để biết giá chi tiết.</p>
-            </section>
-
-            <hr class="booking-divider">
-
-            <section class="booking-section">
-                <h2>Chọn ngày đặt phòng</h2>
-
-                <div class="booking-date-grid">
-                    <label>
-                        Nhận phòng
-                        <input type="date" id="checkin">
-                    </label>
-
-                    <label>
-                        Trả phòng
-                        <input type="date" id="checkout">
-                    </label>
-                </div>
-            </section>
-
-            <section class="booking-section">
-                <h2>Số khách</h2>
-
-                <select class="booking-guests" id="guestCount">
-                    <option value="1">1 khách</option>
-                    <option value="2" selected>2 khách</option>
-                    <option value="3">3 khách</option>
-                    <option value="4">4 khách</option>
-                </select>
-            </section>
-
-            <a href="dat-phong.html" class="room-booking-button" id="bookingLink">
-                Đặt phòng ngay
-            </a>
-
-            <div class="booking-confirm-note">
-                Yêu cầu đặt phòng sẽ được gửi qua trang đặt phòng.
-                Homestay sẽ kiểm tra và phản hồi xác nhận.
-            </div>
-        </aside>
-
+      <div class="footer-links">
+        <a href="index.html">Trang chủ</a>
+        <a href="dat-phong.html">Đặt phòng</a>
+      </div>
     </div>
-</main>
+  </footer>
 
-<footer class="site-footer">
-    <div class="container footer-main">
+  <script>
+    /*
+      Tải ảnh vào các đường dẫn này sau:
+      images/phong-01/phong-01-1.jpg
+      images/phong-01/phong-01-2.jpg
+      images/phong-01/phong-01-3.jpg
+      images/phong-01/phong-01-4.jpg
+      images/phong-01/phong-01-5.jpg
+    */
 
-        <div class="footer-column">
-            <h3>Liên kết nhanh</h3>
-            <a href="index.html">Trang chủ</a>
-            <a href="gioi-thieu.html">Giới thiệu</a>
-            <a href="rooms.html">Phòng nghỉ</a>
-            <a href="blog.html">Blog</a>
-            <a href="gallery.html">Thư viện ảnh</a>
-            <a href="contact.html">Liên hệ</a>
-        </div>
-
-        <div class="footer-column">
-            <h3>Thông tin liên hệ</h3>
-            <p>Dương Gia Đạt Homestay</p>
-            <p>Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
-            <p>Điện thoại: <a href="tel:0815959399">0815 959 399</a></p>
-            <a href="dat-phong.html" class="booking-button">ĐẶT PHÒNG</a>
-        </div>
-
-        <div class="footer-column footer-map">
-            <h3>Vị trí homestay</h3>
-            <iframe
-                src="https://www.google.com/maps?q=Dương%20Gia%20Đạt%20Homestay%20Quỳnh%20Sơn%20Bắc%20Sơn%20Lạng%20Sơn&output=embed"
-                loading="lazy"
-                allowfullscreen
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Bản đồ Dương Gia Đạt Homestay">
-            </iframe>
-
-            <a href="https://maps.app.goo.gl/JjN1hBWdhzmrtrKt6"
-               target="_blank"
-               rel="noopener"
-               class="map-link">
-                Xem đường đi trên Google Maps →
-            </a>
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        <div class="container footer-bottom-inner">
-            <p class="copyright-line">
-                © 2026 Dương Gia Đạt Homestay
-                <a href="quan-ly-dat-phong-demo.html"
-                   class="admin-secret"
-                   aria-label="Mở trang quản lý"
-                   title="Quản lý">⚙</a>
-            </p>
-
-            <div class="social-links">
-                <a href="https://www.facebook.com/profile.php?id=61593921070857"
-                   target="_blank" rel="noopener"><span>Facebook</span></a>
-                <a href="https://www.instagram.com/duonggiadat.homestay/"
-                   target="_blank" rel="noopener"><span>Instagram</span></a>
-                <a href="https://www.tiktok.com/@duonggiadat_homestay"
-                   target="_blank" rel="noopener"><span>TikTok</span></a>
-                <a href="https://zalo.me/0815959399"
-                   target="_blank" rel="noopener"><span>Zalo</span></a>
-                <a href="https://www.youtube.com/@thuduong8592"
-                   target="_blank" rel="noopener"><span>YouTube</span></a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<script>
-    // Ảnh Phòng 02 đang được khai báo trong dat-phong.html.
-    // Nếu ảnh không tồn tại đúng đường dẫn, khung sẽ hiện thông báo thay thế.
     const roomImages = [
-        "images/rooms/2.jpg",
-        "images/rooms/15.jpg"
+      "images/phong-01/phong-01-1.jpg",
+      "images/phong-01/phong-01-2.jpg",
+      "images/phong-01/phong-01-3.jpg",
+      "images/phong-01/phong-01-4.jpg",
+      "images/phong-01/phong-01-5.jpg"
     ];
 
+    const galleryMain = document.getElementById("gallery-main");
+    const galleryPlaceholder = document.getElementById("gallery-placeholder");
+    const galleryThumbnails = document.getElementById("gallery-thumbnails");
+    const galleryCount = document.getElementById("gallery-count");
+    const prevButton = document.getElementById("gallery-prev");
+    const nextButton = document.getElementById("gallery-next");
+
+    let availableImages = [];
     let currentImageIndex = 0;
 
-    const mainPhoto = document.getElementById("roomMainPhoto");
-    const thumbnails = document.getElementById("roomThumbnails");
-
     function showRoomImage(index) {
-        currentImageIndex = index;
+      if (!availableImages.length) return;
 
-        const imagePath = roomImages[index];
+      currentImageIndex =
+        (index + availableImages.length) % availableImages.length;
 
-        mainPhoto.innerHTML = "";
+      const oldImage = galleryMain.querySelector(".main-room-photo");
+      if (oldImage) oldImage.remove();
 
-        const image = document.createElement("img");
-        image.src = imagePath;
-        image.alt = "Ảnh Phòng 02";
-        image.onerror = function() {
-            mainPhoto.innerHTML =
-                "<span>Không tải được ảnh. Vui lòng kiểm tra đường dẫn ảnh.</span>";
-        };
+      const image = document.createElement("img");
+      image.className = "main-room-photo";
+      image.src = availableImages[currentImageIndex];
+      image.alt = "Ảnh Phòng 01 " + (currentImageIndex + 1);
 
-        mainPhoto.appendChild(image);
+      galleryMain.insertBefore(image, galleryCount);
+      galleryPlaceholder.hidden = true;
 
-        const count = document.createElement("span");
-        count.className = "room-photo-count";
-        count.textContent = (index + 1) + " / " + roomImages.length;
-        mainPhoto.appendChild(count);
+      galleryCount.textContent =
+        (currentImageIndex + 1) + " / " + availableImages.length;
+      galleryCount.hidden = false;
 
-        if (roomImages.length > 1) {
-            const previous = document.createElement("button");
-            previous.type = "button";
-            previous.className = "room-photo-arrow prev";
-            previous.setAttribute("aria-label", "Ảnh trước");
-            previous.textContent = "‹";
-            previous.onclick = function() {
-                showRoomImage(
-                    (currentImageIndex - 1 + roomImages.length) % roomImages.length
-                );
-            };
+      galleryThumbnails.querySelectorAll("button").forEach((button, i) => {
+        button.classList.toggle("active", i === currentImageIndex);
+      });
+    }
 
-            const next = document.createElement("button");
-            next.type = "button";
-            next.className = "room-photo-arrow next";
-            next.setAttribute("aria-label", "Ảnh tiếp theo");
-            next.textContent = "›";
-            next.onclick = function() {
-                showRoomImage((currentImageIndex + 1) % roomImages.length);
-            };
+    function buildGallery() {
+      const checks = roomImages.map(path => new Promise(resolve => {
+        const image = new Image();
 
-            mainPhoto.appendChild(previous);
-            mainPhoto.appendChild(next);
+        image.onload = () => resolve(path);
+        image.onerror = () => resolve(null);
+        image.src = path;
+      }));
+
+      Promise.all(checks).then(results => {
+        availableImages = results.filter(Boolean);
+
+        if (!availableImages.length) {
+          galleryPlaceholder.hidden = false;
+          return;
         }
 
-        thumbnails.querySelectorAll("button").forEach(function(button, buttonIndex) {
-            button.classList.toggle("active", buttonIndex === index);
+        galleryThumbnails.innerHTML = "";
+
+        availableImages.forEach((path, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "gallery-thumb";
+          button.setAttribute("aria-label", "Xem ảnh " + (index + 1));
+
+          const image = document.createElement("img");
+          image.src = path;
+          image.alt = "Ảnh thu nhỏ Phòng 01 " + (index + 1);
+
+          button.appendChild(image);
+          button.addEventListener("click", () => showRoomImage(index));
+          galleryThumbnails.appendChild(button);
         });
-    }
 
-    roomImages.forEach(function(imagePath, index) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.setAttribute("aria-label", "Xem ảnh " + (index + 1));
+        prevButton.hidden = availableImages.length < 2;
+        nextButton.hidden = availableImages.length < 2;
 
-        const image = document.createElement("img");
-        image.src = imagePath;
-        image.alt = "Ảnh thu nhỏ Phòng 02 " + (index + 1);
-
-        button.appendChild(image);
-        button.onclick = function() {
-            showRoomImage(index);
-        };
-
-        thumbnails.appendChild(button);
-    });
-
-    if (roomImages.length > 0) {
         showRoomImage(0);
+      });
     }
 
-    // Chọn ngày và số khách rồi chuyển sang trang đặt phòng.
-    const checkinInput = document.getElementById("checkin");
-    const checkoutInput = document.getElementById("checkout");
-    const guestInput = document.getElementById("guestCount");
-    const bookingLink = document.getElementById("bookingLink");
-
-    const localToday = new Date();
-    const todayString = new Date(
-        localToday.getTime() - localToday.getTimezoneOffset() * 60000
-    ).toISOString().slice(0, 10);
-
-    checkinInput.min = todayString;
-    checkoutInput.min = todayString;
-
-    checkinInput.addEventListener("change", function() {
-        checkoutInput.min = checkinInput.value || todayString;
-
-        if (checkoutInput.value && checkoutInput.value <= checkinInput.value) {
-            checkoutInput.value = "";
-        }
+    prevButton.addEventListener("click", () => {
+      showRoomImage(currentImageIndex - 1);
     });
 
-    bookingLink.addEventListener("click", function(event) {
-        event.preventDefault();
-
-        const checkin = checkinInput.value;
-        const checkout = checkoutInput.value;
-        const guests = guestInput.value;
-
-        if (checkin && checkout && checkout <= checkin) {
-            alert("Ngày trả phòng phải sau ngày nhận phòng.");
-            return;
-        }
-
-        const params = new URLSearchParams();
-        params.set("room", "r2");
-
-        if (checkin) params.set("checkin", checkin);
-        if (checkout) params.set("checkout", checkout);
-        if (guests) params.set("guests", guests);
-
-        window.location.href = "dat-phong.html?" + params.toString();
+    nextButton.addEventListener("click", () => {
+      showRoomImage(currentImageIndex + 1);
     });
-</script>
+
+    buildGallery();
+
+    document.getElementById("booking-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const checkin = document.getElementById("checkin").value;
+      const checkout = document.getElementById("checkout").value;
+      const guests = document.getElementById("guests").value;
+
+      if (checkin && checkout && checkout <= checkin) {
+        alert("Ngày trả phòng phải sau ngày nhận phòng.");
+        return;
+      }
+
+      /*
+        Chuyển khách sang trang đặt phòng hiện có.
+        Trang dat-phong.html vẫn là nơi kiểm tra tình trạng phòng
+        và gửi yêu cầu đặt phòng.
+      */
+      window.location.href = "dat-phong.html";
+    });
+  </script>
 
 </body>
 </html>
