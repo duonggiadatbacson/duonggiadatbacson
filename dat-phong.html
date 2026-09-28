@@ -322,6 +322,8 @@ main .actions {
 <section class="panel"><h2>Kiểm tra phòng trống</h2><div class="fields"><div><label>Ngày nhận phòng</label><input type="date" id="ci"></div><div><label>Ngày trả phòng</label><input type="date" id="co"></div><div><label>Số khách</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div><p><button id="check">Kiểm tra tình trạng phòng</button></p><div class="hint">Yêu cầu chỉ được xác nhận sau khi homestay phản hồi.</div></section>
 <h2>Chọn phòng</h2><div class="rooms" id="rooms"></div>
 <section class="panel booking" id="booking"><h2>Gửi yêu cầu đặt phòng</h2><p id="summary"></p><div class="fields"><div><label>Họ tên</label><input id="name" required></div><div><label>Số điện thoại</label><input id="phone" type="tel" required></div><div><label>Số khách</label><select id="n"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div><p><label>Ghi chú</label><textarea id="note" rows="3"></textarea></p><div class="actions"><button id="msg">Messenger</button><button class="alt" id="zalo">Zalo</button><button class="alt" id="email">Email</button></div></section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
 <script>
 /* =====================================
    1. CẤU HÌNH PHÒNG VÀ BIẾN BAN ĐẦU
@@ -334,7 +336,7 @@ const rooms = [
 ];
 
 const $ = id => document.getElementById(id);
-const supabase = window.supabaseClient;
+const sbClient = window.supabaseClient;
 
 let checked = false;
 let chosen = null;
@@ -375,7 +377,6 @@ function render() {
 
     return `
       <article class="room">
-
         <div class="photo">
           Ảnh ${room.name} sẽ bổ sung
         </div>
@@ -415,7 +416,6 @@ function render() {
             Ảnh thực tế, tiện nghi và giá phòng sẽ được bổ sung sau.
           </p>
         </div>
-
       </article>
     `;
   }).join("");
@@ -486,8 +486,9 @@ $("check").onclick = async function() {
     return;
   }
 
-  if (!supabase) {
+  if (!sbClient) {
     alert("Chưa kết nối được Supabase. Vui lòng tải lại trang.");
+    console.error("Không tìm thấy window.supabaseClient");
     return;
   }
 
@@ -503,7 +504,7 @@ $("check").onclick = async function() {
   try {
     const results = await Promise.all(
       rooms.map(room =>
-        supabase.rpc("is_room_available", {
+        sbClient.rpc("is_room_available", {
           p_room_id: room.id,
           p_checkin: checkin,
           p_checkout: checkout
@@ -515,7 +516,6 @@ $("check").onclick = async function() {
 
     if (failed) {
       console.error("Lỗi kiểm tra phòng:", failed.error);
-
       alert("Chưa kiểm tra được phòng trống. Vui lòng thử lại.");
       return;
     }
@@ -525,12 +525,10 @@ $("check").onclick = async function() {
     });
 
     checked = true;
-
     render();
 
   } catch (error) {
-    console.error(error);
-
+    console.error("Lỗi kết nối Supabase:", error);
     alert("Có lỗi khi kiểm tra phòng. Vui lòng thử lại.");
 
   } finally {
@@ -621,13 +619,18 @@ Xin homestay kiểm tra và xác nhận.
 ===================================== */
 
 async function saveRequest(request) {
+  if (!sbClient) {
+    alert("Chưa kết nối được Supabase.");
+    return false;
+  }
+
   const requestKey = JSON.stringify(request);
 
   if (savedRequestKey === requestKey) {
     return true;
   }
 
-  const { error } = await supabase
+  const { error } = await sbClient
     .from("reservations")
     .insert(request);
 
@@ -643,7 +646,6 @@ async function saveRequest(request) {
   }
 
   savedRequestKey = requestKey;
-
   return true;
 }
 
@@ -660,7 +662,6 @@ async function submitTo(channel) {
   }
 
   const message = makeMessage(request);
-
   const saved = await saveRequest(request);
 
   if (!saved) {
@@ -674,20 +675,14 @@ async function submitTo(channel) {
   }
 
   if (channel === "messenger") {
-    window.open(
-      "https://m.me/61593858644090",
-      "_blank"
-    );
+    window.open("https://m.me/61593858644090", "_blank");
 
     alert(
       "Yêu cầu đã được lưu. Hãy dán nội dung yêu cầu vào Messenger để gửi."
     );
 
   } else if (channel === "zalo") {
-    window.open(
-      "https://zalo.me/0815959399",
-      "_blank"
-    );
+    window.open("https://zalo.me/0815959399", "_blank");
 
     alert(
       "Yêu cầu đã được lưu. Hãy dán nội dung yêu cầu vào Zalo để gửi."
@@ -866,14 +861,5 @@ render();
     </div>
 
 </footer>
-<!-- Nạp thư viện Supabase một lần -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Nạp cấu hình kết nối -->
-<script src="js/supabase-config.js"></script>
-
-<!-- Mã JavaScript xử lý đặt phòng -->
-<script>
-  // Giữ toàn bộ mã đặt phòng hiện tại ở đây
-</script>
 </body></html>
