@@ -621,6 +621,7 @@ const $ = id => document.getElementById(id);
 
 let currentUser = null;
 let inventoryItems = [];
+let filteredReceipts = [];
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, c => ({
@@ -768,6 +769,7 @@ async function loadReceipts() {
   }
 
   const rows = data || [];
+filteredReceipts = rows;
 
   $("receiptRows").innerHTML = rows.map(receipt => `
     <tr>
@@ -1251,33 +1253,129 @@ $("summaryMonth").value = localDateString().slice(0, 7);
     }
   });
 }
-$("exportExcelBtn").addEventListener("click", () => {
-  const table = $("receiptTable");
+$("exportExcelBtn").addEventListener("click", async () => {
+  if (typeof XLSX === "undefined") {
+    alert("Không tải được thư viện Excel. Vui lòng tải lại trang.");
+    return;
+  }
 
-  if (!table || !table.querySelector("tbody tr")) {
+  if (!filteredReceipts.length) {
     alert("Không có phiếu nhập nào để xuất Excel.");
     return;
   }
 
-  const workbook = XLSX.utils.table_to_book(table, {
-    sheet: "Phieu nhap kho"
-  });
+  const exportBtn = $("exportExcelBtn");
+  exportBtn.disabled = true;
+  exportBtn.textContent = "Đang xuất...";
 
-  const fromDate = $("receiptFilterFrom")?.value || "";
-  const toDate = $("receiptFilterTo")?.value || "";
+  try {
+    const receiptIds = filteredReceipts.map(r => r.receipt_id);
 
-  const dateLabel = fromDate && toDate
-    ? `${fromDate}_den_${toDate}`
-    : fromDate
-      ? `tu_${fromDate}`
-      : toDate
-        ? `den_${toDate}`
-        : "tat_ca";
+    // Lấy chi tiết các mặt hàng thuộc những phiếu đang được lọc
+    const { data: detailRows, error: detailError } = await sbClient
+      .from("stock_receipt_items")
+      .select("receipt_id,item_id,quantity,unit_price")
+      .in("receipt_id", receiptIds);
 
-  XLSX.writeFile(
-    workbook,
-    `Phieu_nhap_kho_${dateLabel}.xlsx`
-  );
+    if (detailError) throw detailError;
+
+    // Lấy tên và đơn vị của các mặt hàng
+    const itemIds = [...new Set((detailRows || []).map(row => row.item_id))];
+
+    let itemMap = {};
+
+    if (itemIds.length > 0) {
+      const { data: items, error: itemsError } = await sbClient
+        .from("inventory_items")
+        .select("id,item_name,unit")
+        .in("id", itemIds);
+
+      if (itemsError) throw itemsError;
+
+      itemMap = Object.fromEntries(
+        (items || []).map(item => [String(item.id), item])
+      );
+    }
+
+    // Sheet 1: Tổng hợp phiếu nhập
+    const summaryData = [
+      ["Mã phiếu", "Ngày nhập", "Nơi mua", "Tổng tiền (₫)", "Ghi chú"],
+      ...filteredReceipts.map(receipt => [
+        `#${receipt.receipt_id}`,
+        receipt.receipt_date,
+        receipt.supplier || "",
+        Number(receipt.total_amount) || 0,
+        receipt.note || ""
+      ])
+    ];
+
+    // Sheet 2: Chi tiết hàng nhập
+    const detailData = [
+      [
+        "Mã phiếu",
+        "Ngày nhập",
+        "Nơi mua",
+        "Tên hàng hóa",
+        "Đơn vị",
+        "Số lượng",
+        "Đơn giá (₫)",
+        "Thành tiền (₫)"
+      ]
+    ];
+
+    const receiptMap = Object.fromEntries(
+      filteredReceipts.map(receipt => [
+        String(receipt.receipt_id),
+        receipt
+      ])
+    );
+
+    (detailRows || []).forEach(row => {
+      const receipt = receiptMap[String(row.receipt_id)];
+      const item = itemMap[String(row.item_id)];
+
+      if (!receipt) return;
+
+      detailData.push([
+        `#${receipt.receipt_id}`,
+        receipt.receipt_date,
+        receipt.supplier || "",
+        item?.item_name || "Không tìm thấy tên hàng",
+        item?.unit || "",
+        Number(row.quantity) || 0,
+        Number(row.unit_price) || 0,
+        (Number(row.quantity) || 0) * (Number(row.unit_price) || 0)
+      ]);
+    });
+
+    const workbook = XLSX.utils.book_new();
+
+    const summarySheet = XLSX.utils.aoa_to_sheet(summaryData);
+    const detailSheet = XLSX.utils.aoa_to_sheet(detailData);
+
+    XLSX.utils.book_append_sheet(workbook, summarySheet, "Tong hop phieu nhap");
+    XLSX.utils.book_append_sheet(workbook, detailSheet, "Chi tiet hang nhap");
+
+    const fromDate = $("receiptFilterFrom")?.value || "";
+    const toDate = $("receiptFilterTo")?.value || "";
+
+    const dateLabel = fromDate && toDate
+      ? `${fromDate}_den_${toDate}`
+      : fromDate
+        ? `tu_${fromDate}`
+        : toDate
+          ? `den_${toDate}`
+          : "tat_ca";
+
+    XLSX.writeFile(workbook, `Bao_cao_nhap_kho_${dateLabel}.xlsx`);
+
+  } catch (error) {
+    console.error("Lỗi xuất Excel:", error);
+    alert("Không xuất được Excel: " + error.message);
+  } finally {
+    exportBtn.disabled = false;
+    exportBtn.textContent = "Xuất Excel";
+  }
 });
 initializePage();
 </script>
