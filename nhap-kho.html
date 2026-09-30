@@ -554,21 +554,24 @@ th {
   <button type="button" class="light" id="refreshBtn">
     Tải lại
   </button>
+<button type="button" class="light" id="exportExcelBtn">
+  Xuất Excel
+</button>
 </div>
     <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Mã phiếu</th>
-            <th>Ngày nhập</th>
-            <th>Nơi mua</th>
-            <th>Tổng tiền</th>
-            <th>Ghi chú</th>
-          </tr>
-        </thead>
-        <tbody id="receiptRows"></tbody>
-      </table>
-    </div>
+  <table id="receiptTable">
+    <thead>
+      <tr>
+        <th>Mã phiếu</th>
+        <th>Ngày nhập</th>
+        <th>Nơi mua</th>
+        <th>Tổng tiền</th>
+        <th>Ghi chú</th>
+      </tr>
+    </thead>
+    <tbody id="receiptRows"></tbody>
+  </table>
+</div>
     <div class="empty" id="receiptEmpty" hidden>Chưa có phiếu nhập phù hợp.</div>
   </section>
 
@@ -609,6 +612,7 @@ th {
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="js/supabase-config.js"></script>
 
 <script>
@@ -1247,7 +1251,34 @@ $("summaryMonth").value = localDateString().slice(0, 7);
     }
   });
 }
+$("exportExcelBtn").addEventListener("click", () => {
+  const table = $("receiptTable");
 
+  if (!table || !table.querySelector("tbody tr")) {
+    alert("Không có phiếu nhập nào để xuất Excel.");
+    return;
+  }
+
+  const workbook = XLSX.utils.table_to_book(table, {
+    sheet: "Phieu nhap kho"
+  });
+
+  const fromDate = $("receiptFilterFrom")?.value || "";
+  const toDate = $("receiptFilterTo")?.value || "";
+
+  const dateLabel = fromDate && toDate
+    ? `${fromDate}_den_${toDate}`
+    : fromDate
+      ? `tu_${fromDate}`
+      : toDate
+        ? `den_${toDate}`
+        : "tat_ca";
+
+  XLSX.writeFile(
+    workbook,
+    `Phieu_nhap_kho_${dateLabel}.xlsx`
+  );
+});
 initializePage();
 </script>
 
