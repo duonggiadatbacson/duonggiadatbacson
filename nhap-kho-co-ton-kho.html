@@ -1,0 +1,1404 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nhập kho | Dương Gia Đạt Homestay</title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+:root {
+  --wine: #87382d;
+  --wine-dark: #6e2b23;
+  --line: #eadfd2;
+  --ink: #382f2a;
+  --muted: #786b62;
+  --red: #a33b32;
+  --green: #246a37;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f7f5f1;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: var(--wine);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover { background: var(--wine-dark); }
+button:disabled { opacity: .55; cursor: wait; }
+button.light {
+  background: #f5eee7;
+  color: var(--wine);
+  border: 1px solid var(--line);
+}
+button.danger {
+  background: #fff0ee;
+  color: var(--red);
+  border: 1px solid #f0cbc6;
+}
+button.small { padding: 7px 10px; font-size: 12px; }
+input, select, textarea {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid #d9cec3;
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  min-height: 40px;
+}
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0 0 6px;
+}
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.login-box {
+  width: min(420px, 100%);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 12px 40px #39291b18;
+}
+.login-box h1 { color: var(--wine); font-size: 24px; margin-top: 0; }
+.login-box p { color: var(--muted); line-height: 1.5; font-size: 14px; }
+.login-box label { margin-top: 14px; }
+.login-box button { width: 100%; margin-top: 16px; }
+.message { margin-top: 12px; color: var(--red); font-size: 14px; white-space: pre-wrap; }
+.admin {
+  max-width: 1200px;
+  width: calc(100% - 32px);
+  margin: 30px auto 60px;
+}
+.admin-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.admin-head h1 { color: var(--wine); margin: 0 0 5px; }
+.admin-head p { margin: 0; color: var(--muted); }
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: 0 5px 18px #4b33200c;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.panel h2 { font-size: 20px; color: var(--wine); margin: 0 0 16px; }
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+.field-full { grid-column: 1 / -1; }
+.actions, .toolbar {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.actions { margin-top: 15px; }
+.toolbar { margin-bottom: 14px; }
+.toolbar > div { min-width: 160px; flex: 1; }
+.notice {
+  padding: 13px 16px;
+  background: #fff8e8;
+  border: 1px solid #f0dfb8;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.error-box {
+  padding: 12px;
+  margin: 12px 0;
+  background: #fff0ee;
+  border: 1px solid #f0cbc6;
+  color: #8c3028;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+.success-box {
+  padding: 12px;
+  margin: 12px 0;
+  background: #eaf6ec;
+  border: 1px solid #c8e5ce;
+  color: var(--green);
+  border-radius: 8px;
+}
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 14px; }
+th, td {
+  text-align: left;
+  padding: 11px 9px;
+  border-bottom: 1px solid #eee7df;
+  vertical-align: middle;
+}
+th {
+  color: #69594e;
+  background: #fbf8f4;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.line-table { min-width: 700px; }
+.line-table input, .line-table select { min-width: 100px; }
+.line-table .qty { width: 100px; }
+.line-table .price { width: 150px; }
+.line-total { font-weight: bold; white-space: nowrap; }
+.remove-cell { width: 65px; }
+.total-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 0 0;
+  font-size: 16px;
+}
+.total-box strong { color: var(--wine); font-size: 25px; }
+.empty { text-align: center; padding: 24px; color: var(--muted); }
+.muted { color: var(--muted); font-size: 13px; }
+.back-link { color: var(--wine); text-decoration: none; font-weight: bold; }
+/* Cửa sổ xem chi tiết phiếu nhập */
+.detail-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: 20px;
+  background: #1e1714a6;
+  overflow-y: auto;
+  place-items: center;
+}
+
+.detail-modal.open {
+  display: grid;
+}
+
+.detail-card {
+  width: min(760px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 12px 40px #0002;
+}
+
+.detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.detail-head h2 {
+  color: var(--wine);
+  margin: 0;
+}
+
+.detail-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+  background: #fbf8f4;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+.detail-info strong {
+  color: var(--wine);
+}
+
+.detail-total {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  padding-top: 16px;
+  font-size: 16px;
+}
+
+.detail-total strong {
+  color: var(--wine);
+  font-size: 24px;
+}
+
+.receipt-id-btn {
+  border: 0;
+  padding: 4px 7px;
+  background: #f5eee7;
+  color: var(--wine);
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.receipt-id-btn:hover {
+  background: #eadfd2;
+}
+/* Bảng chi tiết phiếu nhập: vừa khung hộp thoại */
+.detail-card .table-wrap {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.detail-card table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  font-size: 13px;
+}
+
+.detail-card th,
+.detail-card td {
+  padding: 9px 6px;
+  overflow-wrap: anywhere;
+}
+
+/* Điều chỉnh độ rộng các cột */
+.detail-card th:nth-child(1),
+.detail-card td:nth-child(1) {
+  width: 9%;
+}
+
+.detail-card th:nth-child(2),
+.detail-card td:nth-child(2) {
+  width: 32%;
+}
+
+.detail-card th:nth-child(3),
+.detail-card td:nth-child(3) {
+  width: 17%;
+}
+
+.detail-card th:nth-child(4),
+.detail-card td:nth-child(4) {
+  width: 19%;
+}
+
+.detail-card th:nth-child(5),
+.detail-card td:nth-child(5) {
+  width: 23%;
+}
+
+/* Trên điện thoại */
+@media (max-width: 520px) {
+  .detail-card table {
+    font-size: 11px;
+  }
+
+  .detail-card th,
+  .detail-card td {
+    padding: 7px 4px;
+  }
+}
+
+@media(max-width: 520px) {
+  .detail-card {
+    padding: 15px;
+  }
+
+  .detail-info {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-total {
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+@media(max-width: 700px) {
+  .admin { width: calc(100% - 22px); margin-top: 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .field-full { grid-column: auto; }
+  .panel { padding: 15px; }
+  .total-box { align-items: flex-end; flex-direction: column; gap: 5px; }
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.summary-card {
+  padding: 18px;
+  background: #fbf8f4;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-card span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.summary-card strong {
+  color: var(--wine);
+  font-size: 25px;
+}
+
+.summary-card small {
+  color: var(--muted);
+}
+
+@media(max-width: 520px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h1>Đăng nhập quản trị</h1>
+    <p>Dương Gia Đạt Homestay · Quản lý nhập kho</p>
+
+    <form id="loginForm">
+      <label for="loginEmail">Email quản trị</label>
+      <input id="loginEmail" type="email"
+             value="duonggiadathomestay@gmail.com"
+             autocomplete="username" required>
+
+      <label for="loginPassword">Mật khẩu Supabase</label>
+      <input id="loginPassword" type="password"
+             autocomplete="current-password" required>
+
+      <button id="loginBtn" type="submit">Đăng nhập</button>
+      <div class="message" id="loginMessage"></div>
+    </form>
+  </div>
+</div>
+
+<main class="admin" id="adminApp" hidden>
+
+  <header class="admin-head">
+    <div>
+      <h1>📦 Nhập kho</h1>
+      <p>Dương Gia Đạt Homestay · Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+    </div>
+    <div class="actions">
+      <a class="back-link" href="admin.html">← Bảng quản trị</a>
+      <button class="light" id="logoutBtn" type="button">Đăng xuất</button>
+    </div>
+  </header>
+
+  <div class="notice">
+    Tạo phiếu nhập kho và lưu danh sách hàng hóa vào Supabase.
+    Mỗi phiếu có thể gồm nhiều mặt hàng.
+  </div>
+
+  <div id="pageMessage"></div>
+
+  <section class="panel">
+    <h2>1. Thêm hàng hóa vào danh mục</h2>
+
+    <form id="itemForm">
+      <div class="form-grid">
+        <div>
+          <label for="newItemName">Tên hàng hóa *</label>
+          <input id="newItemName" placeholder="Ví dụ: Nước suối 500ml" required>
+        </div>
+
+        <div>
+          <label for="newItemCategory">Loại hàng *</label>
+          <select id="newItemCategory" required>
+            <option value="consumable">Hàng tiêu hao</option>
+            <option value="reusable">Đồ dùng tái sử dụng</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="newItemUnit">Đơn vị tính *</label>
+          <input id="newItemUnit" value="cái" placeholder="cái, chai, gói, kg..." required>
+        </div>
+
+        <div class="field-full">
+          <label for="newItemNote">Ghi chú</label>
+          <input id="newItemNote" placeholder="Không bắt buộc">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="addItemBtn">Thêm vào danh mục</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>2. Lập phiếu nhập kho</h2>
+
+    <form id="receiptForm">
+      <div class="form-grid">
+        <div>
+          <label for="receiptDate">Ngày nhập *</label>
+          <input id="receiptDate" type="date" required>
+        </div>
+
+        <div>
+          <label for="supplier">Nhà cung cấp / Nơi mua</label>
+          <input id="supplier" placeholder="Ví dụ: Siêu thị, cửa hàng...">
+        </div>
+
+        <div>
+          <label for="receiptNote">Ghi chú phiếu</label>
+          <input id="receiptNote" placeholder="Số hóa đơn hoặc ghi chú">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="light" id="addLineBtn">+ Thêm mặt hàng</button>
+      </div>
+
+      <div class="table-wrap" style="margin-top:14px">
+        <table class="line-table">
+          <thead>
+            <tr>
+              <th style="width:32%">Mặt hàng</th>
+              <th>Số lượng</th>
+              <th>Đơn giá (₫)</th>
+              <th>Thành tiền</th>
+              <th class="remove-cell">Xóa</th>
+            </tr>
+          </thead>
+          <tbody id="receiptLines"></tbody>
+        </table>
+      </div>
+
+      <div class="total-box">
+        <span>Tổng tiền phiếu nhập</span>
+        <strong id="receiptTotal">0 ₫</strong>
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="saveReceiptBtn">Lưu phiếu nhập</button>
+        <button type="reset" class="light" id="resetReceiptBtn">Làm mới phiếu</button>
+      </div>
+    </form>
+  </section>
+<section class="panel">
+  <h2>3. Thống kê tiền nhập kho</h2>
+
+  <div class="toolbar">
+    <div>
+      <label for="summaryDate">Tổng tiền nhập theo ngày</label>
+      <input id="summaryDate" type="date">
+    </div>
+
+    <div>
+      <label for="summaryMonth">Tổng tiền nhập theo tháng</label>
+      <input id="summaryMonth" type="month">
+    </div>
+
+    <button type="button" class="light" id="summaryRefreshBtn">
+      Cập nhật
+    </button>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <span>Tổng chi trong ngày</span>
+      <strong id="dailyTotal">0 ₫</strong>
+      <small id="dailyCount">0 phiếu nhập</small>
+    </div>
+
+    <div class="summary-card">
+      <span>Tổng chi trong tháng</span>
+      <strong id="monthlyTotal">0 ₫</strong>
+      <small id="monthlyCount">0 phiếu nhập</small>
+    </div>
+  </div>
+</section>
+  <section class="panel">
+    <h2>4. Tồn kho hiện tại</h2>
+    <p class="muted">Tồn khả dụng = tổng nhập − tổng đã xuất + đồ tái sử dụng đã thu hồi.</p>
+    <div class="table-wrap"><table><thead><tr><th>Mặt hàng</th><th>Loại</th><th>Đơn vị</th><th>Đã nhập</th><th>Đã xuất</th><th>Thu hồi</th><th>Tồn khả dụng</th></tr></thead><tbody id="stockRows"></tbody></table></div>
+    <div class="empty" id="stockEmpty" hidden>Chưa có mặt hàng trong danh mục.</div>
+  </section>
+  <section class="panel">
+    <h2>5. Phiếu nhập gần đây</h2>
+    <div class="toolbar">
+  <div>
+    <label for="receiptFrom">Từ ngày</label>
+    <input id="receiptFrom" type="date">
+  </div>
+
+  <div>
+    <label for="receiptTo">Đến ngày</label>
+    <input id="receiptTo" type="date">
+  </div>
+
+  <button type="button" class="light" id="refreshBtn">
+    Tải lại
+  </button>
+<button type="button" class="light" id="exportExcelBtn">
+  Xuất Excel
+</button>
+</div>
+    <div class="table-wrap">
+  <table id="receiptTable">
+    <thead>
+      <tr>
+        <th>Mã phiếu</th>
+        <th>Ngày nhập</th>
+        <th>Nơi mua</th>
+        <th>Tổng tiền</th>
+        <th>Ghi chú</th>
+      </tr>
+    </thead>
+    <tbody id="receiptRows"></tbody>
+  </table>
+</div>
+    <div class="empty" id="receiptEmpty" hidden>Chưa có phiếu nhập phù hợp.</div>
+  </section>
+
+</main>
+<!-- CỬA SỔ CHI TIẾT PHIẾU NHẬP -->
+<div class="detail-modal" id="detailModal" role="dialog" aria-modal="true">
+  <div class="detail-card">
+    <div class="detail-head">
+      <h2 id="detailTitle">Chi tiết phiếu nhập</h2>
+      <button type="button" class="light small" id="closeDetailBtn">
+        Đóng
+      </button>
+    </div>
+
+    <div id="detailMessage"></div>
+
+    <div class="detail-info" id="detailInfo"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mặt hàng</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+          </tr>
+        </thead>
+        <tbody id="detailRows"></tbody>
+      </table>
+    </div>
+
+    <div class="detail-total">
+      <span>Tổng tiền phiếu nhập</span>
+      <strong id="detailTotal">0 ₫</strong>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="js/supabase-config.js"></script>
+
+<script>
+const sbClient = window.supabaseClient;
+const $ = id => document.getElementById(id);
+
+let currentUser = null;
+let inventoryItems = [];
+let filteredReceipts = [];
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
+}
+
+function money(value) {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    maximumFractionDigits: 0
+  }).format(Number(value) || 0);
+}
+
+function localDateString() {
+  const now = new Date();
+  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 10);
+}
+
+function showMessage(message, type = "success") {
+  const box = $("pageMessage");
+  if (!message) {
+    box.innerHTML = "";
+    return;
+  }
+  box.innerHTML = `<div class="${type === "error" ? "error-box" : "success-box"}">${escapeHTML(message)}</div>`;
+}
+
+function showLoginMessage(message) {
+  $("loginMessage").textContent = message || "";
+}
+
+function setLoggedIn(loggedIn) {
+  $("loginScreen").style.display = loggedIn ? "none" : "grid";
+  $("adminApp").hidden = !loggedIn;
+}
+
+function itemOptions(selectedId = "") {
+  const options = inventoryItems.map(item => `
+    <option value="${item.id}" ${String(item.id) === String(selectedId) ? "selected" : ""}>
+      ${escapeHTML(item.item_name)} (${escapeHTML(item.unit)})
+    </option>
+  `).join("");
+
+  return `<option value="">-- Chọn hàng hóa --</option>${options}`;
+}
+
+function addReceiptLine() {
+  const row = document.createElement("tr");
+  row.className = "receipt-line";
+  row.innerHTML = `
+    <td>
+      <select class="line-item" required>
+        ${itemOptions()}
+      </select>
+    </td>
+    <td>
+      <input class="line-qty qty" type="number" min="0.01" step="0.01"
+             value="1" required>
+    </td>
+    <td>
+      <input class="line-price price" type="number" min="0" step="1"
+             value="0" required>
+    </td>
+    <td class="line-total">0 ₫</td>
+    <td class="remove-cell">
+      <button type="button" class="danger small remove-line">Xóa</button>
+    </td>
+  `;
+  $("receiptLines").appendChild(row);
+  calculateTotal();
+}
+
+function calculateTotal() {
+  let total = 0;
+
+  document.querySelectorAll(".receipt-line").forEach(row => {
+    const quantity = Number(row.querySelector(".line-qty").value) || 0;
+    const price = Number(row.querySelector(".line-price").value) || 0;
+    const lineTotal = quantity * price;
+
+    row.querySelector(".line-total").textContent = money(lineTotal);
+    total += lineTotal;
+  });
+
+  $("receiptTotal").textContent = money(total);
+}
+
+async function loadItems() {
+  const { data, error } = await sbClient
+    .from("inventory_items")
+    .select("id,item_name,category,unit,note")
+    .order("item_name", { ascending: true });
+
+  if (error) {
+    console.error("Lỗi tải danh mục:", error);
+    throw new Error("Không tải được danh mục hàng hóa: " + error.message);
+  }
+
+  inventoryItems = data || [];
+
+  document.querySelectorAll(".line-item").forEach(select => {
+    const selected = select.value;
+    select.innerHTML = itemOptions(selected);
+  });
+}
+
+async function loadReceipts() {
+  const fromDate = $("receiptFrom").value;
+  const toDate = $("receiptTo").value;
+
+  if (fromDate && toDate && fromDate > toDate) {
+    showMessage("Ngày bắt đầu không được lớn hơn ngày kết thúc.", "error");
+    return;
+  }
+
+  let query = sbClient
+    .from("stock_receipt_totals")
+    .select("receipt_id,receipt_date,supplier,note,total_amount,created_at")
+    .order("receipt_date", { ascending: false })
+    .order("created_at", { ascending: false });
+
+  // Lọc từ ngày, bao gồm cả ngày được chọn
+  if (fromDate) {
+    query = query.gte("receipt_date", fromDate);
+  }
+
+  // Lọc đến ngày, bao gồm cả ngày được chọn
+  if (toDate) {
+    query = query.lte("receipt_date", toDate);
+  }
+
+  const { data, error } = await query.limit(500);
+
+  if (error) {
+    console.error("Lỗi tải phiếu nhập:", error);
+    showMessage("Không tải được phiếu nhập: " + error.message, "error");
+    return;
+  }
+
+  const rows = data || [];
+filteredReceipts = rows;
+
+  $("receiptRows").innerHTML = rows.map(receipt => `
+    <tr>
+      <td>
+        <button
+          type="button"
+          class="receipt-id-btn"
+          data-receipt-id="${escapeHTML(receipt.receipt_id)}">
+          #${escapeHTML(receipt.receipt_id)}
+        </button>
+      </td>
+      <td>${escapeHTML(receipt.receipt_date)}</td>
+      <td>${escapeHTML(receipt.supplier || "—")}</td>
+      <td><b>${money(receipt.total_amount)}</b></td>
+      <td>${escapeHTML(receipt.note || "—")}</td>
+    </tr>
+  `).join("");
+
+  $("receiptEmpty").hidden = rows.length > 0;
+}
+async function loadSummary() {
+  const selectedDate = $("summaryDate").value;
+  const selectedMonth = $("summaryMonth").value;
+
+  if (!selectedDate || !selectedMonth) {
+    return;
+  }
+
+  // Lấy các phiếu nhập trong ngày được chọn
+  const { data: dailyRows, error: dailyError } = await sbClient
+    .from("stock_receipt_totals")
+    .select("receipt_date,total_amount")
+    .eq("receipt_date", selectedDate);
+
+  if (dailyError) {
+    throw new Error("Không tải được thống kê theo ngày: " + dailyError.message);
+  }
+
+  // Xác định ngày đầu tháng và ngày đầu tháng kế tiếp
+  const [year, month] = selectedMonth.split("-").map(Number);
+
+  const monthStart = `${selectedMonth}-01`;
+
+  const nextMonthDate = new Date(year, month, 1);
+  const nextMonthStart =
+    `${nextMonthDate.getFullYear()}-${String(nextMonthDate.getMonth() + 1).padStart(2, "0")}-01`;
+
+  // Lấy các phiếu nhập trong tháng được chọn
+  const { data: monthlyRows, error: monthlyError } = await sbClient
+    .from("stock_receipt_totals")
+    .select("receipt_date,total_amount")
+    .gte("receipt_date", monthStart)
+    .lt("receipt_date", nextMonthStart);
+
+  if (monthlyError) {
+    throw new Error("Không tải được thống kê theo tháng: " + monthlyError.message);
+  }
+
+  const dailyTotal = (dailyRows || []).reduce(
+    (sum, receipt) => sum + Number(receipt.total_amount || 0),
+    0
+  );
+
+  const monthlyTotal = (monthlyRows || []).reduce(
+    (sum, receipt) => sum + Number(receipt.total_amount || 0),
+    0
+  );
+
+  $("dailyTotal").textContent = money(dailyTotal);
+  $("dailyCount").textContent = `${(dailyRows || []).length} phiếu nhập`;
+
+  $("monthlyTotal").textContent = money(monthlyTotal);
+  $("monthlyCount").textContent = `${(monthlyRows || []).length} phiếu nhập`;
+}
+async function loadStockBalances() {
+  const { data, error } = await sbClient.from("inventory_stock_balances")
+    .select("item_id,item_name,category,unit,total_in,total_issued,total_recovered,available_quantity")
+    .order("item_name", { ascending: true });
+  if (error) throw new Error("Không tải được tồn kho: " + error.message);
+  const rows = data || [];
+  $("stockRows").innerHTML = rows.map(item => `<tr>
+    <td><b>${escapeHTML(item.item_name)}</b></td><td>${item.category === "reusable" ? "Tái sử dụng" : "Tiêu hao"}</td>
+    <td>${escapeHTML(item.unit)}</td><td>${item.total_in}</td><td>${item.total_issued}</td><td>${item.total_recovered}</td>
+    <td><b>${item.available_quantity}</b></td></tr>`).join("");
+  $("stockEmpty").hidden = rows.length > 0;
+}
+
+async function refreshPage() {
+  showMessage("");
+
+  try {
+    await loadItems();
+    await loadStockBalances();
+    await loadReceipts();
+    await loadSummary();
+  } catch (error) {
+    showMessage(error.message, "error");
+  }
+}
+
+$("itemForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const itemName = $("newItemName").value.trim();
+  const category = $("newItemCategory").value;
+  const unit = $("newItemUnit").value.trim();
+  const note = $("newItemNote").value.trim();
+
+  if (!itemName || !unit) {
+    alert("Vui lòng nhập tên hàng hóa và đơn vị tính.");
+    return;
+  }
+
+  $("addItemBtn").disabled = true;
+
+  const { data, error } = await sbClient
+    .from("inventory_items")
+    .insert({
+      item_name: itemName,
+      category,
+      unit,
+      note: note || null
+    })
+    .select("id,item_name,category,unit,note")
+    .single();
+
+  $("addItemBtn").disabled = false;
+
+  if (error) {
+    console.error("Lỗi thêm hàng hóa:", error);
+    showMessage("Không thêm được hàng hóa: " + error.message, "error");
+    return;
+  }
+
+  $("itemForm").reset();
+  $("newItemUnit").value = "cái";
+
+  await loadItems();
+  showMessage(`Đã thêm "${data.item_name}" vào danh mục.`);
+});
+
+$("addLineBtn").addEventListener("click", () => {
+  if (inventoryItems.length === 0) {
+    alert("Bạn cần thêm hàng hóa vào danh mục trước.");
+    return;
+  }
+  addReceiptLine();
+});
+
+$("receiptLines").addEventListener("input", event => {
+  if (event.target.matches(".line-qty, .line-price")) {
+    calculateTotal();
+  }
+});
+
+$("receiptLines").addEventListener("click", event => {
+  const button = event.target.closest(".remove-line");
+  if (!button) return;
+
+  button.closest("tr").remove();
+  calculateTotal();
+});
+
+$("receiptForm").addEventListener("reset", () => {
+  setTimeout(() => {
+    $("receiptDate").value = localDateString();
+    $("receiptLines").innerHTML = "";
+    calculateTotal();
+    if (inventoryItems.length > 0) addReceiptLine();
+  }, 0);
+});
+
+$("receiptForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!currentUser) {
+    alert("Phiên đăng nhập không hợp lệ. Vui lòng đăng nhập lại.");
+    return;
+  }
+
+  const rows = [...document.querySelectorAll(".receipt-line")];
+
+  if (rows.length === 0) {
+    alert("Vui lòng thêm ít nhất một mặt hàng vào phiếu.");
+    return;
+  }
+
+  const receiptItems = [];
+  const seenItems = new Set();
+
+  for (const row of rows) {
+    const itemId = row.querySelector(".line-item").value;
+    const quantity = Number(row.querySelector(".line-qty").value);
+    const unitPrice = Number(row.querySelector(".line-price").value);
+
+    if (!itemId || !Number.isFinite(quantity) || quantity <= 0 ||
+        !Number.isFinite(unitPrice) || unitPrice < 0) {
+      alert("Vui lòng kiểm tra mặt hàng, số lượng và đơn giá.");
+      return;
+    }
+
+    if (seenItems.has(itemId)) {
+      alert("Một mặt hàng đang được chọn nhiều lần. Vui lòng gộp thành một dòng.");
+      return;
+    }
+
+    seenItems.add(itemId);
+    receiptItems.push({
+      item_id: Number(itemId),
+      quantity,
+      unit_price: unitPrice
+    });
+  }
+
+  const receiptDate = $("receiptDate").value;
+  if (!receiptDate) {
+    alert("Vui lòng chọn ngày nhập.");
+    return;
+  }
+
+  const receipt = {
+    receipt_date: receiptDate,
+    supplier: $("supplier").value.trim() || null,
+    note: $("receiptNote").value.trim() || null,
+    created_by: currentUser.id
+  };
+
+  $("saveReceiptBtn").disabled = true;
+  $("saveReceiptBtn").textContent = "Đang lưu...";
+
+  let receiptId = null;
+
+  try {
+    const { data: savedReceipt, error: receiptError } = await sbClient
+      .from("stock_receipts")
+      .insert(receipt)
+      .select("id")
+      .single();
+
+    if (receiptError) throw receiptError;
+
+    receiptId = savedReceipt.id;
+
+    const rowsToInsert = receiptItems.map(item => ({
+      receipt_id: receiptId,
+      item_id: item.item_id,
+      quantity: item.quantity,
+      unit_price: item.unit_price
+    }));
+
+    const { error: itemsError } = await sbClient
+      .from("stock_receipt_items")
+      .insert(rowsToInsert);
+
+    if (itemsError) throw itemsError;
+
+    $("receiptForm").reset();
+    await loadReceipts();
+    showMessage(`Đã lưu phiếu nhập #${receiptId} thành công.`);
+  } catch (error) {
+    console.error("Lỗi lưu phiếu nhập:", error);
+
+    if (receiptId !== null) {
+      const { error: cleanupError } = await sbClient
+        .from("stock_receipts")
+        .delete()
+        .eq("id", receiptId);
+
+      if (cleanupError) {
+        console.error("Không thể dọn phiếu nhập chưa hoàn chỉnh:", cleanupError);
+      }
+    }
+
+    showMessage("Không lưu được phiếu nhập: " + error.message, "error");
+  } finally {
+    $("saveReceiptBtn").disabled = false;
+    $("saveReceiptBtn").textContent = "Lưu phiếu nhập";
+  }
+});
+// Mở cửa sổ chi tiết phiếu nhập
+async function openReceiptDetail(receiptId) {
+  $("detailModal").classList.add("open");
+  $("detailTitle").textContent = `Chi tiết phiếu nhập #${receiptId}`;
+  $("detailMessage").innerHTML = "";
+  $("detailInfo").innerHTML = "";
+  $("detailRows").innerHTML = `
+    <tr>
+      <td colspan="5" class="empty">Đang tải chi tiết phiếu...</td>
+    </tr>
+  `;
+  $("detailTotal").textContent = money(0);
+
+  // Lấy thông tin phiếu
+  const { data: receipt, error: receiptError } = await sbClient
+    .from("stock_receipts")
+    .select("id,receipt_date,supplier,note,created_at")
+    .eq("id", receiptId)
+    .single();
+
+  if (receiptError) {
+    console.error("Lỗi tải thông tin phiếu:", receiptError);
+    $("detailRows").innerHTML = "";
+    $("detailMessage").innerHTML = `
+      <div class="error-box">
+        Không tải được thông tin phiếu: ${escapeHTML(receiptError.message)}
+      </div>
+    `;
+    return;
+  }
+
+  // Lấy các mặt hàng trong phiếu
+  const { data: items, error: itemsError } = await sbClient
+    .from("stock_receipt_items")
+    .select(`
+      item_id,
+      quantity,
+      unit_price,
+      inventory_items (
+        item_name,
+        unit
+      )
+    `)
+    .eq("receipt_id", receiptId)
+    .order("id", { ascending: true });
+
+  if (itemsError) {
+    console.error("Lỗi tải mặt hàng của phiếu:", itemsError);
+    $("detailRows").innerHTML = "";
+    $("detailMessage").innerHTML = `
+      <div class="error-box">
+        Không tải được danh sách mặt hàng: ${escapeHTML(itemsError.message)}
+      </div>
+    `;
+    return;
+  }
+
+  const receiptItems = items || [];
+  let total = 0;
+
+  $("detailInfo").innerHTML = `
+    <div><strong>Mã phiếu:</strong> #${escapeHTML(receipt.id)}</div>
+    <div><strong>Ngày nhập:</strong> ${escapeHTML(receipt.receipt_date || "—")}</div>
+    <div><strong>Nơi mua:</strong> ${escapeHTML(receipt.supplier || "—")}</div>
+    <div><strong>Ghi chú:</strong> ${escapeHTML(receipt.note || "—")}</div>
+  `;
+
+  if (receiptItems.length === 0) {
+    $("detailRows").innerHTML = `
+      <tr>
+        <td colspan="5" class="empty">
+          Phiếu này chưa có mặt hàng chi tiết.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  $("detailRows").innerHTML = receiptItems.map((item, index) => {
+    const quantity = Number(item.quantity) || 0;
+    const unitPrice = Number(item.unit_price) || 0;
+    const lineTotal = quantity * unitPrice;
+
+    total += lineTotal;
+
+    // Supabase trả quan hệ có thể là object hoặc mảng
+    const product = Array.isArray(item.inventory_items)
+      ? item.inventory_items[0]
+      : item.inventory_items;
+
+    const itemName = product?.item_name || `Mặt hàng #${item.item_id}`;
+    const unit = product?.unit || "";
+
+    return `
+      <tr>
+        <td>${index + 1}</td>
+        <td>
+          <strong>${escapeHTML(itemName)}</strong>
+          ${unit ? `<br><small>${escapeHTML(unit)}</small>` : ""}
+        </td>
+        <td>${escapeHTML(quantity)}</td>
+        <td>${money(unitPrice)}</td>
+        <td><strong>${money(lineTotal)}</strong></td>
+      </tr>
+    `;
+  }).join("");
+
+  $("detailTotal").textContent = money(total);
+}
+
+// Bấm mã phiếu để mở chi tiết
+$("receiptRows").addEventListener("click", event => {
+  const button = event.target.closest("[data-receipt-id]");
+  if (!button) return;
+
+  openReceiptDetail(button.dataset.receiptId);
+});
+
+// Đóng cửa sổ chi tiết
+function closeReceiptDetail() {
+  $("detailModal").classList.remove("open");
+}
+
+$("closeDetailBtn").addEventListener("click", closeReceiptDetail);
+
+$("detailModal").addEventListener("click", event => {
+  if (event.target === $("detailModal")) {
+    closeReceiptDetail();
+  }
+});
+
+// Đóng bằng phím Escape
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeReceiptDetail();
+  }
+});
+$("receiptFrom").addEventListener("change", loadReceipts);
+$("receiptTo").addEventListener("change", loadReceipts);
+$("refreshBtn").addEventListener("click", refreshPage);
+
+$("summaryDate").addEventListener("change", loadSummary);
+$("summaryMonth").addEventListener("change", loadSummary);
+$("summaryRefreshBtn").addEventListener("click", loadSummary);
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!sbClient) {
+    showLoginMessage("Không tìm thấy kết nối Supabase. Kiểm tra js/supabase-config.js.");
+    return;
+  }
+
+  $("loginBtn").disabled = true;
+  $("loginBtn").textContent = "Đang đăng nhập...";
+  showLoginMessage("");
+
+  const { data, error } = await sbClient.auth.signInWithPassword({
+    email: $("loginEmail").value.trim(),
+    password: $("loginPassword").value
+  });
+
+  $("loginBtn").disabled = false;
+  $("loginBtn").textContent = "Đăng nhập";
+
+  if (error) {
+    console.error("Lỗi đăng nhập:", error);
+    showLoginMessage("Đăng nhập chưa thành công. Kiểm tra email và mật khẩu.");
+    return;
+  }
+
+  currentUser = data.user;
+  setLoggedIn(true);
+  await refreshPage();
+
+  if (inventoryItems.length > 0) addReceiptLine();
+});
+
+$("logoutBtn").addEventListener("click", async () => {
+  await sbClient.auth.signOut();
+  currentUser = null;
+  inventoryItems = [];
+  $("receiptLines").innerHTML = "";
+  setLoggedIn(false);
+  showLoginMessage("Đã đăng xuất.");
+});
+
+async function initializePage() {
+  $("receiptDate").value = localDateString();
+$("summaryDate").value = localDateString();
+$("summaryMonth").value = localDateString().slice(0, 7);
+  if (!sbClient) {
+    showLoginMessage("Không tìm thấy Supabase. Kiểm tra file js/supabase-config.js.");
+    return;
+  }
+
+  const { data, error } = await sbClient.auth.getSession();
+
+  if (error) {
+    showLoginMessage("Không kiểm tra được phiên đăng nhập: " + error.message);
+    return;
+  }
+
+  if (data.session) {
+    currentUser = data.session.user;
+    setLoggedIn(true);
+    await refreshPage();
+    if (inventoryItems.length > 0) addReceiptLine();
+  } else {
+    setLoggedIn(false);
+  }
+
+  sbClient.auth.onAuthStateChange((event, session) => {
+    if (!session) {
+      currentUser = null;
+      setLoggedIn(false);
+    }
+  });
+}
+$("exportExcelBtn").addEventListener("click", async () => {
+  if (typeof XLSX === "undefined") {
+    alert("Không tải được thư viện Excel. Vui lòng tải lại trang.");
+    return;
+  }
+
+  if (!filteredReceipts.length) {
+    alert("Không có phiếu nhập nào để xuất Excel.");
+    return;
+  }
+
+  const exportBtn = $("exportExcelBtn");
+  exportBtn.disabled = true;
+  exportBtn.textContent = "Đang xuất...";
+
+  try {
+    const receiptIds = filteredReceipts.map(r => r.receipt_id);
+
+    // Lấy chi tiết các mặt hàng thuộc những phiếu đang được lọc
+    const { data: detailRows, error: detailError } = await sbClient
+      .from("stock_receipt_items")
+      .select("receipt_id,item_id,quantity,unit_price")
+      .in("receipt_id", receiptIds);
+
+    if (detailError) throw detailError;
+
+    // Lấy tên và đơn vị của các mặt hàng
+    const itemIds = [...new Set((detailRows || []).map(row => row.item_id))];
+
+    let itemMap = {};
+
+    if (itemIds.length > 0) {
+      const { data: items, error: itemsError } = await sbClient
+        .from("inventory_items")
+        .select("id,item_name,unit")
+        .in("id", itemIds);
+
+      if (itemsError) throw itemsError;
+
+      itemMap = Object.fromEntries(
+        (items || []).map(item => [String(item.id), item])
+      );
+    }
+
+    // Sheet 1: Tổng hợp phiếu nhập
+    const summaryData = [
+      ["Mã phiếu", "Ngày nhập", "Nơi mua", "Tổng tiền (₫)", "Ghi chú"],
+      ...filteredReceipts.map(receipt => [
+        `#${receipt.receipt_id}`,
+        receipt.receipt_date,
+        receipt.supplier || "",
+        Number(receipt.total_amount) || 0,
+        receipt.note || ""
+      ])
+    ];
+
+    // Sheet 2: Chi tiết hàng nhập
+    const detailData = [
+      [
+        "Mã phiếu",
+        "Ngày nhập",
+        "Nơi mua",
+        "Tên hàng hóa",
+        "Đơn vị",
+        "Số lượng",
+        "Đơn giá (₫)",
+        "Thành tiền (₫)"
+      ]
+    ];
+
+    const receiptMap = Object.fromEntries(
+      filteredReceipts.map(receipt => [
+        String(receipt.receipt_id),
+        receipt
+      ])
+    );
+
+    (detailRows || []).forEach(row => {
+      const receipt = receiptMap[String(row.receipt_id)];
+      const item = itemMap[String(row.item_id)];
+
+      if (!receipt) return;
+
+      detailData.push([
+        `#${receipt.receipt_id}`,
+        receipt.receipt_date,
+        receipt.supplier || "",
+        item?.item_name || "Không tìm thấy tên hàng",
+        item?.unit || "",
+        Number(row.quantity) || 0,
+        Number(row.unit_price) || 0,
+        (Number(row.quantity) || 0) * (Number(row.unit_price) || 0)
+      ]);
+    });
+
+    const workbook = XLSX.utils.book_new();
+
+    const summarySheet = XLSX.utils.aoa_to_sheet(summaryData);
+    const detailSheet = XLSX.utils.aoa_to_sheet(detailData);
+
+    XLSX.utils.book_append_sheet(workbook, summarySheet, "Tong hop phieu nhap");
+    XLSX.utils.book_append_sheet(workbook, detailSheet, "Chi tiet hang nhap");
+
+    const fromDate = $("receiptFilterFrom")?.value || "";
+    const toDate = $("receiptFilterTo")?.value || "";
+
+    const dateLabel = fromDate && toDate
+      ? `${fromDate}_den_${toDate}`
+      : fromDate
+        ? `tu_${fromDate}`
+        : toDate
+          ? `den_${toDate}`
+          : "tat_ca";
+
+    XLSX.writeFile(workbook, `Bao_cao_nhap_kho_${dateLabel}.xlsx`);
+
+  } catch (error) {
+    console.error("Lỗi xuất Excel:", error);
+    alert("Không xuất được Excel: " + error.message);
+  } finally {
+    exportBtn.disabled = false;
+    exportBtn.textContent = "Xuất Excel";
+  }
+});
+initializePage();
+</script>
+
+</body>
+</html>
