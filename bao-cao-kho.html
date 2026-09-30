@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Báo cáo kho | Dương Gia Đạt Homestay</title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+:root {
+  --wine: #87382d;
+  --wine-dark: #6e2b23;
+  --line: #eadfd2;
+  --ink: #382f2a;
+  --muted: #786b62;
+  --red: #a33b32;
+  --green: #246a37;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f7f5f1;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: var(--wine);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover { background: var(--wine-dark); }
+button:disabled { opacity: .55; cursor: wait; }
+button.light {
+  background: #f5eee7;
+  color: var(--wine);
+  border: 1px solid var(--line);
+}
+input {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid #d9cec3;
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  min-height: 40px;
+}
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0 0 6px;
+}
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.login-box {
+  width: min(420px, 100%);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 12px 40px #39291b18;
+}
+.login-box h1 { color: var(--wine); font-size: 24px; margin-top: 0; }
+.login-box p { color: var(--muted); line-height: 1.5; font-size: 14px; }
+.login-box label { margin-top: 14px; }
+.login-box button { width: 100%; margin-top: 16px; }
+.message { margin-top: 12px; color: var(--red); font-size: 14px; white-space: pre-wrap; }
+
+.admin {
+  max-width: 1200px;
+  width: calc(100% - 32px);
+  margin: 30px auto 60px;
+}
+.admin-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.admin-head h1 { color: var(--wine); margin: 0 0 5px; }
+.admin-head p { margin: 0; color: var(--muted); }
+.actions, .toolbar {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: 0 5px 18px #4b33200c;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.panel h2 {
+  font-size: 20px;
+  color: var(--wine);
+  margin: 0 0 16px;
+}
+.toolbar { margin-bottom: 16px; }
+.toolbar > div { min-width: 180px; flex: 1; }
+
+.notice {
+  padding: 13px 16px;
+  background: #fff8e8;
+  border: 1px solid #f0dfb8;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.info-box {
+  padding: 12px;
+  background: #f5f8ff;
+  border: 1px solid #d9e3f7;
+  color: #344d78;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.error-box {
+  padding: 12px;
+  margin: 12px 0;
+  background: #fff0ee;
+  border: 1px solid #f0cbc6;
+  color: #8c3028;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+.success-box {
+  padding: 12px;
+  margin: 12px 0;
+  background: #eaf6ec;
+  border: 1px solid #c8e5ce;
+  color: var(--green);
+  border-radius: 8px;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.summary-card {
+  padding: 18px;
+  background: #fbf8f4;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.summary-card span { color: var(--muted); font-size: 14px; }
+.summary-card strong { color: var(--wine); font-size: 25px; }
+.summary-card small { color: var(--muted); }
+
+.table-wrap { overflow-x: auto; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 650px;
+  font-size: 14px;
+}
+th, td {
+  text-align: left;
+  padding: 11px 9px;
+  border-bottom: 1px solid #eee7df;
+  vertical-align: middle;
+}
+th {
+  color: #69594e;
+  background: #fbf8f4;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+td.num, th.num { text-align: right; }
+.empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+}
+.muted { color: var(--muted); font-size: 13px; }
+.back-link {
+  color: var(--wine);
+  text-decoration: none;
+  font-weight: bold;
+}
+.section-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin: -8px 0 14px;
+}
+@media(max-width: 700px) {
+  .admin { width: calc(100% - 22px); margin-top: 20px; }
+  .panel { padding: 15px; }
+  .summary-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h1>Đăng nhập quản trị</h1>
+    <p>Dương Gia Đạt Homestay · Báo cáo kho</p>
+
+    <form id="loginForm">
+      <label for="loginEmail">Email quản trị</label>
+      <input id="loginEmail" type="email"
+             value="duonggiadathomestay@gmail.com"
+             autocomplete="username" required>
+
+      <label for="loginPassword">Mật khẩu Supabase</label>
+      <input id="loginPassword" type="password"
+             autocomplete="current-password" required>
+
+      <button id="loginBtn" type="submit">Đăng nhập</button>
+      <div class="message" id="loginMessage"></div>
+    </form>
+  </div>
+</div>
+
+<main class="admin" id="adminApp" hidden>
+
+  <header class="admin-head">
+    <div>
+      <h1>📊 Báo cáo kho</h1>
+      <p>Dương Gia Đạt Homestay · Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+    </div>
+    <div class="actions">
+      <a class="back-link" href="admin.html">← Bảng quản trị</a>
+      <a class="back-link" href="nhap-kho.html">📦 Nhập kho</a>
+      <button class="light" id="logoutBtn" type="button">Đăng xuất</button>
+    </div>
+  </header>
+
+  <div class="notice">
+    Chọn khoảng ngày để xem báo cáo nhập kho. Báo cáo tồn hiện thống kê tổng số lượng
+    đã nhập lũy kế; chưa phải tồn thực tế vì hệ thống chưa có dữ liệu xuất kho.
+  </div>
+
+  <div id="pageMessage"></div>
+
+  <section class="panel">
+    <h2>Bộ lọc báo cáo</h2>
+    <div class="toolbar">
+      <div>
+        <label for="dateFrom">Từ ngày</label>
+        <input id="dateFrom" type="date">
+      </div>
+      <div>
+        <label for="dateTo">Đến ngày</label>
+        <input id="dateTo" type="date">
+      </div>
+      <button id="applyBtn" type="button">Cập nhật báo cáo</button>
+      <button id="exportBtn" class="light" type="button">Xuất Excel</button>
+    </div>
+    <p class="muted" id="filterDescription">Đang tải dữ liệu...</p>
+  </section>
+
+  <section class="panel">
+    <h2>1. Báo cáo chi phí nhập kho</h2>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <span>Tổng chi nhập kho trong kỳ</span>
+        <strong id="periodTotal">0 ₫</strong>
+        <small id="periodCount">0 phiếu nhập</small>
+      </div>
+      <div class="summary-card">
+        <span>Số mặt hàng được nhập</span>
+        <strong id="periodItemCount">0</strong>
+        <small>Loại mặt hàng khác nhau</small>
+      </div>
+      <div class="summary-card">
+        <span>Tổng số lượng nhập trong kỳ</span>
+        <strong id="periodQuantity">0</strong>
+        <small>Tổng số lượng của các dòng hàng</small>
+      </div>
+    </div>
+
+    <h3>Chi phí theo ngày</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ngày nhập</th>
+            <th class="num">Số phiếu</th>
+            <th class="num">Tổng chi</th>
+          </tr>
+        </thead>
+        <tbody id="dailyRows"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="dailyEmpty" hidden>Không có dữ liệu trong khoảng ngày đã chọn.</div>
+  </section>
+
+  <section class="panel">
+    <h2>2. Thống kê mặt hàng đã nhập</h2>
+    <p class="section-subtitle">Tổng hợp số lượng và giá trị nhập theo từng mặt hàng trong khoảng ngày đã chọn.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Mặt hàng</th>
+            <th>Loại</th>
+            <th>Đơn vị</th>
+            <th class="num">Tổng số lượng</th>
+            <th class="num">Tổng tiền</th>
+          </tr>
+        </thead>
+        <tbody id="itemRows"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="itemEmpty" hidden>Không có mặt hàng nhập trong khoảng ngày đã chọn.</div>
+  </section>
+
+  <section class="panel">
+    <h2>3. Báo cáo số lượng nhập lũy kế</h2>
+    <div class="info-box">
+      Đây là tổng số lượng được ghi nhận trong các phiếu nhập từ trước đến nay.
+      Chưa trừ số đã sử dụng, xuất kho, hỏng hoặc điều chỉnh nên không được xem là tồn kho thực tế.
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Mặt hàng</th>
+            <th>Loại</th>
+            <th>Đơn vị</th>
+            <th class="num">Tổng đã nhập</th>
+          </tr>
+        </thead>
+        <tbody id="balanceRows"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="balanceEmpty" hidden>Chưa có dữ liệu nhập kho.</div>
+  </section>
+
+  <section class="panel">
+    <h2>4. Báo cáo xuất kho / sử dụng</h2>
+    <div class="info-box">
+      Hệ thống hiện chưa có bảng ghi nhận phiếu xuất kho hoặc sử dụng hàng hóa.
+      Vì vậy chưa thể thống kê số lượng xuất, mục đích sử dụng hoặc tồn thực tế.
+      Khi bổ sung chức năng xuất kho, phần báo cáo này sẽ lấy dữ liệu từ các phiếu xuất.
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="js/supabase-config.js"></script>
+
+<script>
+const sbClient = window.supabaseClient;
+const $ = id => document.getElementById(id);
+
+let currentUser = null;
+let reportData = null;
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
+}
+
+function money(value) {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    maximumFractionDigits: 0
+  }).format(Number(value) || 0);
+}
+
+function numberFormat(value) {
+  return new Intl.NumberFormat("vi-VN", {
+    maximumFractionDigits: 2
+  }).format(Number(value) || 0);
+}
+
+function showMessage(message, type = "success") {
+  const box = $("pageMessage");
+  if (!message) {
+    box.innerHTML = "";
+    return;
+  }
+  box.innerHTML = `<div class="${type === "error" ? "error-box" : "success-box"}">${escapeHTML(message)}</div>`;
+}
+
+function showLoginMessage(message) {
+  $("loginMessage").textContent = message || "";
+}
+
+function setLoggedIn(loggedIn) {
+  $("loginScreen").style.display = loggedIn ? "none" : "grid";
+  $("adminApp").hidden = !loggedIn;
+}
+
+function setLoading(isLoading) {
+  $("applyBtn").disabled = isLoading;
+  $("applyBtn").textContent = isLoading ? "Đang tải..." : "Cập nhật báo cáo";
+}
+
+/*
+  Tải dữ liệu theo từng trang để tránh giới hạn số dòng mặc định của Supabase.
+  queryFactory nhận vị trí bắt đầu và kết thúc của mỗi trang.
+*/
+async function fetchAllPages(queryFactory) {
+  const pageSize = 1000;
+  let allRows = [];
+  let start = 0;
+
+  while (true) {
+    const { data, error } = await queryFactory(start, start + pageSize - 1);
+
+    if (error) throw error;
+
+    const rows = data || [];
+    allRows = allRows.concat(rows);
+
+    if (rows.length < pageSize) break;
+    start += pageSize;
+  }
+
+  return allRows;
+}
+
+function isWithinRange(date, from, to) {
+  if (from && date < from) return false;
+  if (to && date > to) return false;
+  return true;
+}
+
+function renderEmptyState() {
+  $("dailyRows").innerHTML = "";
+  $("itemRows").innerHTML = "";
+  $("balanceRows").innerHTML = "";
+
+  $("dailyEmpty").hidden = false;
+  $("itemEmpty").hidden = false;
+  $("balanceEmpty").hidden = false;
+
+  $("periodTotal").textContent = money(0);
+  $("periodCount").textContent = "0 phiếu nhập";
+  $("periodItemCount").textContent = "0";
+  $("periodQuantity").textContent = "0";
+}
+
+async function loadReport() {
+  const from = $("dateFrom").value;
+  const to = $("dateTo").value;
+
+  if (from && to && from > to) {
+    showMessage("Ngày bắt đầu không được lớn hơn ngày kết thúc.", "error");
+    return;
+  }
+
+  setLoading(true);
+  showMessage("");
+
+  try {
+    // Tải toàn bộ phiếu nhập để vừa lọc báo cáo kỳ, vừa tính tổng nhập lũy kế.
+    const receipts = await fetchAllPages((start, end) =>
+      sbClient
+        .from("stock_receipt_totals")
+        .select("receipt_id,receipt_date,supplier,note,total_amount,created_at")
+        .order("receipt_id", { ascending: true })
+        .range(start, end)
+    );
+
+    // Tải chi tiết các dòng nhập, kèm thông tin danh mục mặt hàng.
+    const details = await fetchAllPages((start, end) =>
+      sbClient
+        .from("stock_receipt_items")
+        .select(`
+          id,
+          receipt_id,
+          item_id,
+          quantity,
+          unit_price,
+          line_total,
+          inventory_items (
+            item_name,
+            category,
+            unit
+          )
+        `)
+        .order("id", { ascending: true })
+        .range(start, end)
+    );
+
+    const itemsResult = await sbClient
+      .from("inventory_items")
+      .select("id,item_name,category,unit")
+      .order("item_name", { ascending: true });
+
+    if (itemsResult.error) throw itemsResult.error;
+
+    const inventoryItems = itemsResult.data || [];
+    const receiptMap = new Map(
+      receipts.map(receipt => [String(receipt.receipt_id), receipt])
+    );
+
+    const selectedReceipts = receipts.filter(receipt =>
+      isWithinRange(receipt.receipt_date, from, to)
+    );
+
+    const selectedReceiptIds = new Set(
+      selectedReceipts.map(receipt => String(receipt.receipt_id))
+    );
+
+    const selectedDetails = details.filter(detail =>
+      selectedReceiptIds.has(String(detail.receipt_id))
+    );
+
+    // Báo cáo chi phí theo ngày.
+    const dailyMap = new Map();
+
+    selectedReceipts.forEach(receipt => {
+      const date = receipt.receipt_date;
+      if (!dailyMap.has(date)) {
+        dailyMap.set(date, { date, count: 0, total: 0 });
+      }
+
+      const day = dailyMap.get(date);
+      day.count += 1;
+      day.total += Number(receipt.total_amount) || 0;
+    });
+
+    const dailyRows = [...dailyMap.values()]
+      .sort((a, b) => a.date.localeCompare(b.date));
+
+    // Thống kê mặt hàng trong kỳ.
+    const periodItemMap = new Map();
+
+    selectedDetails.forEach(detail => {
+      const itemId = String(detail.item_id);
+      const product = Array.isArray(detail.inventory_items)
+        ? detail.inventory_items[0]
+        : detail.inventory_items;
+
+      if (!periodItemMap.has(itemId)) {
+        periodItemMap.set(itemId, {
+          itemId,
+          name: product?.item_name || `Mặt hàng #${itemId}`,
+          category: product?.category || "",
+          unit: product?.unit || "",
+          quantity: 0,
+          total: 0
+        });
+      }
+
+      const item = periodItemMap.get(itemId);
+      item.quantity += Number(detail.quantity) || 0;
+      item.total += Number(detail.line_total) ||
+        ((Number(detail.quantity) || 0) * (Number(detail.unit_price) || 0));
+    });
+
+    const periodItems = [...periodItemMap.values()]
+      .sort((a, b) => a.name.localeCompare(b.name, "vi"));
+
+    // Tổng số lượng đã nhập lũy kế, không trừ xuất kho.
+    const allTimeMap = new Map();
+
+    inventoryItems.forEach(item => {
+      allTimeMap.set(String(item.id), {
+        itemId: String(item.id),
+        name: item.item_name,
+        category: item.category || "",
+        unit: item.unit || "",
+        quantity: 0
+      });
+    });
+
+    details.forEach(detail => {
+      const itemId = String(detail.item_id);
+      const product = Array.isArray(detail.inventory_items)
+        ? detail.inventory_items[0]
+        : detail.inventory_items;
+
+      if (!allTimeMap.has(itemId)) {
+        allTimeMap.set(itemId, {
+          itemId,
+          name: product?.item_name || `Mặt hàng #${itemId}`,
+          category: product?.category || "",
+          unit: product?.unit || "",
+          quantity: 0
+        });
+      }
+
+      allTimeMap.get(itemId).quantity += Number(detail.quantity) || 0;
+    });
+
+    const allTimeItems = [...allTimeMap.values()]
+      .sort((a, b) => a.name.localeCompare(b.name, "vi"));
+
+    const periodTotal = selectedReceipts.reduce(
+      (sum, receipt) => sum + (Number(receipt.total_amount) || 0),
+      0
+    );
+
+    const periodQuantity = selectedDetails.reduce(
+      (sum, detail) => sum + (Number(detail.quantity) || 0),
+      0
+    );
+
+    $("periodTotal").textContent = money(periodTotal);
+    $("periodCount").textContent = `${selectedReceipts.length} phiếu nhập`;
+    $("periodItemCount").textContent = String(periodItems.length);
+    $("periodQuantity").textContent = numberFormat(periodQuantity);
+
+    $("dailyRows").innerHTML = dailyRows.map(row => `
+      <tr>
+        <td>${escapeHTML(row.date)}</td>
+        <td class="num">${numberFormat(row.count)}</td>
+        <td class="num"><strong>${money(row.total)}</strong></td>
+      </tr>
+    `).join("");
+
+    $("dailyEmpty").hidden = dailyRows.length > 0;
+
+    $("itemRows").innerHTML = periodItems.map(item => `
+      <tr>
+        <td><strong>${escapeHTML(item.name)}</strong></td>
+        <td>${escapeHTML(item.category)}</td>
+        <td>${escapeHTML(item.unit)}</td>
+        <td class="num">${numberFormat(item.quantity)}</td>
+        <td class="num"><strong>${money(item.total)}</strong></td>
+      </tr>
+    `).join("");
+
+    $("itemEmpty").hidden = periodItems.length > 0;
+
+    $("balanceRows").innerHTML = allTimeItems.map(item => `
+      <tr>
+        <td><strong>${escapeHTML(item.name)}</strong></td>
+        <td>${escapeHTML(item.category)}</td>
+        <td>${escapeHTML(item.unit)}</td>
+        <td class="num">${numberFormat(item.quantity)}</td>
+      </tr>
+    `).join("");
+
+    $("balanceEmpty").hidden = allTimeItems.length > 0;
+
+    $("filterDescription").textContent =
+      `Khoảng thời gian: ${from || "Từ đầu dữ liệu"} đến ${to || "hiện tại"} · ` +
+      `Đã tải ${receipts.length} phiếu nhập và ${details.length} dòng hàng.`;
+
+    reportData = {
+      from,
+      to,
+      selectedReceipts,
+      selectedDetails,
+      dailyRows,
+      periodItems,
+      allTimeItems
+    };
+
+  } catch (error) {
+    console.error("Lỗi tải báo cáo kho:", error);
+    showMessage("Không tải được báo cáo: " + error.message, "error");
+  } finally {
+    setLoading(false);
+  }
+}
+
+function exportExcel() {
+  if (typeof XLSX === "undefined") {
+    alert("Không tải được thư viện Excel. Vui lòng tải lại trang.");
+    return;
+  }
+
+  if (!reportData) {
+    alert("Vui lòng cập nhật báo cáo trước khi xuất Excel.");
+    return;
+  }
+
+  const { from, to, selectedReceipts, selectedDetails, dailyRows, periodItems, allTimeItems } = reportData;
+
+  const receiptSheetData = [
+    ["Mã phiếu", "Ngày nhập", "Nơi mua", "Tổng tiền", "Ghi chú"],
+    ...selectedReceipts.map(receipt => [
+      `#${receipt.receipt_id}`,
+      receipt.receipt_date,
+      receipt.supplier || "",
+      Number(receipt.total_amount) || 0,
+      receipt.note || ""
+    ])
+  ];
+
+  const dailySheetData = [
+    ["Ngày", "Số phiếu", "Tổng chi"],
+    ...dailyRows.map(row => [row.date, row.count, row.total])
+  ];
+
+  const itemSheetData = [
+    ["Mặt hàng", "Loại", "Đơn vị", "Tổng số lượng", "Tổng tiền"],
+    ...periodItems.map(item => [
+      item.name,
+      item.category,
+      item.unit,
+      item.quantity,
+      item.total
+    ])
+  ];
+
+  const balanceSheetData = [
+    ["Mặt hàng", "Loại", "Đơn vị", "Tổng đã nhập lũy kế"],
+    ...allTimeItems.map(item => [
+      item.name,
+      item.category,
+      item.unit,
+      item.quantity
+    ])
+  ];
+
+  const detailSheetData = [
+    ["Mã phiếu", "Ngày nhập", "Mặt hàng ID", "Số lượng", "Đơn giá", "Thành tiền"]
+  ];
+
+  const receiptMap = new Map(
+    selectedReceipts.map(receipt => [String(receipt.receipt_id), receipt])
+  );
+
+  selectedDetails.forEach(detail => {
+    const receipt = receiptMap.get(String(detail.receipt_id));
+    if (!receipt) return;
+
+    detailSheetData.push([
+      `#${receipt.receipt_id}`,
+      receipt.receipt_date,
+      detail.item_id,
+      Number(detail.quantity) || 0,
+      Number(detail.unit_price) || 0,
+      Number(detail.line_total) ||
+        ((Number(detail.quantity) || 0) * (Number(detail.unit_price) || 0))
+    ]);
+  });
+
+  const workbook = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    workbook,
+    XLSX.utils.aoa_to_sheet(receiptSheetData),
+    "Phieu nhap"
+  );
+  XLSX.utils.book_append_sheet(
+    workbook,
+    XLSX.utils.aoa_to_sheet(dailySheetData),
+    "Chi phi theo ngay"
+  );
+  XLSX.utils.book_append_sheet(
+    workbook,
+    XLSX.utils.aoa_to_sheet(itemSheetData),
+    "Mat hang trong ky"
+  );
+  XLSX.utils.book_append_sheet(
+    workbook,
+    XLSX.utils.aoa_to_sheet(balanceSheetData),
+    "Tong nhap luy ke"
+  );
+  XLSX.utils.book_append_sheet(
+    workbook,
+    XLSX.utils.aoa_to_sheet(detailSheetData),
+    "Chi tiet hang nhap"
+  );
+
+  const dateLabel = from && to
+    ? `${from}_den_${to}`
+    : from
+      ? `tu_${from}`
+      : to
+        ? `den_${to}`
+        : "tat_ca";
+
+  XLSX.writeFile(workbook, `Bao_cao_kho_${dateLabel}.xlsx`);
+}
+
+$("applyBtn").addEventListener("click", loadReport);
+$("exportBtn").addEventListener("click", exportExcel);
+
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!sbClient) {
+    showLoginMessage("Không tìm thấy kết nối Supabase. Kiểm tra js/supabase-config.js.");
+    return;
+  }
+
+  $("loginBtn").disabled = true;
+  $("loginBtn").textContent = "Đang đăng nhập...";
+  showLoginMessage("");
+
+  const { data, error } = await sbClient.auth.signInWithPassword({
+    email: $("loginEmail").value.trim(),
+    password: $("loginPassword").value
+  });
+
+  $("loginBtn").disabled = false;
+  $("loginBtn").textContent = "Đăng nhập";
+
+  if (error) {
+    console.error("Lỗi đăng nhập:", error);
+    showLoginMessage("Đăng nhập chưa thành công. Kiểm tra email và mật khẩu.");
+    return;
+  }
+
+  currentUser = data.user;
+  setLoggedIn(true);
+  await loadReport();
+});
+
+$("logoutBtn").addEventListener("click", async () => {
+  await sbClient.auth.signOut();
+  currentUser = null;
+  reportData = null;
+  setLoggedIn(false);
+  showLoginMessage("Đã đăng xuất.");
+});
+
+async function initializePage() {
+  if (!sbClient) {
+    showLoginMessage("Không tìm thấy Supabase. Kiểm tra file js/supabase-config.js.");
+    return;
+  }
+
+  const { data, error } = await sbClient.auth.getSession();
+
+  if (error) {
+    showLoginMessage("Không kiểm tra được phiên đăng nhập: " + error.message);
+    return;
+  }
+
+  if (data.session) {
+    currentUser = data.session.user;
+    setLoggedIn(true);
+    await loadReport();
+  } else {
+    setLoggedIn(false);
+  }
+
+  sbClient.auth.onAuthStateChange((event, session) => {
+    if (!session) {
+      currentUser = null;
+      setLoggedIn(false);
+    }
+  });
+}
+
+initializePage();
+</script>
+
+</body>
+</html>
