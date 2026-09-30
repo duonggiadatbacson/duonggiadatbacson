@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nhập kho | Dương Gia Đạt Homestay</title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+:root {
+  --wine: #87382d;
+  --wine-dark: #6e2b23;
+  --line: #eadfd2;
+  --ink: #382f2a;
+  --muted: #786b62;
+  --red: #a33b32;
+  --green: #246a37;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f7f5f1;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: var(--wine);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover { background: var(--wine-dark); }
+button:disabled { opacity: .55; cursor: wait; }
+button.light {
+  background: #f5eee7;
+  color: var(--wine);
+  border: 1px solid var(--line);
+}
+button.danger {
+  background: #fff0ee;
+  color: var(--red);
+  border: 1px solid #f0cbc6;
+}
+button.small { padding: 7px 10px; font-size: 12px; }
+input, select, textarea {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid #d9cec3;
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  min-height: 40px;
+}
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0 0 6px;
+}
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.login-box {
+  width: min(420px, 100%);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 12px 40px #39291b18;
+}
+.login-box h1 { color: var(--wine); font-size: 24px; margin-top: 0; }
+.login-box p { color: var(--muted); line-height: 1.5; font-size: 14px; }
+.login-box label { margin-top: 14px; }
+.login-box button { width: 100%; margin-top: 16px; }
+.message { margin-top: 12px; color: var(--red); font-size: 14px; white-space: pre-wrap; }
+.admin {
+  max-width: 1200px;
+  width: calc(100% - 32px);
+  margin: 30px auto 60px;
+}
+.admin-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.admin-head h1 { color: var(--wine); margin: 0 0 5px; }
+.admin-head p { margin: 0; color: var(--muted); }
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: 0 5px 18px #4b33200c;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.panel h2 { font-size: 20px; color: var(--wine); margin: 0 0 16px; }
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+.field-full { grid-column: 1 / -1; }
+.actions, .toolbar {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.actions { margin-top: 15px; }
+.toolbar { margin-bottom: 14px; }
+.toolbar > div { min-width: 160px; flex: 1; }
+.notice {
+  padding: 13px 16px;
+  background: #fff8e8;
+  border: 1px solid #f0dfb8;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.error-box {
+  padding: 12px;
+  margin: 12px 0;
+  background: #fff0ee;
+  border: 1px solid #f0cbc6;
+  color: #8c3028;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+.success-box {
+  padding: 12px;
+  margin: 12px 0;
+  background: #eaf6ec;
+  border: 1px solid #c8e5ce;
+  color: var(--green);
+  border-radius: 8px;
+}
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 14px; }
+th, td {
+  text-align: left;
+  padding: 11px 9px;
+  border-bottom: 1px solid #eee7df;
+  vertical-align: middle;
+}
+th {
+  color: #69594e;
+  background: #fbf8f4;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.line-table { min-width: 700px; }
+.line-table input, .line-table select { min-width: 100px; }
+.line-table .qty { width: 100px; }
+.line-table .price { width: 150px; }
+.line-total { font-weight: bold; white-space: nowrap; }
+.remove-cell { width: 65px; }
+.total-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 0 0;
+  font-size: 16px;
+}
+.total-box strong { color: var(--wine); font-size: 25px; }
+.empty { text-align: center; padding: 24px; color: var(--muted); }
+.muted { color: var(--muted); font-size: 13px; }
+.back-link { color: var(--wine); text-decoration: none; font-weight: bold; }
+@media(max-width: 700px) {
+  .admin { width: calc(100% - 22px); margin-top: 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .field-full { grid-column: auto; }
+  .panel { padding: 15px; }
+  .total-box { align-items: flex-end; flex-direction: column; gap: 5px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h1>Đăng nhập quản trị</h1>
+    <p>Dương Gia Đạt Homestay · Quản lý nhập kho</p>
+
+    <form id="loginForm">
+      <label for="loginEmail">Email quản trị</label>
+      <input id="loginEmail" type="email"
+             value="duonggiadathomestay@gmail.com"
+             autocomplete="username" required>
+
+      <label for="loginPassword">Mật khẩu Supabase</label>
+      <input id="loginPassword" type="password"
+             autocomplete="current-password" required>
+
+      <button id="loginBtn" type="submit">Đăng nhập</button>
+      <div class="message" id="loginMessage"></div>
+    </form>
+  </div>
+</div>
+
+<main class="admin" id="adminApp" hidden>
+
+  <header class="admin-head">
+    <div>
+      <h1>📦 Nhập kho</h1>
+      <p>Dương Gia Đạt Homestay · Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+    </div>
+    <div class="actions">
+      <a class="back-link" href="admin.html">← Bảng quản trị</a>
+      <button class="light" id="logoutBtn" type="button">Đăng xuất</button>
+    </div>
+  </header>
+
+  <div class="notice">
+    Tạo phiếu nhập kho và lưu danh sách hàng hóa vào Supabase.
+    Mỗi phiếu có thể gồm nhiều mặt hàng.
+  </div>
+
+  <div id="pageMessage"></div>
+
+  <section class="panel">
+    <h2>1. Thêm hàng hóa vào danh mục</h2>
+
+    <form id="itemForm">
+      <div class="form-grid">
+        <div>
+          <label for="newItemName">Tên hàng hóa *</label>
+          <input id="newItemName" placeholder="Ví dụ: Nước suối 500ml" required>
+        </div>
+
+        <div>
+          <label for="newItemCategory">Loại hàng *</label>
+          <select id="newItemCategory" required>
+            <option value="consumable">Hàng tiêu hao</option>
+            <option value="reusable">Đồ dùng tái sử dụng</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="newItemUnit">Đơn vị tính *</label>
+          <input id="newItemUnit" value="cái" placeholder="cái, chai, gói, kg..." required>
+        </div>
+
+        <div class="field-full">
+          <label for="newItemNote">Ghi chú</label>
+          <input id="newItemNote" placeholder="Không bắt buộc">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="addItemBtn">Thêm vào danh mục</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>2. Lập phiếu nhập kho</h2>
+
+    <form id="receiptForm">
+      <div class="form-grid">
+        <div>
+          <label for="receiptDate">Ngày nhập *</label>
+          <input id="receiptDate" type="date" required>
+        </div>
+
+        <div>
+          <label for="supplier">Nhà cung cấp / Nơi mua</label>
+          <input id="supplier" placeholder="Ví dụ: Siêu thị, cửa hàng...">
+        </div>
+
+        <div>
+          <label for="receiptNote">Ghi chú phiếu</label>
+          <input id="receiptNote" placeholder="Số hóa đơn hoặc ghi chú">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="light" id="addLineBtn">+ Thêm mặt hàng</button>
+      </div>
+
+      <div class="table-wrap" style="margin-top:14px">
+        <table class="line-table">
+          <thead>
+            <tr>
+              <th style="width:32%">Mặt hàng</th>
+              <th>Số lượng</th>
+              <th>Đơn giá (₫)</th>
+              <th>Thành tiền</th>
+              <th class="remove-cell">Xóa</th>
+            </tr>
+          </thead>
+          <tbody id="receiptLines"></tbody>
+        </table>
+      </div>
+
+      <div class="total-box">
+        <span>Tổng tiền phiếu nhập</span>
+        <strong id="receiptTotal">0 ₫</strong>
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="saveReceiptBtn">Lưu phiếu nhập</button>
+        <button type="reset" class="light" id="resetReceiptBtn">Làm mới phiếu</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>3. Phiếu nhập gần đây</h2>
+    <div class="toolbar">
+      <div>
+        <label for="receiptFilter">Lọc từ ngày</label>
+        <input id="receiptFilter" type="date">
+      </div>
+      <button type="button" class="light" id="refreshBtn">Tải lại</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Mã phiếu</th>
+            <th>Ngày nhập</th>
+            <th>Nơi mua</th>
+            <th>Tổng tiền</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody id="receiptRows"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="receiptEmpty" hidden>Chưa có phiếu nhập phù hợp.</div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+
+<script>
+const sbClient = window.supabaseClient;
+const $ = id => document.getElementById(id);
+
+let currentUser = null;
+let inventoryItems = [];
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
+}
+
+function money(value) {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    maximumFractionDigits: 0
+  }).format(Number(value) || 0);
+}
+
+function localDateString() {
+  const now = new Date();
+  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 10);
+}
+
+function showMessage(message, type = "success") {
+  const box = $("pageMessage");
+  if (!message) {
+    box.innerHTML = "";
+    return;
+  }
+  box.innerHTML = `<div class="${type === "error" ? "error-box" : "success-box"}">${escapeHTML(message)}</div>`;
+}
+
+function showLoginMessage(message) {
+  $("loginMessage").textContent = message || "";
+}
+
+function setLoggedIn(loggedIn) {
+  $("loginScreen").style.display = loggedIn ? "none" : "grid";
+  $("adminApp").hidden = !loggedIn;
+}
+
+function itemOptions(selectedId = "") {
+  const options = inventoryItems.map(item => `
+    <option value="${item.id}" ${String(item.id) === String(selectedId) ? "selected" : ""}>
+      ${escapeHTML(item.item_name)} (${escapeHTML(item.unit)})
+    </option>
+  `).join("");
+
+  return `<option value="">-- Chọn hàng hóa --</option>${options}`;
+}
+
+function addReceiptLine() {
+  const row = document.createElement("tr");
+  row.className = "receipt-line";
+  row.innerHTML = `
+    <td>
+      <select class="line-item" required>
+        ${itemOptions()}
+      </select>
+    </td>
+    <td>
+      <input class="line-qty qty" type="number" min="0.01" step="0.01"
+             value="1" required>
+    </td>
+    <td>
+      <input class="line-price price" type="number" min="0" step="1"
+             value="0" required>
+    </td>
+    <td class="line-total">0 ₫</td>
+    <td class="remove-cell">
+      <button type="button" class="danger small remove-line">Xóa</button>
+    </td>
+  `;
+  $("receiptLines").appendChild(row);
+  calculateTotal();
+}
+
+function calculateTotal() {
+  let total = 0;
+
+  document.querySelectorAll(".receipt-line").forEach(row => {
+    const quantity = Number(row.querySelector(".line-qty").value) || 0;
+    const price = Number(row.querySelector(".line-price").value) || 0;
+    const lineTotal = quantity * price;
+
+    row.querySelector(".line-total").textContent = money(lineTotal);
+    total += lineTotal;
+  });
+
+  $("receiptTotal").textContent = money(total);
+}
+
+async function loadItems() {
+  const { data, error } = await sbClient
+    .from("inventory_items")
+    .select("id,item_name,category,unit,note")
+    .order("item_name", { ascending: true });
+
+  if (error) {
+    console.error("Lỗi tải danh mục:", error);
+    throw new Error("Không tải được danh mục hàng hóa: " + error.message);
+  }
+
+  inventoryItems = data || [];
+
+  document.querySelectorAll(".line-item").forEach(select => {
+    const selected = select.value;
+    select.innerHTML = itemOptions(selected);
+  });
+}
+
+async function loadReceipts() {
+  const { data, error } = await sbClient
+    .from("stock_receipt_totals")
+    .select("receipt_id,receipt_date,supplier,note,total_amount,created_at")
+    .order("created_at", { ascending: false })
+    .limit(100);
+
+  if (error) {
+    console.error("Lỗi tải phiếu nhập:", error);
+    showMessage("Không tải được phiếu nhập: " + error.message, "error");
+    return;
+  }
+
+  const dateFilter = $("receiptFilter").value;
+  const rows = (data || []).filter(receipt =>
+    !dateFilter || receipt.receipt_date >= dateFilter
+  );
+
+  $("receiptRows").innerHTML = rows.map(receipt => `
+    <tr>
+      <td>#${escapeHTML(receipt.receipt_id)}</td>
+      <td>${escapeHTML(receipt.receipt_date)}</td>
+      <td>${escapeHTML(receipt.supplier || "—")}</td>
+      <td><b>${money(receipt.total_amount)}</b></td>
+      <td>${escapeHTML(receipt.note || "—")}</td>
+    </tr>
+  `).join("");
+
+  $("receiptEmpty").hidden = rows.length > 0;
+}
+
+async function refreshPage() {
+  showMessage("");
+  try {
+    await loadItems();
+    await loadReceipts();
+  } catch (error) {
+    showMessage(error.message, "error");
+  }
+}
+
+$("itemForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const itemName = $("newItemName").value.trim();
+  const category = $("newItemCategory").value;
+  const unit = $("newItemUnit").value.trim();
+  const note = $("newItemNote").value.trim();
+
+  if (!itemName || !unit) {
+    alert("Vui lòng nhập tên hàng hóa và đơn vị tính.");
+    return;
+  }
+
+  $("addItemBtn").disabled = true;
+
+  const { data, error } = await sbClient
+    .from("inventory_items")
+    .insert({
+      item_name: itemName,
+      category,
+      unit,
+      note: note || null
+    })
+    .select("id,item_name,category,unit,note")
+    .single();
+
+  $("addItemBtn").disabled = false;
+
+  if (error) {
+    console.error("Lỗi thêm hàng hóa:", error);
+    showMessage("Không thêm được hàng hóa: " + error.message, "error");
+    return;
+  }
+
+  $("itemForm").reset();
+  $("newItemUnit").value = "cái";
+
+  await loadItems();
+  showMessage(`Đã thêm "${data.item_name}" vào danh mục.`);
+});
+
+$("addLineBtn").addEventListener("click", () => {
+  if (inventoryItems.length === 0) {
+    alert("Bạn cần thêm hàng hóa vào danh mục trước.");
+    return;
+  }
+  addReceiptLine();
+});
+
+$("receiptLines").addEventListener("input", event => {
+  if (event.target.matches(".line-qty, .line-price")) {
+    calculateTotal();
+  }
+});
+
+$("receiptLines").addEventListener("click", event => {
+  const button = event.target.closest(".remove-line");
+  if (!button) return;
+
+  button.closest("tr").remove();
+  calculateTotal();
+});
+
+$("receiptForm").addEventListener("reset", () => {
+  setTimeout(() => {
+    $("receiptDate").value = localDateString();
+    $("receiptLines").innerHTML = "";
+    calculateTotal();
+    if (inventoryItems.length > 0) addReceiptLine();
+  }, 0);
+});
+
+$("receiptForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!currentUser) {
+    alert("Phiên đăng nhập không hợp lệ. Vui lòng đăng nhập lại.");
+    return;
+  }
+
+  const rows = [...document.querySelectorAll(".receipt-line")];
+
+  if (rows.length === 0) {
+    alert("Vui lòng thêm ít nhất một mặt hàng vào phiếu.");
+    return;
+  }
+
+  const receiptItems = [];
+  const seenItems = new Set();
+
+  for (const row of rows) {
+    const itemId = row.querySelector(".line-item").value;
+    const quantity = Number(row.querySelector(".line-qty").value);
+    const unitPrice = Number(row.querySelector(".line-price").value);
+
+    if (!itemId || !Number.isFinite(quantity) || quantity <= 0 ||
+        !Number.isFinite(unitPrice) || unitPrice < 0) {
+      alert("Vui lòng kiểm tra mặt hàng, số lượng và đơn giá.");
+      return;
+    }
+
+    if (seenItems.has(itemId)) {
+      alert("Một mặt hàng đang được chọn nhiều lần. Vui lòng gộp thành một dòng.");
+      return;
+    }
+
+    seenItems.add(itemId);
+    receiptItems.push({
+      item_id: Number(itemId),
+      quantity,
+      unit_price: unitPrice
+    });
+  }
+
+  const receiptDate = $("receiptDate").value;
+  if (!receiptDate) {
+    alert("Vui lòng chọn ngày nhập.");
+    return;
+  }
+
+  const receipt = {
+    receipt_date: receiptDate,
+    supplier: $("supplier").value.trim() || null,
+    note: $("receiptNote").value.trim() || null,
+    created_by: currentUser.id
+  };
+
+  $("saveReceiptBtn").disabled = true;
+  $("saveReceiptBtn").textContent = "Đang lưu...";
+
+  let receiptId = null;
+
+  try {
+    const { data: savedReceipt, error: receiptError } = await sbClient
+      .from("stock_receipts")
+      .insert(receipt)
+      .select("id")
+      .single();
+
+    if (receiptError) throw receiptError;
+
+    receiptId = savedReceipt.id;
+
+    const rowsToInsert = receiptItems.map(item => ({
+      receipt_id: receiptId,
+      item_id: item.item_id,
+      quantity: item.quantity,
+      unit_price: item.unit_price
+    }));
+
+    const { error: itemsError } = await sbClient
+      .from("stock_receipt_items")
+      .insert(rowsToInsert);
+
+    if (itemsError) throw itemsError;
+
+    $("receiptForm").reset();
+    await loadReceipts();
+    showMessage(`Đã lưu phiếu nhập #${receiptId} thành công.`);
+  } catch (error) {
+    console.error("Lỗi lưu phiếu nhập:", error);
+
+    if (receiptId !== null) {
+      const { error: cleanupError } = await sbClient
+        .from("stock_receipts")
+        .delete()
+        .eq("id", receiptId);
+
+      if (cleanupError) {
+        console.error("Không thể dọn phiếu nhập chưa hoàn chỉnh:", cleanupError);
+      }
+    }
+
+    showMessage("Không lưu được phiếu nhập: " + error.message, "error");
+  } finally {
+    $("saveReceiptBtn").disabled = false;
+    $("saveReceiptBtn").textContent = "Lưu phiếu nhập";
+  }
+});
+
+$("receiptFilter").addEventListener("change", loadReceipts);
+$("refreshBtn").addEventListener("click", refreshPage);
+
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!sbClient) {
+    showLoginMessage("Không tìm thấy kết nối Supabase. Kiểm tra js/supabase-config.js.");
+    return;
+  }
+
+  $("loginBtn").disabled = true;
+  $("loginBtn").textContent = "Đang đăng nhập...";
+  showLoginMessage("");
+
+  const { data, error } = await sbClient.auth.signInWithPassword({
+    email: $("loginEmail").value.trim(),
+    password: $("loginPassword").value
+  });
+
+  $("loginBtn").disabled = false;
+  $("loginBtn").textContent = "Đăng nhập";
+
+  if (error) {
+    console.error("Lỗi đăng nhập:", error);
+    showLoginMessage("Đăng nhập chưa thành công. Kiểm tra email và mật khẩu.");
+    return;
+  }
+
+  currentUser = data.user;
+  setLoggedIn(true);
+  await refreshPage();
+
+  if (inventoryItems.length > 0) addReceiptLine();
+});
+
+$("logoutBtn").addEventListener("click", async () => {
+  await sbClient.auth.signOut();
+  currentUser = null;
+  inventoryItems = [];
+  $("receiptLines").innerHTML = "";
+  setLoggedIn(false);
+  showLoginMessage("Đã đăng xuất.");
+});
+
+async function initializePage() {
+  $("receiptDate").value = localDateString();
+
+  if (!sbClient) {
+    showLoginMessage("Không tìm thấy Supabase. Kiểm tra file js/supabase-config.js.");
+    return;
+  }
+
+  const { data, error } = await sbClient.auth.getSession();
+
+  if (error) {
+    showLoginMessage("Không kiểm tra được phiên đăng nhập: " + error.message);
+    return;
+  }
+
+  if (data.session) {
+    currentUser = data.session.user;
+    setLoggedIn(true);
+    await refreshPage();
+    if (inventoryItems.length > 0) addReceiptLine();
+  } else {
+    setLoggedIn(false);
+  }
+
+  sbClient.auth.onAuthStateChange((event, session) => {
+    if (!session) {
+      currentUser = null;
+      setLoggedIn(false);
+    }
+  });
+}
+
+initializePage();
+</script>
+
+</body>
+</html>
