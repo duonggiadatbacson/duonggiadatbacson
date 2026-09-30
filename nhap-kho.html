@@ -177,6 +177,104 @@ th {
 .empty { text-align: center; padding: 24px; color: var(--muted); }
 .muted { color: var(--muted); font-size: 13px; }
 .back-link { color: var(--wine); text-decoration: none; font-weight: bold; }
+/* Cửa sổ xem chi tiết phiếu nhập */
+.detail-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: 20px;
+  background: #1e1714a6;
+  overflow-y: auto;
+  place-items: center;
+}
+
+.detail-modal.open {
+  display: grid;
+}
+
+.detail-card {
+  width: min(760px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 12px 40px #0002;
+}
+
+.detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.detail-head h2 {
+  color: var(--wine);
+  margin: 0;
+}
+
+.detail-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+  background: #fbf8f4;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+.detail-info strong {
+  color: var(--wine);
+}
+
+.detail-total {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  padding-top: 16px;
+  font-size: 16px;
+}
+
+.detail-total strong {
+  color: var(--wine);
+  font-size: 24px;
+}
+
+.receipt-id-btn {
+  border: 0;
+  padding: 4px 7px;
+  background: #f5eee7;
+  color: var(--wine);
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.receipt-id-btn:hover {
+  background: #eadfd2;
+}
+
+@media(max-width: 520px) {
+  .detail-card {
+    padding: 15px;
+  }
+
+  .detail-info {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-total {
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
 @media(max-width: 700px) {
   .admin { width: calc(100% - 22px); margin-top: 20px; }
   .form-grid { grid-template-columns: 1fr; }
@@ -345,7 +443,41 @@ th {
   </section>
 
 </main>
+<!-- CỬA SỔ CHI TIẾT PHIẾU NHẬP -->
+<div class="detail-modal" id="detailModal" role="dialog" aria-modal="true">
+  <div class="detail-card">
+    <div class="detail-head">
+      <h2 id="detailTitle">Chi tiết phiếu nhập</h2>
+      <button type="button" class="light small" id="closeDetailBtn">
+        Đóng
+      </button>
+    </div>
 
+    <div id="detailMessage"></div>
+
+    <div class="detail-info" id="detailInfo"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mặt hàng</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+          </tr>
+        </thead>
+        <tbody id="detailRows"></tbody>
+      </table>
+    </div>
+
+    <div class="detail-total">
+      <span>Tổng tiền phiếu nhập</span>
+      <strong id="detailTotal">0 ₫</strong>
+    </div>
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
 
@@ -488,14 +620,20 @@ async function loadReceipts() {
 
   $("receiptRows").innerHTML = rows.map(receipt => `
     <tr>
-      <td>#${escapeHTML(receipt.receipt_id)}</td>
+      <td>
+        <button
+          type="button"
+          class="receipt-id-btn"
+          data-receipt-id="${escapeHTML(receipt.receipt_id)}">
+          #${escapeHTML(receipt.receipt_id)}
+        </button>
+      </td>
       <td>${escapeHTML(receipt.receipt_date)}</td>
       <td>${escapeHTML(receipt.supplier || "—")}</td>
       <td><b>${money(receipt.total_amount)}</b></td>
       <td>${escapeHTML(receipt.note || "—")}</td>
     </tr>
   `).join("");
-
   $("receiptEmpty").hidden = rows.length > 0;
 }
 
@@ -688,7 +826,143 @@ $("receiptForm").addEventListener("submit", async event => {
     $("saveReceiptBtn").textContent = "Lưu phiếu nhập";
   }
 });
+// Mở cửa sổ chi tiết phiếu nhập
+async function openReceiptDetail(receiptId) {
+  $("detailModal").classList.add("open");
+  $("detailTitle").textContent = `Chi tiết phiếu nhập #${receiptId}`;
+  $("detailMessage").innerHTML = "";
+  $("detailInfo").innerHTML = "";
+  $("detailRows").innerHTML = `
+    <tr>
+      <td colspan="5" class="empty">Đang tải chi tiết phiếu...</td>
+    </tr>
+  `;
+  $("detailTotal").textContent = money(0);
 
+  // Lấy thông tin phiếu
+  const { data: receipt, error: receiptError } = await sbClient
+    .from("stock_receipts")
+    .select("id,receipt_date,supplier,note,created_at")
+    .eq("id", receiptId)
+    .single();
+
+  if (receiptError) {
+    console.error("Lỗi tải thông tin phiếu:", receiptError);
+    $("detailRows").innerHTML = "";
+    $("detailMessage").innerHTML = `
+      <div class="error-box">
+        Không tải được thông tin phiếu: ${escapeHTML(receiptError.message)}
+      </div>
+    `;
+    return;
+  }
+
+  // Lấy các mặt hàng trong phiếu
+  const { data: items, error: itemsError } = await sbClient
+    .from("stock_receipt_items")
+    .select(`
+      item_id,
+      quantity,
+      unit_price,
+      inventory_items (
+        item_name,
+        unit
+      )
+    `)
+    .eq("receipt_id", receiptId)
+    .order("id", { ascending: true });
+
+  if (itemsError) {
+    console.error("Lỗi tải mặt hàng của phiếu:", itemsError);
+    $("detailRows").innerHTML = "";
+    $("detailMessage").innerHTML = `
+      <div class="error-box">
+        Không tải được danh sách mặt hàng: ${escapeHTML(itemsError.message)}
+      </div>
+    `;
+    return;
+  }
+
+  const receiptItems = items || [];
+  let total = 0;
+
+  $("detailInfo").innerHTML = `
+    <div><strong>Mã phiếu:</strong> #${escapeHTML(receipt.id)}</div>
+    <div><strong>Ngày nhập:</strong> ${escapeHTML(receipt.receipt_date || "—")}</div>
+    <div><strong>Nơi mua:</strong> ${escapeHTML(receipt.supplier || "—")}</div>
+    <div><strong>Ghi chú:</strong> ${escapeHTML(receipt.note || "—")}</div>
+  `;
+
+  if (receiptItems.length === 0) {
+    $("detailRows").innerHTML = `
+      <tr>
+        <td colspan="5" class="empty">
+          Phiếu này chưa có mặt hàng chi tiết.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  $("detailRows").innerHTML = receiptItems.map((item, index) => {
+    const quantity = Number(item.quantity) || 0;
+    const unitPrice = Number(item.unit_price) || 0;
+    const lineTotal = quantity * unitPrice;
+
+    total += lineTotal;
+
+    // Supabase trả quan hệ có thể là object hoặc mảng
+    const product = Array.isArray(item.inventory_items)
+      ? item.inventory_items[0]
+      : item.inventory_items;
+
+    const itemName = product?.item_name || `Mặt hàng #${item.item_id}`;
+    const unit = product?.unit || "";
+
+    return `
+      <tr>
+        <td>${index + 1}</td>
+        <td>
+          <strong>${escapeHTML(itemName)}</strong>
+          ${unit ? `<br><small>${escapeHTML(unit)}</small>` : ""}
+        </td>
+        <td>${escapeHTML(quantity)}</td>
+        <td>${money(unitPrice)}</td>
+        <td><strong>${money(lineTotal)}</strong></td>
+      </tr>
+    `;
+  }).join("");
+
+  $("detailTotal").textContent = money(total);
+}
+
+// Bấm mã phiếu để mở chi tiết
+$("receiptRows").addEventListener("click", event => {
+  const button = event.target.closest("[data-receipt-id]");
+  if (!button) return;
+
+  openReceiptDetail(button.dataset.receiptId);
+});
+
+// Đóng cửa sổ chi tiết
+function closeReceiptDetail() {
+  $("detailModal").classList.remove("open");
+}
+
+$("closeDetailBtn").addEventListener("click", closeReceiptDetail);
+
+$("detailModal").addEventListener("click", event => {
+  if (event.target === $("detailModal")) {
+    closeReceiptDetail();
+  }
+});
+
+// Đóng bằng phím Escape
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeReceiptDetail();
+  }
+});
 $("receiptFilter").addEventListener("change", loadReceipts);
 $("refreshBtn").addEventListener("click", refreshPage);
 
