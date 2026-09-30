@@ -541,13 +541,20 @@ th {
   <section class="panel">
     <h2>4. Phiếu nhập gần đây</h2>
     <div class="toolbar">
-      <div>
-        <label for="receiptFilter">Lọc từ ngày</label>
-        <input id="receiptFilter" type="date">
-      </div>
-      <button type="button" class="light" id="refreshBtn">Tải lại</button>
-    </div>
+  <div>
+    <label for="receiptFrom">Từ ngày</label>
+    <input id="receiptFrom" type="date">
+  </div>
 
+  <div>
+    <label for="receiptTo">Đến ngày</label>
+    <input id="receiptTo" type="date">
+  </div>
+
+  <button type="button" class="light" id="refreshBtn">
+    Tải lại
+  </button>
+</div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -724,11 +731,31 @@ async function loadItems() {
 }
 
 async function loadReceipts() {
-  const { data, error } = await sbClient
+  const fromDate = $("receiptFrom").value;
+  const toDate = $("receiptTo").value;
+
+  if (fromDate && toDate && fromDate > toDate) {
+    showMessage("Ngày bắt đầu không được lớn hơn ngày kết thúc.", "error");
+    return;
+  }
+
+  let query = sbClient
     .from("stock_receipt_totals")
     .select("receipt_id,receipt_date,supplier,note,total_amount,created_at")
-    .order("created_at", { ascending: false })
-    .limit(100);
+    .order("receipt_date", { ascending: false })
+    .order("created_at", { ascending: false });
+
+  // Lọc từ ngày, bao gồm cả ngày được chọn
+  if (fromDate) {
+    query = query.gte("receipt_date", fromDate);
+  }
+
+  // Lọc đến ngày, bao gồm cả ngày được chọn
+  if (toDate) {
+    query = query.lte("receipt_date", toDate);
+  }
+
+  const { data, error } = await query.limit(500);
 
   if (error) {
     console.error("Lỗi tải phiếu nhập:", error);
@@ -736,10 +763,7 @@ async function loadReceipts() {
     return;
   }
 
-  const dateFilter = $("receiptFilter").value;
-  const rows = (data || []).filter(receipt =>
-    !dateFilter || receipt.receipt_date >= dateFilter
-  );
+  const rows = data || [];
 
   $("receiptRows").innerHTML = rows.map(receipt => `
     <tr>
@@ -757,6 +781,7 @@ async function loadReceipts() {
       <td>${escapeHTML(receipt.note || "—")}</td>
     </tr>
   `).join("");
+
   $("receiptEmpty").hidden = rows.length > 0;
 }
 async function loadSummary() {
@@ -1141,7 +1166,8 @@ document.addEventListener("keydown", event => {
     closeReceiptDetail();
   }
 });
-$("receiptFilter").addEventListener("change", loadReceipts);
+$("receiptFrom").addEventListener("change", loadReceipts);
+$("receiptTo").addEventListener("change", loadReceipts);
 $("refreshBtn").addEventListener("click", refreshPage);
 
 $("summaryDate").addEventListener("change", loadSummary);
