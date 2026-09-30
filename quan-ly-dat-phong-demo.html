@@ -264,10 +264,11 @@ th {
         <div>
           <label for="roomId">Phòng *</label>
           <select id="roomId">
-            <option value="r1">Phòng 01</option>
-            <option value="r2">Phòng 02</option>
-            <option value="r3">Phòng 03</option>
-          </select>
+  <option value="r1">Phòng 01</option>
+  <option value="r2">Phòng 02</option>
+  <option value="r3">Phòng 03</option>
+  <option value="r4">Phòng 04</option>
+</select>
         </div>
         <div><label for="guestCount">Số khách *</label><input id="guestCount" type="number" min="1" max="6" value="2" required></div>
         <div><label for="checkin">Ngày nhận *</label><input id="checkin" type="date" required></div>
@@ -356,10 +357,11 @@ th {
         <div>
           <label for="editRoom">Phòng</label>
           <select id="editRoom">
-            <option value="r1">Phòng 01</option>
-            <option value="r2">Phòng 02</option>
-            <option value="r3">Phòng 03</option>
-          </select>
+  <option value="r1">Phòng 01</option>
+  <option value="r2">Phòng 02</option>
+  <option value="r3">Phòng 03</option>
+  <option value="r4">Phòng 04</option>
+</select>
         </div>
         <div><label for="editGuests">Số khách</label><input id="editGuests" type="number" min="1" max="6" required></div>
         <div><label for="editCheckin">Ngày nhận</label><input id="editCheckin" type="date" required></div>
@@ -397,7 +399,8 @@ const sbClient = window.supabaseClient;
 const roomNames = {
   r1: "Phòng 01",
   r2: "Phòng 02",
-  r3: "Phòng 03"
+  r3: "Phòng 03",
+  r4: "Phòng 04"
 };
 
 const statusNames = {
@@ -569,8 +572,7 @@ $("addForm").addEventListener("submit", async event => {
   const checkin = $("checkin").value;
   const checkout = $("checkout").value;
   const guests = Number($("guestCount").value);
-  const capacity = { r1: 4, r2: 4, r3: 6 }[roomId];
-
+  const capacity = { r1: 4, r2: 4, r3: 6, r4: 4 }[roomId];
   if (!checkin || !checkout || checkout <= checkin) {
     alert("Ngày trả phòng phải sau ngày nhận phòng.");
     return;
@@ -677,7 +679,7 @@ $("editForm").addEventListener("submit", async event => {
   const checkin = $("editCheckin").value;
   const checkout = $("editCheckout").value;
   const guests = Number($("editGuests").value);
-  const capacity = { r1: 4, r2: 4, r3: 6 }[roomId];
+  const capacity = { r1: 4, r2: 4, r3: 6, r4: 4 }[roomId];
 
   if (!checkin || !checkout || checkout <= checkin) {
     alert("Ngày trả phòng phải sau ngày nhận phòng.");
