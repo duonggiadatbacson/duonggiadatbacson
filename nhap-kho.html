@@ -259,6 +259,62 @@ th {
 .receipt-id-btn:hover {
   background: #eadfd2;
 }
+/* Bảng chi tiết phiếu nhập: vừa khung hộp thoại */
+.detail-card .table-wrap {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.detail-card table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+  font-size: 13px;
+}
+
+.detail-card th,
+.detail-card td {
+  padding: 9px 6px;
+  overflow-wrap: anywhere;
+}
+
+/* Điều chỉnh độ rộng các cột */
+.detail-card th:nth-child(1),
+.detail-card td:nth-child(1) {
+  width: 9%;
+}
+
+.detail-card th:nth-child(2),
+.detail-card td:nth-child(2) {
+  width: 32%;
+}
+
+.detail-card th:nth-child(3),
+.detail-card td:nth-child(3) {
+  width: 17%;
+}
+
+.detail-card th:nth-child(4),
+.detail-card td:nth-child(4) {
+  width: 19%;
+}
+
+.detail-card th:nth-child(5),
+.detail-card td:nth-child(5) {
+  width: 23%;
+}
+
+/* Trên điện thoại */
+@media (max-width: 520px) {
+  .detail-card table {
+    font-size: 11px;
+  }
+
+  .detail-card th,
+  .detail-card td {
+    padding: 7px 4px;
+  }
+}
 
 @media(max-width: 520px) {
   .detail-card {
