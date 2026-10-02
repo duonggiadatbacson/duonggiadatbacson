@@ -1740,3 +1740,14 @@ a {
 .footer-admin-link:hover {
     text-decoration: underline;
 }
+/* FOOTER - LINK ADMIN ẨN */
+.footer-admin-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer-admin-link:hover {
+    color: inherit;
+    text-decoration: none;
+}
