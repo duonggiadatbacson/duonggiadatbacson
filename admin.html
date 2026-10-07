@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quản trị | Dương Gia Đạt Homestay</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+:root {
+  --wine: #87382d;
+  --wine-dark: #6e2b23;
+  --cream: #fbf7f0;
+  --line: #eadfd2;
+  --ink: #382f2a;
+  --muted: #786b62;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f7f5f1;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+
+.admin {
+  width: min(1100px, calc(100% - 32px));
+  margin: 40px auto;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.admin-header h1 {
+  color: var(--wine);
+  margin: 0 0 8px;
+}
+
+.admin-header p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-card {
+  display: block;
+  padding: 25px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: 0 5px 18px #4b33200c;
+  transition: .2s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--wine);
+  box-shadow: 0 10px 25px #4b332018;
+}
+
+.admin-card .icon {
+  font-size: 30px;
+  margin-bottom: 14px;
+}
+
+.admin-card h2 {
+  color: var(--wine);
+  font-size: 20px;
+  margin: 0 0 9px;
+}
+
+.admin-card p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 14px;
+}
+
+.admin-card .link-label {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--wine);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.admin-footer {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.admin-footer a {
+  color: var(--wine);
+  text-decoration: none;
+}
+
+@media(max-width: 650px) {
+  .admin {
+    margin-top: 24px;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-card {
+    padding: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="admin">
+
+  <header class="admin-header">
+    <div>
+      <h1>🔐 Bảng điều khiển quản trị</h1>
+      <p>Dương Gia Đạt Homestay · Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+    </div>
+  </header>
+
+  <section class="admin-grid">
+
+    <a class="admin-card" href="quan-ly-dat-phong-co-luu-tru.html">
+      <div class="icon">📅</div>
+      <h2>Quản lý đặt phòng</h2>
+      <p>
+        Xem đơn đặt phòng, thêm đơn trực tiếp, cập nhật trạng thái,
+        chỉnh sửa thông tin khách và xuất danh sách đặt phòng.
+      </p>
+      <span class="link-label">Mở quản lý đặt phòng →</span>
+    </a>
+
+    <a class="admin-card" href="nhap-kho-co-ton-kho.html">
+      <div class="icon">📦</div>
+      <h2>Quản lý kho</h2>
+      <p>
+        Theo dõi hàng hóa, nhập hàng, số lượng tồn kho và các hoạt động
+        xuất kho phục vụ khách lưu trú.
+      </p>
+      <span class="link-label">Mở quản lý kho →</span>
+    </a>
+
+    <a class="admin-card" href="bao-cao.html">
+      <div class="icon">📊</div>
+      <h2>Báo cáo</h2>
+      <p>
+        Tổng hợp hoạt động đặt phòng, nhập xuất kho và các số liệu
+        quản lý của homestay.
+      </p>
+      <span class="link-label">Xem báo cáo →</span>
+    </a>
+
+    <a class="admin-card" href="index.html">
+      <div class="icon">🏡</div>
+      <h2>Về trang chủ</h2>
+      <p>
+        Quay lại website Dương Gia Đạt Homestay.
+      </p>
+      <span class="link-label">Về trang chủ →</span>
+    </a>
+
+  </section>
+
+  <div class="admin-footer">
+    <a href="index.html">← Quay lại website</a>
+  </div>
+
+</main>
+
+</body>
+</html>

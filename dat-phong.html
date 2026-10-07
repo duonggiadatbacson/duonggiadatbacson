@@ -1,60 +1,455 @@
+
 <!DOCTYPE html>
 <html lang="vi">
+<style>
+/* ==================================================
+   CSS RIÊNG CHO TRANG ĐẶT PHÒNG
+   ================================================== */
+
+/* Khung nội dung chính */
+main {
+    max-width: 1120px;
+    width: calc(100% - 36px);
+    margin: 40px auto 60px;
+    color: #40352f;
+    line-height: 1.6;
+}
+
+main h1 {
+    color: #8b382c;
+    font-size: 36px;
+    margin: 0 0 8px;
+}
+
+main h2 {
+    color: #8b382c;
+    font-size: 26px;
+    margin: 0 0 20px;
+}
+
+/* Khung biểu mẫu */
+main .panel {
+    background: #fff;
+    border: 1px solid #eadfce;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 24px rgba(70, 45, 25, .07);
+}
+
+main .fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+main label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+main input,
+main select,
+main textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d9cbbd;
+    border-radius: 8px;
+    background: #fff;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+main button {
+    border: 1px solid #8b382c;
+    border-radius: 8px;
+    padding: 11px 18px;
+    background: #8b382c;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+main button:hover:not(:disabled) {
+    background: #6f2b22;
+}
+
+main button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+main button.alt {
+    background: #fff;
+    color: #8b382c;
+}
+
+main button.alt:hover:not(:disabled) {
+    background: #fff7ed;
+}
+
+main .hint {
+    color: #796c62;
+    font-size: 14px;
+}
+
+/* ==================================================
+   DANH SÁCH PHÒNG
+   ================================================== */
+
+main .rooms {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 20px 0 36px;
+}
+
+main .room {
+    min-width: 0;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #eadfce;
+    border-radius: 14px;
+    padding: 0 20px 20px;
+    box-shadow: 0 7px 22px rgba(70, 45, 25, .07);
+}
+
+/* Ảnh đại diện trên thẻ phòng */
+main .room .photo {
+    width: calc(100% + 40px);
+    height: 220px;
+    margin: 0 -20px 18px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #79634d;
+    font-weight: 600;
+    background: linear-gradient(135deg, #f5ead9, #e8d4b8);
+}
+
+main .room .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tên và thông tin phòng */
+main .room h3 {
+    color: #8b382c;
+    font-size: 21px;
+    margin: 0 0 8px;
+}
+
+main .status {
+    display: inline-block;
+    margin: 12px 0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #f5eee5;
+    color: #79634d;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+main .status.yes {
+    background: #e7f4e9;
+    color: #246a37;
+}
+
+main .status.no {
+    background: #fbe9e6;
+    color: #9a3428;
+}
+
+/* ==================================================
+   PHẦN XEM CHI TIẾT PHÒNG
+   ================================================== */
+
+main .details {
+    display: none;
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #fffaf2;
+    font-size: 14px;
+}
+
+main .details.open {
+    display: block;
+}
+
+/* ==================================================
+   THƯ VIỆN ẢNH TRONG CHI TIẾT PHÒNG
+   ================================================== */
+
+main .room-gallery {
+    width: 100%;
+    min-width: 0;
+    margin: 18px 0;
+    padding: 14px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+}
+
+/* Ảnh lớn */
+main .room-gallery-main {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f5ead9, #e8d4b8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #79634d;
+}
+
+main .room-gallery-main img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Hàng ảnh thu nhỏ */
+main .room-gallery-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+main .room-gallery-thumbnails button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f1e6d7;
+    cursor: pointer;
+}
+
+main .room-gallery-thumbnails button:hover {
+    background: #f1e6d7;
+}
+
+main .room-gallery-thumbnails button.active {
+    border-color: #8b382c;
+}
+
+main .room-gallery-thumbnails img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+/* Ghi chú dưới thư viện ảnh */
+main .room-gallery-note {
+    margin: 10px 0 0;
+    color: #796c62;
+    font-size: 13px;
+}
+
+/* Các thông tin bổ sung nếu có */
+main .room-gallery-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 18px;
+    color: #444;
+}
+
+main .room-gallery-info span {
+    display: inline-block;
+}
+
+/* ==================================================
+   PHẦN ĐẶT PHÒNG VÀ NÚT HÀNH ĐỘNG
+   ================================================== */
+
+main .booking {
+    display: none;
+}
+
+main .booking.show {
+    display: block;
+}
+
+main #summary {
+    padding: 12px 15px;
+    background: #fffaf2;
+    border-left: 4px solid #d6a34b;
+    border-radius: 5px;
+}
+
+main .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* ==================================================
+   NÚT QUẢN LÝ KÍN ĐÁO CẠNH BẢN QUYỀN
+   ================================================== */
+
+.copyright-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-secret {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: inherit;
+    opacity: .35;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: opacity .2s ease, background .2s ease;
+}
+
+.admin-secret:hover,
+.admin-secret:focus {
+    opacity: 1;
+    background: rgba(255, 255, 255, .15);
+}
+
+/* ==================================================
+   GIAO DIỆN MÁY TÍNH BẢNG VÀ ĐIỆN THOẠI
+   ================================================== */
+
+@media (max-width: 760px) {
+    main {
+        width: calc(100% - 28px);
+        margin-top: 25px;
+    }
+
+    main .fields,
+    main .rooms {
+        grid-template-columns: 1fr;
+    }
+
+    main .panel {
+        padding: 20px;
+    }
+
+    main .room .photo {
+        height: 230px;
+    }
+}
+
+/* Màn hình điện thoại nhỏ */
+@media (max-width: 600px) {
+    main h1 {
+        font-size: 29px;
+    }
+
+    main h2 {
+        font-size: 23px;
+    }
+
+    main .room-gallery {
+        padding: 10px;
+    }
+
+    main .room-gallery-main {
+        aspect-ratio: 4 / 3;
+    }
+
+    main .room-gallery-thumbnails {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    main .room-gallery-thumbnails button {
+        min-height: 0;
+    }
+}
+main .detail-link {
+    display: inline-block;
+    padding: 11px 18px;
+    border: 1px solid #8b382c;
+    border-radius: 8px;
+    background: #fff;
+    color: #8b382c;
+    font: inherit;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+main .detail-link:hover {
+    background: #fff7ed;
+}
+</style>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Gửi yêu cầu đặt phòng trực tiếp tại Dương Gia Đạt Homestay, Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn.">
-  <link rel="canonical" href="https://duonggiadatbacson.com/dat-phong.html">
-  <meta property="og:title" content="Đặt phòng trực tiếp | Dương Gia Đạt Homestay">
-  <meta property="og:description" content="Gửi thông tin ngày lưu trú và số khách để Dương Gia Đạt Homestay kiểm tra phòng và phản hồi.">
-  <meta property="og:image" content="https://duonggiadatbacson.com/images/logo/3.jpg">
-  <meta property="og:url" content="https://duonggiadatbacson.com/dat-phong.html">
-  <title>Đặt phòng trực tiếp | Dương Gia Đạt Homestay</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    .booking-page{padding:42px 16px 60px}
-    .booking-wrap{max-width:850px;margin:0 auto}
-    .booking-intro{text-align:center;margin-bottom:28px}
-    .booking-intro h1{margin-bottom:10px}
-    .booking-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:clamp(20px,4vw,36px);box-shadow:0 8px 28px rgba(0,0,0,.06);color:#222}
-    .booking-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .booking-field{display:flex;flex-direction:column;gap:7px}
-    .booking-field.full{grid-column:1/-1}
-    .booking-field label{font-weight:600}
-    .booking-field input,.booking-field select,.booking-field textarea{width:100%;box-sizing:border-box;padding:12px 13px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;background:#fff;color:#222}
-    .booking-field textarea{min-height:110px;resize:vertical}
-    .booking-help{font-size:.92rem;color:#5b6470;line-height:1.6}
-    .booking-submit{display:inline-flex;align-items:center;justify-content:center;width:100%;margin-top:22px;padding:14px 20px;border:0;border-radius:9px;background:#176b45;color:#fff;font-size:1rem;font-weight:700;cursor:pointer}
-    .booking-submit:hover{background:#105638}
-    .booking-notice{margin-top:16px;padding:14px;border-radius:9px;background:#f0f7f2;line-height:1.6}
-    .booking-contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
-    .booking-contact-actions a{display:inline-flex;align-items:center;justify-content:center;flex:1 1 190px;padding:13px 16px;border-radius:9px;text-decoration:none;font-weight:700}
-    .booking-fb{background:#1877f2;color:#fff}
-    .booking-zalo{background:#0068ff;color:#fff}
-    .booking-mail{background:#176b45;color:#fff}
-    .booking-hidden{display:none}
-    @media(max-width:620px){.booking-grid{grid-template-columns:1fr}.booking-field.full{grid-column:auto}.booking-page{padding-top:28px}}
-  </style>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Du lịch Quỳnh Sơn, Bắc Sơn, Lạng Sơn. Khám phá làng Tày, nhà sàn truyền thống, văn hóa, ẩm thực địa phương, thung lũng Bắc Sơn và những trải nghiệm đặc sắc tại Quỳnh Sơn.">
+
+    <link rel="canonical" href="https://duonggiadatbacson.com">
+
+    <meta property="og:title" content="Du lịch Quỳnh Sơn | Khám phá Bắc Sơn, Lạng Sơn">
+
+    <meta property="og:description" content="Khám phá Quỳnh Sơn, Bắc Sơn, Lạng Sơn với làng Tày, nhà sàn truyền thống, văn hóa, ẩm thực địa phương và cảnh quan núi rừng Đông Bắc.">
+
+    <meta property="og:image" content="https://duonggiadatbacson.com/images/logo/1.jpg">
+
+    <meta property="og:url" content="https://duonggiadatbacson.com">
+
+    <title>Du lịch Quỳnh Sơn | Khám phá Bắc Sơn, Lạng Sơn</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
+
 <body>
-<header class="site-header">
-  <div class="header-image">
-    <img src="images/logo/1.jpg" alt="Dương Gia Đạt Homestay">
-  </div>
-  <div class="header-navigation">
-    <div class="container">
-      <nav class="main-nav">
-         <a href="index.html"
+
+    <header class="site-header">
+
+    <div class="header-image">
+        <img src="images/logo/1.jpg"
+             alt="Dương Gia Đạt Homestay">
+    </div>
+
+    <div class="header-navigation">
+
+        <div class="container">
+
+            <nav class="main-nav">
+
+    <a href="index.html"
        data-i18n="nav.home"
        aria-label="Trang chủ">
         🏠
     </a>
 
-    <a href="du-lich-quynh-son.html"
-       data-i18n="nav.quynhson">
-        Du lịch Quỳnh Sơn
-    </a>
-
+   <a href="du-lich-bac-son.html"
+   data-i18n="nav.travel">
+    Du lịch Bắc Sơn
+</a>
     <a href="rooms.html"
        data-i18n="nav.rooms">
         Phòng
@@ -92,170 +487,721 @@
 </div>
 
 <a href="dat-phong.html" class="booking-button" data-i18n="nav.booking">ĐẶT PHÒNG</a>
-    </div>
-  </div>
+
+</div>
+</div>
 </header>
 
-<main class="booking-page">
-  <div class="booking-wrap">
-    <div class="booking-intro">
-      <h1>Đặt phòng trực tiếp</h1>
-      <p>Dương Gia Đạt Homestay · Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
-      <p class="booking-help">Gửi thông tin lưu trú để homestay kiểm tra tình trạng phòng và liên hệ xác nhận với anh/chị.</p>
-    </div>
-
-    <section class="booking-card" aria-labelledby="booking-form-title">
-      <h2 id="booking-form-title">Thông tin đặt phòng</h2>
-      <form id="bookingForm">
-        <div class="booking-grid">
-          <div class="booking-field">
-            <label for="checkin">Ngày nhận phòng *</label>
-            <input id="checkin" name="checkin" type="date" required>
-          </div>
-          <div class="booking-field">
-            <label for="checkout">Ngày trả phòng *</label>
-            <input id="checkout" name="checkout" type="date" required>
-          </div>
-          <div class="booking-field">
-            <label for="guests">Số khách *</label>
-            <select id="guests" name="guests" required>
-              <option value="">Chọn số khách</option>
-              <option>1 khách</option><option>2 khách</option><option>3 khách</option>
-              <option>4 khách</option><option>5 khách</option><option>6 khách</option>
-              <option>Trên 6 khách</option>
-            </select>
-          </div>
-          <div class="booking-field">
-            <label for="rooms">Số phòng dự kiến *</label>
-            <select id="rooms" name="rooms" required>
-              <option value="">Chọn số phòng</option>
-              <option>1 phòng</option><option>2 phòng</option><option>3 phòng</option>
-              <option>4 phòng trở lên</option>
-            </select>
-          </div>
-          <div class="booking-field">
-            <label for="fullname">Họ và tên *</label>
-            <input id="fullname" name="fullname" type="text" autocomplete="name" maxlength="100" placeholder="Tên người đặt phòng" required>
-          </div>
-          <div class="booking-field">
-            <label for="phone">Số điện thoại *</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Số điện thoại liên hệ" required>
-          </div>
-          <div class="booking-field full">
-            <label for="email">Email (không bắt buộc)</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="Địa chỉ email nếu có">
-          </div>
-          <div class="booking-field full">
-            <label for="note">Yêu cầu thêm (không bắt buộc)</label>
-            <textarea id="note" name="note" maxlength="1000" placeholder="Ví dụ: giờ đến dự kiến, nhu cầu ăn uống hoặc yêu cầu khác..."></textarea>
-          </div>
-        </div>
-        <p class="booking-help">Sau khi bấm gửi, thiết bị sẽ mở ứng dụng email với nội dung yêu cầu đã điền sẵn. Anh/chị cần bấm <strong>Gửi</strong> trong ứng dụng email để chuyển yêu cầu đến homestay. Việc gửi yêu cầu chưa phải xác nhận phòng đã được giữ.</p>
-        <button class="booking-submit" type="submit">Gửi yêu cầu đặt phòng qua email</button>
-      </form>
-
-      <div id="afterSubmit" class="booking-notice booking-hidden" role="status" aria-live="polite">
-        <strong>Đã chuẩn bị nội dung yêu cầu đặt phòng.</strong><br>
-        Vui lòng hoàn tất thao tác gửi trong ứng dụng email vừa mở. Nếu không mở được email, anh/chị có thể liên hệ trực tiếp qua các kênh bên dưới.
-        <div class="booking-contact-actions">
-          <a class="booking-fb" href="https://www.facebook.com/profile.php?id=61593858644090" target="_blank" rel="noopener">Nhắn tin qua Fanpage</a>
-          <a class="booking-zalo" href="https://zalo.me/0815959399" target="_blank" rel="noopener">Liên hệ qua Zalo</a>
-          <a class="booking-mail" href="mailto:duonggiadathomestay@gmail.com">Mở email</a>
-        </div>
-      </div>
-    </section>
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-main">
-    <div class="footer-column">
-      <h3>Liên kết nhanh</h3>
-      <a href="index.html">Trang chủ</a>
-      <a href="gioi-thieu.html">Giới thiệu</a>
-      <a href="rooms.html">Phòng nghỉ</a>
-      <a href="blog.html">Blog</a>
-      <a href="gallery.html">Thư viện ảnh</a>
-      <a href="contact.html">Liên hệ</a>
-      <a href="dat-phong.html">Đặt phòng trực tiếp</a>
-    </div>
-    <div class="footer-column">
-      <h3>Thông tin liên hệ</h3>
-      <p>Dương Gia Đạt Homestay</p>
-      <p>Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
-      <p>Điện thoại: <a href="tel:0815959399">0815 959 399</a></p>
-      <a href="dat-phong.html" class="footer-booking">Gửi yêu cầu đặt phòng</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="container footer-bottom-inner">
-      <p>© 2026 Dương Gia Đạt Homestay</p>
-      <div class="social-links">
-        <a href="https://www.facebook.com/profile.php?id=61593858644090" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://zalo.me/0815959399" target="_blank" rel="noopener">Zalo</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
+<main>
+<div class="booking-intro">
+    <h1>Dương Gia Đạt Homestay</h1>
+    <p>Làng du lịch cộng đồng Quỳnh Sơn, Bắc Sơn, Lạng Sơn</p>
+</div>
+<section class="panel"><h2>Kiểm tra phòng trống</h2><div class="fields"><div><label>Ngày nhận phòng</label><input type="date" id="ci"></div><div><label>Ngày trả phòng</label><input type="date" id="co"></div><div><label>Số khách</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div><p><button id="check">Kiểm tra tình trạng phòng</button></p><div class="hint">Yêu cầu chỉ được xác nhận sau khi homestay phản hồi.</div></section>
+<h2>Chọn phòng</h2><div class="rooms" id="rooms"></div>
+<section class="panel booking" id="booking"><h2>Gửi yêu cầu đặt phòng</h2><p id="summary"></p><div class="fields"><div><label>Họ tên</label><input id="name" required></div><div><label>Số điện thoại</label><input id="phone" type="tel" required></div><div><label>Số khách</label><select id="n"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div><p><label>Ghi chú</label><textarea id="note" rows="3"></textarea></p><div class="actions"><button id="msg">Messenger</button><button class="alt" id="zalo">Zalo</button><button class="alt" id="email">Email</button></div></section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
 <script>
-  (function () {
-    const form = document.getElementById('bookingForm');
-    const checkin = document.getElementById('checkin');
-    const checkout = document.getElementById('checkout');
-    const afterSubmit = document.getElementById('afterSubmit');
+/* =====================================
+   1. CẤU HÌNH PHÒNG VÀ BIẾN BAN ĐẦU
+===================================== */
 
-    const today = new Date();
-    const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
-      .toISOString().slice(0, 10);
-    checkin.min = localToday;
-    checkout.min = localToday;
+const rooms = [
+  {
+    id: "r1",
+    name: "Phòng 01",
+    beds: 2,
+    cap: 4,
+    images: ["images/rooms/1.jpg",
+"images/rooms/6.jpg",]
+  },
+  {
+    id: "r2",
+    name: "Phòng 02",
+    beds: 2,
+    cap: 4,
+    images: ["images/rooms/2.jpg","images/rooms/15.jpg"]
+  },
+  {
+    id: "r3",
+    name: "Phòng 03",
+    beds: 3,
+    cap: 6,
+    images: ["images/rooms/12.jpg","images/rooms/8.jpg"]
+  },
+{
+    id: "r4",
+    name: "Phòng 04",
+    beds: 2,
+    cap: 4,
+    images: ["images/rooms/12.jpg","images/rooms/9.jpg"]
+  }
+];
 
-    checkin.addEventListener('change', function () {
-      checkout.min = checkin.value || localToday;
-      if (checkout.value && checkout.value <= checkin.value) checkout.value = '';
+const $ = id => document.getElementById(id);
+const sbClient = window.supabaseClient;
+
+let checked = false;
+let chosen = null;
+let availability = {};
+let savedRequestKey = null;
+
+
+/* =====================================
+   2. THIẾT LẬP NGÀY NHẬN PHÒNG
+===================================== */
+
+const now = new Date();
+
+const today = new Date(
+  now.getTime() - now.getTimezoneOffset() * 60000
+).toISOString().slice(0, 10);
+
+$("ci").min = today;
+$("co").min = today;
+$("ci").value = today;
+
+
+/* =====================================
+   3. HIỂN THỊ DANH SÁCH PHÒNG
+===================================== */
+
+function render() {
+  $("rooms").innerHTML = rooms.map(room => {
+    const available = availability[room.id] === true;
+
+    let status = "Chọn ngày để kiểm tra";
+
+    if (checked) {
+      status = available
+        ? "Còn phòng"
+        : "Hết phòng trong ngày đã chọn";
+    }
+
+    const hasImages = room.images && room.images.length > 0;
+
+    const cover = hasImages
+      ? `
+        <img
+          src="${room.images[0]}"
+          alt="Ảnh ${room.name}"
+          style="width:100%; height:100%; object-fit:cover;"
+        >
+      `
+      : `Ảnh ${room.name} sẽ được cập nhật`;
+
+    const mainImage = hasImages
+      ? `<img id="main-image-${room.id}"
+              src="${room.images[0]}"
+              alt="Hình ảnh ${room.name}">`
+      : `Ảnh phòng sẽ được cập nhật`;
+
+    const thumbnails = hasImages
+      ? room.images.map((image, index) => `
+          <button
+            type="button"
+            class="${index === 0 ? "active" : ""}"
+            onclick="changeRoomImage('${room.id}', ${index})"
+            aria-label="Xem ảnh ${index + 1} của ${room.name}">
+            <img src="${image}" alt="${room.name} - ảnh ${index + 1}">
+          </button>
+        `).join("")
+      : "";
+
+    return `
+      <article class="room">
+        <div class="photo">
+          ${cover}
+        </div>
+
+        <h3>${room.name}</h3>
+
+        <div>
+          ${room.beds} giường · Tối đa ${room.cap} khách
+        </div>
+
+        <span class="status ${available ? "yes" : "no"}">
+          ${status}
+        </span>
+
+        <br>
+
+    ${
+  room.id === "r1"
+    ? `<a class="detail-link" href="https://duonggiadatbacson.com/room1.html">Xem chi tiết</a>`
+    : room.id === "r2"
+      ? `<a class="detail-link" href="https://duonggiadatbacson.com/room2.html">Xem chi tiết</a>`
+      : room.id === "r3"
+        ? `<a class="detail-link" href="https://duonggiadatbacson.com/room3.html">Xem chi tiết</a>`
+        : room.id === "r4"
+          ? `<a class="detail-link" href="https://duonggiadatbacson.com/room4.html">Xem chi tiết</a>`
+          : `<button
+               class="alt"
+               onclick="document.getElementById('d-${room.id}').classList.toggle('open')">
+               Xem chi tiết
+             </button>`
+}
+
+        <button
+          ${available ? "" : "disabled"}
+          onclick="pick('${room.id}')">
+          Chọn phòng
+        </button>
+
+        <div class="details" id="d-${room.id}">
+          <b>Thông tin ${room.name}</b>
+
+          <p>
+            ${room.beds} giường, tối đa ${room.cap} khách.
+          </p>
+
+          <div class="room-gallery">
+            <div class="room-gallery-main" id="gallery-main-${room.id}">
+              ${mainImage}
+            </div>
+
+            <div
+              class="room-gallery-thumbnails"
+              id="gallery-thumbnails-${room.id}">
+              ${thumbnails}
+            </div>
+
+            ${
+              hasImages
+                ? `<p class="room-gallery-note">
+                     Bấm vào ảnh nhỏ để xem ảnh lớn.
+                   </p>`
+                : `<p class="room-gallery-note">
+                     Ảnh thực tế của phòng sẽ được bổ sung tại đây.
+                   </p>`
+            }
+          </div>
+
+          <p>
+            Tiện nghi và thông tin chi tiết sẽ được cập nhật.
+          </p>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+window.changeRoomImage = function(roomId, imageIndex) {
+  const room = rooms.find(item => item.id === roomId);
+
+  if (!room || !room.images || !room.images[imageIndex]) {
+    return;
+  }
+
+  const mainArea = document.getElementById("gallery-main-" + roomId);
+
+  if (!mainArea) {
+    return;
+  }
+
+  mainArea.innerHTML = `
+    <img
+      src="${room.images[imageIndex]}"
+      alt="Hình ảnh ${room.name}"
+    >
+  `;
+
+  const thumbnails = document.getElementById(
+    "gallery-thumbnails-" + roomId
+  );
+
+  if (thumbnails) {
+    thumbnails.querySelectorAll("button").forEach((button, index) => {
+      button.classList.toggle("active", index === imageIndex);
+    });
+  }
+};
+
+/* =====================================
+   4. CHỌN PHÒNG
+===================================== */
+
+window.pick = function(id) {
+  if (!checked || availability[id] !== true) {
+    alert("Vui lòng kiểm tra tình trạng phòng trước.");
+    return;
+  }
+
+  chosen = rooms.find(room => room.id === id);
+
+  $("booking").classList.add("show");
+
+  $("summary").textContent =
+    `${chosen.name} · ${$("ci").value} đến ${$("co").value}`;
+
+  $("n").value = $("guests").value;
+
+  $("booking").scrollIntoView({
+    behavior: "smooth"
+  });
+};
+
+
+/* =====================================
+   5. THAY ĐỔI NGÀY ĐẶT PHÒNG
+===================================== */
+
+$("ci").onchange = function() {
+  checked = false;
+  chosen = null;
+  availability = {};
+
+  $("co").min = $("ci").value;
+  $("booking").classList.remove("show");
+
+  render();
+};
+
+$("co").onchange = function() {
+  checked = false;
+  chosen = null;
+  availability = {};
+
+  $("booking").classList.remove("show");
+
+  render();
+};
+
+
+/* =====================================
+   6. KIỂM TRA PHÒNG TRỐNG TRÊN SUPABASE
+===================================== */
+
+$("check").onclick = async function() {
+  const checkin = $("ci").value;
+  const checkout = $("co").value;
+
+  if (!checkin || !checkout || checkout <= checkin) {
+    alert("Ngày trả phòng phải sau ngày nhận phòng.");
+    return;
+  }
+
+  if (!sbClient) {
+    alert("Chưa kết nối được Supabase. Vui lòng tải lại trang.");
+    console.error("Không tìm thấy window.supabaseClient");
+    return;
+  }
+
+  $("check").disabled = true;
+  $("check").textContent = "Đang kiểm tra...";
+
+  checked = false;
+  chosen = null;
+  availability = {};
+
+  render();
+
+  try {
+    const results = await Promise.all(
+      rooms.map(room =>
+        sbClient.rpc("is_room_available", {
+          p_room_id: room.id,
+          p_checkin: checkin,
+          p_checkout: checkout
+        })
+      )
+    );
+
+    const failed = results.find(result => result.error);
+
+    if (failed) {
+      console.error("Lỗi kiểm tra phòng:", failed.error);
+      alert("Chưa kiểm tra được phòng trống. Vui lòng thử lại.");
+      return;
+    }
+
+    rooms.forEach((room, index) => {
+      availability[room.id] = results[index].data === true;
     });
 
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (!form.reportValidity()) return;
-      if (checkout.value <= checkin.value) {
-        checkout.setCustomValidity('Ngày trả phòng phải sau ngày nhận phòng.');
-        checkout.reportValidity();
-        checkout.setCustomValidity('');
-        return;
-      }
+    checked = true;
+    render();
 
-      const data = new FormData(form);
-      const subject = 'Yêu cầu đặt phòng trực tiếp - Dương Gia Đạt Homestay';
-      const body = [
-        'Xin chào Dương Gia Đạt Homestay,',
-        '',
-        'Tôi muốn gửi yêu cầu đặt phòng với thông tin:',
-        'Ngày nhận phòng: ' + data.get('checkin'),
-        'Ngày trả phòng: ' + data.get('checkout'),
-        'Số khách: ' + data.get('guests'),
-        'Số phòng dự kiến: ' + data.get('rooms'),
-        'Họ và tên: ' + data.get('fullname'),
-        'Số điện thoại: ' + data.get('phone'),
-        'Email: ' + (data.get('email') || 'Không cung cấp'),
-        'Yêu cầu thêm: ' + (data.get('note') || 'Không có'),
-        '',
-        'Vui lòng kiểm tra tình trạng phòng và phản hồi giúp tôi.',
-        'Xin cảm ơn!'
-      ].join('\n');
+  } catch (error) {
+    console.error("Lỗi kết nối Supabase:", error);
+    alert("Có lỗi khi kiểm tra phòng. Vui lòng thử lại.");
 
-      const mailto = 'mailto:duonggiadathomestay@gmail.com'
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body=' + encodeURIComponent(body);
+  } finally {
+    $("check").disabled = false;
+    $("check").textContent = "Kiểm tra tình trạng phòng";
+  }
+};
 
-      afterSubmit.classList.remove('booking-hidden');
-      afterSubmit.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      window.location.href = mailto;
+
+/* =====================================
+   7. KIỂM TRA THÔNG TIN KHÁCH
+===================================== */
+
+function getRequest() {
+  if (!chosen || !checked || availability[chosen.id] !== true) {
+    alert("Hãy kiểm tra và chọn một phòng còn trống trước.");
+    return null;
+  }
+
+  const name = $("name").value.trim();
+  const phone = $("phone").value.trim();
+  const guests = Number.parseInt($("n").value, 10);
+
+  const checkin = $("ci").value;
+  const checkout = $("co").value;
+  const note = $("note").value.trim();
+
+  if (!name || !phone) {
+    alert("Vui lòng nhập họ tên và số điện thoại.");
+    return null;
+  }
+
+  if (name.length < 2 || name.length > 100) {
+    alert("Họ tên cần có từ 2 đến 100 ký tự.");
+    return null;
+  }
+
+  if (phone.length < 6 || phone.length > 30) {
+    alert("Vui lòng kiểm tra lại số điện thoại.");
+    return null;
+  }
+
+  if (
+    !Number.isInteger(guests) ||
+    guests < 1 ||
+    guests > chosen.cap
+  ) {
+    alert(`Phòng này nhận tối đa ${chosen.cap} khách.`);
+    return null;
+  }
+
+  return {
+    room_id: chosen.id,
+    guest_name: name,
+    guest_phone: phone,
+    guests: guests,
+    checkin: checkin,
+    checkout: checkout,
+    note: note,
+    status: "pending"
+  };
+}
+
+
+/* =====================================
+   8. TẠO NỘI DUNG GỬI KHÁCH SẠN
+===================================== */
+
+function makeMessage(request) {
+  return `
+Yêu cầu đặt phòng Dương Gia Đạt Homestay
+
+Tên: ${request.guest_name}
+Điện thoại: ${request.guest_phone}
+Phòng: ${chosen.name}
+Nhận phòng: ${request.checkin}
+Trả phòng: ${request.checkout}
+Số khách: ${request.guests}
+Ghi chú: ${request.note || "Không có"}
+
+Xin homestay kiểm tra và xác nhận.
+`.trim();
+}
+
+
+/* =====================================
+   9. LƯU YÊU CẦU VÀO SUPABASE
+===================================== */
+
+async function saveRequest(request) {
+  if (!sbClient) {
+    alert("Chưa kết nối được Supabase.");
+    return false;
+  }
+
+  const requestKey = JSON.stringify(request);
+
+  if (savedRequestKey === requestKey) {
+    return true;
+  }
+
+  const { error } = await sbClient
+    .from("reservations")
+    .insert(request);
+
+  if (error) {
+    console.error("Lỗi lưu yêu cầu:", error);
+
+    alert(
+      "Chưa lưu được yêu cầu đặt phòng. " +
+      "Vui lòng thử lại hoặc liên hệ trực tiếp homestay."
+    );
+
+    return false;
+  }
+
+  savedRequestKey = requestKey;
+  return true;
+}
+
+
+/* =====================================
+   10. XỬ LÝ NÚT MESSENGER, ZALO, EMAIL
+===================================== */
+
+async function submitTo(channel) {
+  const request = getRequest();
+
+  if (!request) {
+    return;
+  }
+
+  const message = makeMessage(request);
+  const saved = await saveRequest(request);
+
+  if (!saved) {
+    return;
+  }
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(message).catch(error => {
+      console.warn("Không thể tự động sao chép nội dung:", error);
     });
-  })();
+  }
+
+  if (channel === "messenger") {
+    window.open("https://m.me/61593858644090", "_blank");
+
+    alert(
+      "Yêu cầu đã được lưu. Hãy dán nội dung yêu cầu vào Messenger để gửi."
+    );
+
+  } else if (channel === "zalo") {
+    window.open("https://zalo.me/0815959399", "_blank");
+
+    alert(
+      "Yêu cầu đã được lưu. Hãy dán nội dung yêu cầu vào Zalo để gửi."
+    );
+
+  } else if (channel === "email") {
+    location.href =
+      "mailto:duonggiadathomestay@gmail.com" +
+      "?subject=" +
+      encodeURIComponent("Yêu cầu đặt phòng") +
+      "&body=" +
+      encodeURIComponent(message);
+  }
+}
+
+
+/* =====================================
+   11. GẮN SỰ KIỆN CHO CÁC NÚT
+===================================== */
+
+$("msg").onclick = function() {
+  submitTo("messenger");
+};
+
+$("zalo").onclick = function() {
+  submitTo("zalo");
+};
+
+$("email").onclick = function() {
+  submitTo("email");
+};
+
+
+/* =====================================
+   12. KHỞI ĐỘNG TRANG
+===================================== */
+
+render();
 </script>
-<script src="js/language-new.js"></script>
-<script src="js/script.js"></script>
-</body>
-</html>
+<!-- FOOTER: DUONG GIA DAT HOMESTAY -->
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <!-- CỘT TRÁI: ĐIỆN THOẠI -->
+        <div class="footer-side footer-phone">
+
+            <a class="footer-icon-circle"
+               href="tel:0815959399"
+               aria-label="Gọi điện đặt phòng">
+
+                <!-- Phone icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.6 2.8h10.8c1 0 1.8.8 1.8 1.8v14.8c0 1-.8 1.8-1.8 1.8H6.6c-1 0-1.8-.8-1.8-1.8V4.6c0-1 .8-1.8 1.8-1.8Zm.2 3v12.4h10.4V5.8H6.8Zm5.2 14.1a.9.9 0 1 0 0-1.8.9.9 0 0 0 0 1.8Z"/>
+                </svg>
+            </a>
+
+            <a class="footer-phone-number" href="tel:0815959399">
+                0815 959 399
+            </a>
+
+            <span class="footer-side-caption" data-i18n="footer.bookingContact">
+                Liên hệ đặt phòng
+            </span>
+
+        </div>
+
+
+        <!-- GIỮA: LOGO VÀ MẠNG XÃ HỘI -->
+        <div class="footer-center">
+
+            <a href="index.html"
+               class="footer-logo-link"
+               aria-label="Dương Gia Đạt Homestay - Trang chủ">
+
+                <img
+                    src="images/logo/4.jpg"
+                    alt="Dương Gia Đạt Homestay"
+                    class="footer-logo">
+            </a>
+
+            <div class="footer-social-links">
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/profile.php?id=61593921070857"
+                   class="footer-social facebook"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Facebook">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.5 1.6-1.5h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3v3.2h2.8V21h3.4Z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/duonggiadat.homestay/"
+                   class="footer-social instagram"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Instagram">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3.5" y="3.5" width="17" height="17" rx="5"
+                              fill="none" stroke="currentColor" stroke-width="2.2"/>
+                        <circle cx="12" cy="12" r="4"
+                                fill="none" stroke="currentColor" stroke-width="2.2"/>
+                        <circle cx="17.7" cy="6.7" r="1.2"/>
+                    </svg>
+                </a>
+
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@duonggiadat_homestay"
+                   class="footer-social tiktok"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="TikTok">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M15 3h3.1c.2 2 1.3 3.5 3.4 4.2v3.2a9.1 9.1 0 0 1-3.4-1.1v6.1a6.3 6.3 0 1 1-6.3-6.3c.5 0 1 .1 1.5.2v3.5a3 3 0 1 0 1.7 2.7V3Z"/>
+                    </svg>
+                </a>
+
+                <!-- Zalo -->
+                <a href="https://zalo.me/0815959399"
+                   class="footer-social zalo"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Zalo">
+                    <span>Zalo</span>
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@thuduong8592"
+                   class="footer-social youtube"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="YouTube">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.4V8.6l6 3.4-6 3.4Z"/>
+                    </svg>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- CỘT PHẢI: EMAIL VÀ GOOGLE MAPS -->
+        <div class="footer-side footer-details">
+
+            <!-- Gmail -->
+            <div class="footer-detail-item">
+
+                <a class="footer-icon-circle"
+                   href="mailto:duonggiadathomestay@gmail.com"
+                   aria-label="Gửi email cho Dương Gia Đạt Homestay">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3.5 5h17A1.5 1.5 0 0 1 22 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17.5v-11A1.5 1.5 0 0 1 3.5 5Zm8.5 8.1L19.8 7H4.2l7.8 6.1Zm0 2.5L4 9.1v8.4h16V9.1l-8 6.5Z"/>
+                    </svg>
+                </a>
+
+                <a class="footer-email"
+                   href="mailto:duonggiadathomestay@gmail.com">
+                    duonggiadathomestay@gmail.com
+                </a>
+
+            </div>
+
+            <div class="footer-detail-divider"></div>
+
+            <!-- Google Maps -->
+            <div class="footer-detail-item">
+
+                <a class="footer-icon-circle"
+                   href="https://maps.app.goo.gl/JjN1hBWdhzmrtrKt6"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Xem vị trí trên Google Maps">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2.5a7.2 7.2 0 0 0-7.2 7.2c0 5.1 7.2 12 7.2 12s7.2-6.9 7.2-12A7.2 7.2 0 0 0 12 2.5Zm0 10a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6Z"/>
+                    </svg>
+                </a>
+
+                <a class="footer-map-text"
+                   href="https://maps.app.goo.gl/JjN1hBWdhzmrtrKt6"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-i18n="footer.mapLink">
+                    Xem vị trí trên Google Maps
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ĐỊA CHỈ -->
+    <div class="footer-address">
+        <span class="footer-address-pin" aria-hidden="true">●</span>
+        <span data-i18n="footer.address">
+            Làng du lịch cộng đồng Quỳnh Sơn
+        </span>
+        <span class="footer-address-dot">•</span>
+        <span data-i18n="footer.bacson">Bắc Sơn</span>
+        <span class="footer-address-dot">•</span>
+        <span data-i18n="footer.langson">Lạng Sơn</span>
+    </div>
+
+
+    <!-- BẢN QUYỀN -->
+    <div class="footer-bottom">
+        <p>
+    <a href="quan-ly-dat-phong-demo.html" class="footer-admin-link">
+        © 2026 Dương Gia Đạt Homestay.
+    </a>
+    <span data-i18n="footer.rights">Bảo lưu mọi quyền.</span>
+</p>
+    </div>
+
+</footer>
+</body></html>

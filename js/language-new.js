@@ -113,9 +113,9 @@ const translations = {
         "rooms.brand": "DUONG GIA DAT HOMESTAY",
         "rooms.title": "PHÒNG NGHỈ",
         "rooms.subtitle": "Không gian nghỉ ngơi giữa núi rừng Bắc Sơn",
-        "rooms.room1Title": "Phòng nghỉ 1",
-        "rooms.room2Title": "Phòng nghỉ 2",
-        "rooms.room3Title": "Phòng nghỉ 3",
+        "rooms.room1Title": "Phòng 1",
+        "rooms.room2Title": "Phòng 2",
+        "rooms.room3Title": "Phòng 3",
 
         "blog.stiltTitle": "Không gian nhà sàn Quỳnh Sơn",
         "blog.stiltLabel": "KHÔNG GIAN NHÀ SÀN",
