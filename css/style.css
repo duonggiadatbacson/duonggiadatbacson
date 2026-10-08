@@ -1751,3 +1751,20 @@ a {
     color: inherit;
     text-decoration: none;
 }
+/* ================================
+   ẢNH BÀI VIẾT KHAI TRƯƠNG
+================================ */
+
+.blog-opening-images {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.blog-opening-images img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
