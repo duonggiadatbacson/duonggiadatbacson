@@ -604,7 +604,7 @@ $("addForm").addEventListener("submit", async event => {
   const checkin = $("checkin").value;
   const checkout = $("checkout").value;
   const guests = Number($("guestCount").value);
-  const capacity = { r1: 4, r2: 4, r3: 6, r4: 4 }[roomId];
+  const capacity = { r1: 4, r2: 4, r3: 4, r4: 6 }[roomId];
   if (!checkin || !checkout || checkout <= checkin) {
     alert("Ngày trả phòng phải sau ngày nhận phòng.");
     return;
@@ -785,7 +785,7 @@ $("editForm").addEventListener("submit", async event => {
   const checkin = $("editCheckin").value;
   const checkout = $("editCheckout").value;
   const guests = Number($("editGuests").value);
-  const capacity = { r1: 4, r2: 4, r3: 6, r4: 4 }[roomId];
+  const capacity = { r1: 4, r2: 4, r3: 4, r4: 6 }[roomId];
 
   if (!checkin || !checkout || checkout <= checkin) {
     alert("Ngày trả phòng phải sau ngày nhận phòng.");
