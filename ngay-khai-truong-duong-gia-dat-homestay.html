@@ -54,19 +54,39 @@
 
         /* ----- ẢNH TRONG TỪNG PHẦN BÀI VIẾT ----- */
         .blog-content .room-image {
+            display: block !important;
+            position: static !important;
+            float: none !important;
             width: 100%;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
             margin: 25px 0 35px;
-            overflow: visible;
+            padding: 0 !important;
+            overflow: visible !important;
+            clear: both !important;
+        }
+
+        .blog-content .room-image::before,
+        .blog-content .room-image::after {
+            content: none !important;
+            display: none !important;
         }
 
         .blog-content .room-image img {
-            display: block;
-            width: 100%;
-            max-width: 100%;
+            display: block !important;
+            position: static !important;
+            float: none !important;
+            width: 100% !important;
+            max-width: 100% !important;
             height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
             aspect-ratio: auto !important;
             object-fit: contain !important;
             border-radius: 8px;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
         /* ----- TRÊN ĐIỆN THOẠI ----- */
@@ -79,8 +99,12 @@
 
             .blog-opening-images img,
             .blog-content .room-image img {
-                width: 100%;
+                position: static !important;
+                float: none !important;
+                width: 100% !important;
                 height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
                 object-fit: contain !important;
                 border-radius: 6px;
             }
