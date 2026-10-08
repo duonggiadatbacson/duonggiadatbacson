@@ -25,6 +25,67 @@
     <title>Ngày khai trương Dương Gia Đạt Homestay tại Quỳnh Sơn</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =========================================================
+           CSS RIÊNG CHO TRANG: NGÀY KHAI TRƯƠNG DƯƠNG GIA ĐẠT HOMESTAY
+           ========================================================= */
+
+        /* ----- ẢNH PHẦN MỞ ĐẦU BÀI VIẾT ----- */
+        .blog-opening-images {
+            width: 100%;
+            margin: 25px 0 35px;
+        }
+
+        .blog-opening-images img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto !important;
+            aspect-ratio: auto !important;
+            object-fit: contain !important;
+            border-radius: 8px;
+            margin: 0 0 20px;
+        }
+
+        .blog-opening-images img:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ----- ẢNH TRONG TỪNG PHẦN BÀI VIẾT ----- */
+        .blog-content .room-image {
+            width: 100%;
+            margin: 25px 0 35px;
+            overflow: visible;
+        }
+
+        .blog-content .room-image img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto !important;
+            aspect-ratio: auto !important;
+            object-fit: contain !important;
+            border-radius: 8px;
+        }
+
+        /* ----- TRÊN ĐIỆN THOẠI ----- */
+        @media (max-width: 768px) {
+            .blog-opening-images,
+            .blog-content .room-image {
+                margin-top: 20px;
+                margin-bottom: 25px;
+            }
+
+            .blog-opening-images img,
+            .blog-content .room-image img {
+                width: 100%;
+                height: auto !important;
+                object-fit: contain !important;
+                border-radius: 6px;
+            }
+        }
+    </style>
 </head>
 
 <body>
