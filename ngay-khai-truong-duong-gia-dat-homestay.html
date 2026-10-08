@@ -25,6 +25,52 @@
     <title>Ngày khai trương Dương Gia Đạt Homestay tại Quỳnh Sơn</title>
 
     <link rel="stylesheet" href="css/style.css">
+<style>
+    /* ========================================
+       CSS RIÊNG - TRANG KHAI TRƯƠNG
+    ======================================== */
+
+    /* ----- ẢNH BÀI VIẾT ----- */
+    .room-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 25px 0 35px;
+        clear: both;
+    }
+
+    .room-image img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin: 0 0 15px;
+        object-fit: contain;
+    }
+
+    /* ----- 4 ẢNH: 2 ẢNH / 1 HÀNG ----- */
+    .room-image-grid-4 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        width: 100%;
+        margin: 25px 0 35px;
+    }
+
+    .room-image-grid-4 img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        object-fit: contain;
+    }
+
+    /* ----- ĐIỆN THOẠI: 1 ẢNH / 1 HÀNG ----- */
+    @media (max-width: 768px) {
+        .room-image-grid-4 {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 </head>
 
 <body>
@@ -200,17 +246,21 @@
 
                     <h2>3. Những vị khách đầu tiên</h2>
 
-                    <div class="room-image">
-                        <img src="images/blog/khai-truong/10.jpg"
-                             alt="Những vị khách trong ngày khai trương Dương Gia Đạt Homestay">
-<img src="images/blog/khai-truong/11.jpg"
-                             alt="Những vị khách trong ngày khai trương Dương Gia Đạt Homestay">
-<img src="images/blog/khai-truong/12.jpg"
-                             alt="Những vị khách trong ngày khai trương Dương Gia Đạt Homestay">
-<img src="images/blog/khai-truong/13.jpg"
-                             alt="Những vị khách trong ngày khai trương Dương Gia Đạt Homestay">
-                    </div>
+                    <div class="room-image room-image-grid-4">
 
+    <img src="images/blog/khai-truong/10.jpg"
+         alt="Những vị khách trong ngày khai trương Dương Gia Đạt Homestay">
+
+    <img src="images/blog/khai-truong/11.jpg"
+         alt="Những vị khách trong ngày khai trương Dương Gia Đạt Homestay">
+
+    <img src="images/blog/khai-truong/12.jpg"
+         alt="Những vị khách trong ngày khai trương Dương Gia Đạt Homestay">
+
+    <img src="images/blog/khai-truong/13.jpg"
+         alt="Những vị khách trong ngày khai trương Dương Gia Đạt Homestay">
+
+</div>
                     <p>
                         Một homestay chỉ thực sự có sức sống khi có những vị khách đầu tiên bước qua cánh cửa.
                     </p>
