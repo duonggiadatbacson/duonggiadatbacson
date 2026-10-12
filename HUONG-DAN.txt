@@ -1,0 +1,16 @@
+BÀI VIẾT: Một ngày về quê ngoại cùng Dâu Tây
+
+Tệp HTML: mot-ngay-ve-que-ngoai-cung-dau-tay.html
+Thư mục ảnh: images/ve-que-ngoai/
+
+Cách đưa lên website:
+1. Giải nén gói này.
+2. Sao chép tệp HTML vào thư mục gốc của repository nha-minh-journal.
+3. Sao chép thư mục images/ve-que-ngoai/ vào thư mục images/ hiện có (không xóa ảnh cũ).
+4. Mở index.html hoặc trang danh sách bài viết và thêm liên kết đến mot-ngay-ve-que-ngoai-cung-dau-tay.html nếu muốn bài xuất hiện trên trang chủ.
+5. GitHub Desktop: Commit to main rồi Push origin; sau đó mở trang và Ctrl+F5.
+
+SEO title: Một ngày về quê ngoại cùng Dâu Tây | Nhà Mình Journal
+Meta description: Một ngày Dâu Tây về thăm ông bà ngoại, vui chơi ngoài sân và lưu giữ những khoảnh khắc bình dị bên gia đình trong nhật ký Nhà Mình Journal.
+
+Lưu ý: Nội dung chỉ mô tả những điều thể hiện trong ảnh và thông tin đã xác nhận; nếu có chi tiết nào chưa đúng thực tế, hãy sửa trước khi đăng.
