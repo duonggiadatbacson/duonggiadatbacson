@@ -8,6 +8,7 @@ const translations = {
         "nav.gallery": "Thư viện ảnh",
         "nav.contact": "Liên Hệ",
         "nav.booking": "ĐẶT PHÒNG",
+nav_car_booking: "Đặt xe",
 
         "home.welcome": "DU LỊCH QUỲNH SƠN",
         "home.title": "Khám phá Quỳnh Sơn",
@@ -346,6 +347,7 @@ const translations = {
         "nav.gallery": "Gallery",
         "nav.contact": "Contact",
         "nav.booking": "BOOK NOW",
+nav_car_booking: "Book a Car",
 
         "home.welcome": "QUYNH SON TRAVEL",
         "home.title": "Explore Quynh Son",
